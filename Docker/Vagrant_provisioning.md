@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
 			vb.memory = 2048
 			vb.customize ["modifyvm", :id, "--groups", "/k8s-SM(github_SysNet4Admin)"]
 		end
-		cfg.vm.host_name= = "m-k8s"
+		cfg.vm.host_name = "m-k8s"
 		cfg.vm.network "private_network", ip: "192.168.1.10"
 		cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
 		cfg.vm.synced_folder "../data", "/vagrant", disabled: true
@@ -33,8 +33,13 @@ end
 - 7~11 : virtualbox에 생성한 가상 머신의 이름, CPU수, 메모리 크기, 소속 그룹을 명시합니다.
 - 12 : 호스트 이름을 'm-k8s`로 정의.
 - 13 : 호스트 전용 네트워크를 private_network로 정의하고 ip 주소를 정의합니다(eth1 인터페이스가 호스트 전용으로 설정됩니다).
-- 14 : 게스트 22번 포트가 호스트 60010번 포트로 포워딩 됩니다.
+- 14 : 게스트 22번 포트를 호스트 60010번 포트로 포워딩 합니다.
 - 15 : 호스트와 게스트 사이에 디렉토리 동기화가 이루어지지 않게 설정합니다.
-- 
+
+`vagrant up`을 통해 위의 설정으로 가상 머신을 생성합니다.   
+![image](https://user-images.githubusercontent.com/43658658/151112532-c491f05f-58a5-4fcc-94a6-ec56b8b6c320.png)
+
+`vagrant ssh`로 가상 머신에 접근해 `ip addr show eth1`을 통해 호스트 전용 네트워크가 제대로 설정되었는지 확인합니다.   
+
 
 
