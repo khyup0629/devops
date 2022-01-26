@@ -20,7 +20,10 @@ DNS=8.8.8.8   // 해당 내용 추가.
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/151126080-01641f37-a25c-4fa3-b986-784e8dc83166.png)
 
-3. 재실행(`reboot`)합니다.
+3. 네트워크를 재시작 합니다.   
+```
+systemctl restart network
+```
 
 4. 다시 `cat /etc/resolv.conf`를 입력하면 네임서버가 정상적으로 조회됩니다.     
 ![image](https://user-images.githubusercontent.com/43658658/151126218-847b8194-c22f-4160-85a5-95ae97149b43.png)
