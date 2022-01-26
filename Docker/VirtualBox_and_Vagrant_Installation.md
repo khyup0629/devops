@@ -21,6 +21,20 @@
 ![image](https://user-images.githubusercontent.com/43658658/151104875-b1b9fafb-9027-4fc4-ba33-2ab60cc98fe4.png)   
 - 시스템을 다시 시작합니다.
 
+# 베이그런트 구성 및 테스트
+
+먼저 프로비저닝 코드를 작성합니다.   
+베이그런트 설치 디렉토리(C:\HashiCorp)에 코드를 작성하겠습니다.   
+
+명령프롬프트(cmd)를 실행합니다.   
+
+베이그런트 설치 경로로 이동해 `vagrant init`으로 프로비저닝 기초 파일을 생성합니다.   
+```
+cd c:\HashiCorp
+vagrant init
+```   
+![image](https://user-images.githubusercontent.com/43658658/151105728-5375c19b-1926-461d-a451-8c7ba019dac7.png)
+
 
 
 
