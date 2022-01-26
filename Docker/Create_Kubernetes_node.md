@@ -30,6 +30,7 @@ ifconfig
 각 워커 노드들 역시 아래와 같이 IP 주소를 변경해줍니다.   
 ![image](https://user-images.githubusercontent.com/43658658/151133119-ac4405fc-778a-41cc-bfef-726a5cb99d56.png)   
 ![image](https://user-images.githubusercontent.com/43658658/151133217-7c1f3db2-1f05-46ae-9106-53a359034bc5.png)   
+![image](https://user-images.githubusercontent.com/43658658/151134394-5110432c-40a9-4412-92a2-d156fd83a691.png)
 
 
 
