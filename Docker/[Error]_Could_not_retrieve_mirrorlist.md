@@ -14,7 +14,7 @@ cat /etc/resolv.conf
 
 2. `ifcfg-XXX` 파일을 확인합니다.   
 ```
-vi /etc/sysconfig/network-script/ifcfg-ens192
+vi /etc/sysconfig/network-scripts/ifcfg-ens192
 ONBOOT=yes    // no -> yes 로 변경.
 DNS=8.8.8.8   // 해당 내용 추가.
 ```   
