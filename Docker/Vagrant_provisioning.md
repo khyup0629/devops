@@ -1,8 +1,8 @@
 # 베이그런트 프로비저닝 코드 작성
 
-- [VirtualBox 설치]()
-- [Vagrant 설치]()
-- [Vagrant 테스트]()
+- [VirtualBox 설치](https://github.com/khyup0629/docker-kubernetes/blob/main/Docker/VirtualBox_and_Vagrant_Installation.md#%EB%B2%84%EC%B6%94%EC%96%BC%EB%B0%95%EC%8A%A4virtualbox-%EC%84%A4%EC%B9%98)
+- [Vagrant 설치](https://github.com/khyup0629/docker-kubernetes/blob/main/Docker/VirtualBox_and_Vagrant_Installation.md#%EB%B2%A0%EC%9D%B4%EA%B7%B8%EB%9F%B0%ED%8A%B8vagrant-%EC%84%A4%EC%B9%98)
+- [Vagrant 테스트](https://github.com/khyup0629/docker-kubernetes/blob/main/Docker/VirtualBox_and_Vagrant_Installation.md#%EB%B2%A0%EC%9D%B4%EA%B7%B8%EB%9F%B0%ED%8A%B8-%EA%B5%AC%EC%84%B1-%EB%B0%8F-%ED%85%8C%EC%8A%A4%ED%8A%B8)
 
 `vagrant init`으로 `vagrantfile`을 생성하고, 코드 에디터를 이용해 아래처럼 내용을 수정합니다.
 
