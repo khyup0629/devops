@@ -13,7 +13,7 @@
 ```
 vi /etc/sysconfig/network-scripts/ifcfg-ens192
 ```   
-![image](https://user-images.githubusercontent.com/43658658/151129148-baec3da6-c4fd-4ac4-b387-aa9a4cdc3127.png)
+![image](https://user-images.githubusercontent.com/43658658/151130451-3944e307-aa54-4e39-b5e7-c36347bdbdc4.png)
 
 `systemctl restart network`를 통해 네트워크를 재시작해서 변경사항을 적용하고, 다시 `ifconfig`를 통해 IP 주소가 변경되었는지 확인합니다.   
 ```
