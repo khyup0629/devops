@@ -41,5 +41,15 @@ end
 
 `vagrant ssh`로 가상 머신에 접근해 `ip addr show eth1`을 통해 호스트 전용 네트워크가 제대로 설정되었는지 확인합니다.   
 
+## 더 이상 진행할 수 없는 이슈
+
+![image](https://user-images.githubusercontent.com/43658658/151116709-71a75836-6c2a-42a8-aead-dcdfd4269de6.png)
+=> [vagrant 트러블슈팅](https://fellowship.hackbrightacademy.com/materials/resources/vagrant-troubleshooting/)   
+현재 컴퓨터의 CPU가 `가상화 기술`을 지원하지 않기 때문에 발생하는 문제입니다.
+
+
+
+
+
 
 
