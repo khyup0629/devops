@@ -47,7 +47,7 @@ vagrant init    // 프로비저닝을 위한 기초 파일 생성.
 ![image](https://user-images.githubusercontent.com/43658658/151105728-5375c19b-1926-461d-a451-8c7ba019dac7.png)
 
 생성된 파일을 `notepad++` 코드 에디터 프로그램을 통해 열어봅니다.   
-=> [notepad++ 설치 방법]()   
+=> [notepad++ 설치 방법](https://github.com/khyup0629/docker-kubernetes/blob/main/Docker/notepad%2B%2B_installation.md#notepad-%EC%84%A4%EC%B9%98)   
 ![image](https://user-images.githubusercontent.com/43658658/151106587-07f6bd5f-fb47-45f2-b859-28f68626c046.png)   
 
 `config.vm.box = "base"`라는 내용이 있는지 확인합니다.   
