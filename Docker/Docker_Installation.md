@@ -38,7 +38,7 @@ echo \
 
 ```
 sudo apt-get update       // 앞서 리포지토리 URL을 등록해 주었기 때문에 반드시 업데이트를 해야 합니다.
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 ```
 
 도커 엔진이 잘 설치되었는지 테스트를 진행합니다.   
