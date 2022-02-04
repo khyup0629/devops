@@ -45,7 +45,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 sudo docker version
 ```   
-![image](https://user-images.githubusercontent.com/43658658/152484929-ec5f8c21-2142-4119-9688-052be82768f0.png)
+![image](https://user-images.githubusercontent.com/43658658/152484929-ec5f8c21-2142-4119-9688-052be82768f0.png)   
+* Client 버전과 Server 버전이 보입니다.
 
 
 
