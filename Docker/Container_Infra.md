@@ -1,5 +1,6 @@
 # 컨테이너 인프라 환경
 
+![image](https://user-images.githubusercontent.com/43658658/152478476-f4cb49f8-95bd-473c-bb32-674036ed8988.png)   
 컨테이너(Container) : 하나의 OS 커널에서 다른 프로세스의 영향을 받지 않고 독립적으로 실행되는 프로세스.
 
 ## 모놀로식 아키텍쳐(Monolithic Architecture)
