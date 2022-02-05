@@ -37,7 +37,7 @@ Docker HOST의 디스크에 저장된 **컨테이너 이미지**(파일)을 불�
 2. `docker pull nginx:latest` : 허브에서 이미지를 **하드디스크**로 가져옵니다.
 3. `docker run -d --name web -p 80:80 nginx:latest` : 이미지를 **컨테이너**로 올립니다.
 
-
+안돼
 
 
 
