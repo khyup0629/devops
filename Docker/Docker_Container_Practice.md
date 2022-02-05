@@ -87,7 +87,48 @@ docker pull nginx
 `/var/lib/nginx/overlay2` 경로의 내용을 보면, 6개의 레이어가 추가된 것을 확인할 수 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/152627132-460229d0-50b5-4a52-99ac-79e340a1921f.png)
 
+> <h3>컨테이너 올리기</h3>
 
+pull한 컨테이너 이미지를 사용해 컨테이너를 올립니다.   
+```
+docker run --name web -d -p 80:80 nginx
+```   
+![image](https://user-images.githubusercontent.com/43658658/152629890-77dd7b09-db65-4c43-bc38-9fed27bcd258.png)   
+- `-d` : 백그라운드 프로세스 모드
+- `-p` : 포트 옵션
+- 빨간 밑줄은 **컨테이너 ID**를 의미합니다.
+
+실행 중인 docker 컨테이너는 `docker ps` 명령어로 확인할 수 있습니다.   
+```
+docker ps
+```   
+![image](https://user-images.githubusercontent.com/43658658/152629945-1d53351b-50d7-409d-9565-818ecc5b8ed1.png)
+
+`curl` 명령어를 통해 `localhost:80`으로 접속하면 nginx 홈페이지가 나타납니다.   
+![image](https://user-images.githubusercontent.com/43658658/152629992-afa09dd9-10a6-457f-8473-4cdd291ab86c.png)
+
+> <h3>컨테이너 중지</h3>
+
+`docker stop <컨테이너 이름>` 명령어를 통해 해당 컨테이너를 중지할 수 있습니다.   
+```
+docker stop web
+```   
+![image](https://user-images.githubusercontent.com/43658658/152630024-2f5e016c-8b75-4c61-9749-08fb05a03467.png)
+
+> <h3>컨테이너 삭제</h3>
+
+`docker rm <컨테이너 이름>` 명령어를 통해 해당 컨테이너를 삭제할 수 있습니다.   
+```
+docker rm web
+```   
+* 컨테이너를 삭제한 것입니다. 이미지를 삭제한 것이 아닙니다.
+
+> <h3>컨테이너 이미지 삭제</h3>
+
+`docker rmi <이미지 이름>` 명령어를 통해 이미지를 삭제할 수 있습니다.   
+```
+docker rmi nginx
+```   
 
 
 
