@@ -108,7 +108,7 @@ curl localhost:80
 
 컨테이너를 허브에 배포하는 방법을 알아봅시다.   
 
-1. docker HUB로 로그인합니다.   
+1. **docker hub**로 로그인합니다.   
 (미리 docker hub 계정을 생성해야 합니다)   
 ```
 docker login
@@ -131,7 +131,7 @@ docker push <컨테이너 이미지 이름>
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/152633509-2c598d53-fef1-4da8-89a3-2cfc2570bf68.png)
 
-4. hub.docker.com 에 접속해서 개인 리포지토리를 확인합니다.   
+4. hub.docker.com 에 접속해서 **개인 리포지토리**를 확인합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/152633544-de0eef07-beb8-4c92-9891-3cc0fc8c8a75.png)
 
 
