@@ -31,7 +31,7 @@ vi dockerfile
 ```
 FROM node:12        // base 이미지를 명시합니다.
 COPY hello.js /     // 소스 코드를 컨테이너의 최상위 디렉토리에 복사합니다.
-CMD ['node', '/hello.js']     // 컨테이너가 실행될 때 작동할 명령어입니다.
+CMD ["node", "/hello.js"]     // 컨테이너가 실행될 때 작동할 명령어입니다.
 ```
 4. dockerfile을 이용해 컨테이너를 빌드해서 **이미지 파일**로 만듭니다.   
 ```
