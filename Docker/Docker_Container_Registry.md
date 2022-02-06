@@ -1,6 +1,6 @@
 # Docker Registry
 
-- **Registry** : 컨테이너 이미지를 저장하는 외부 저장소
+- **Registry** : 컨테이너 이미지를 저장하는 Docker HOST 바깥의 저장소
 - **Public Registry(Docker Hub)** : 인터넷 상에 존재하는 저장소, hub.docker.com
 - **Private Registry(registry)** : 사내의 컨테이너 저장소
 
