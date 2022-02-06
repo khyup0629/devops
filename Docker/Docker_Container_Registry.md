@@ -99,6 +99,7 @@ docker push localhost:5000/httpd
 ![image](https://user-images.githubusercontent.com/43658658/152679361-f87bc8e2-6a0f-4817-890c-e11289b5790d.png)
 
 registry에 업로드된 컨테이너 이미지는 `/var/lib/docker/volumes/<컨테이너UUID>/_data/docker/registry/v2/repositories` 경로 내에 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/152679506-4f3849f1-d881-4045-8513-1ffeb1638945.png)
 
 
 
