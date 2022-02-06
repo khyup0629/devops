@@ -76,13 +76,29 @@ docker run -d -p 5000:5000 --restart always --name registry registry:2
 - `--restart always` : 컨테이너가 종료되면 **항상 재시작**됩니다.
 - `--name <이름>` : 컨테이너의 이름을 지정합니다.
 
-
+![image](https://user-images.githubusercontent.com/43658658/152679278-0b3127b1-ab29-4276-bfcb-c71d2a6455d3.png)   
 - docker HOST의 디스크에 해당 이미지가 없다면 자동으로 `Pull`한 다음 컨테이너를 실행합니다.
 
 컨테이너가 정상적으로 실행되고 있는지 확인합니다.   
 ```
 docker ps
 ```   
+![image](https://user-images.githubusercontent.com/43658658/152679280-9314b56a-be1e-41e6-a349-6122bdefa778.png)
+
+이번에는 로컬에 올라가 있는 registry 컨테이너에 `push`해야하므로 태그를 아래와 같이 변경해줍니다.   
+```
+docker tag httpd localhost:5000/httpd
+docker images localhost:5000/httpd
+```   
+![image](https://user-images.githubusercontent.com/43658658/152679347-e7fc8938-d184-4850-a84a-9ec6b2712ce7.png)
+
+registry에 httpd 이미지를 업로드합니다.   
+```
+docker push localhost:5000/httpd
+```   
+![image](https://user-images.githubusercontent.com/43658658/152679361-f87bc8e2-6a0f-4817-890c-e11289b5790d.png)
+
+registry에 업로드된 컨테이너 이미지는 `/var/lib/docker/volumes/<컨테이너UUID>/_data/docker/registry/v2/repositories` 경로 내에 있습니다.   
 
 
 
