@@ -46,7 +46,7 @@ docker run -it --rm --device-write-iops /dev/vda:10 ubuntu:latest /bin/bash
 
 ## 컨테이너 사용 리소스 확인 툴
 
-- `docker stat` : 실행중인 컨테이너의 런타임 통계
+- `docker stats` : 실행중인 컨테이너의 런타임 통계
 - `docker event` : Docker HOST의 실시간 event 정보를 수집해서 출력.
 
 - `cAdvisor` : 컨테이너 리소스 모니터링 애플리케이션.
