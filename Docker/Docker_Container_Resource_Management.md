@@ -23,7 +23,7 @@ docker run -d -m 200m --oom-kill-disable nginx:1.14
 > <h3>CPU 리소스 제한</h3>
 
 - `--cpus` : 컨테이너에 할당할 **CPU core**수를 지정
-- `--cpuset-cpus` : 컨테이너가 사용할 수 있는 CPU나 코어를 할당. 인덱스로 할당.
+- `--cpuset-cpus` : 컨테이너가 사용할 수 있는 CPU나 코어를 인덱스로 할당.
 - `--cpu-share` : 1024 값을 기반으로 CPU 비중 설정. 상대적으로 설정. --cpu-share 2048 이라면, 기본값보다 두 배 많은 CPU 자원 할당
 
 ```
