@@ -6,7 +6,7 @@
 docker search [옵션] <이미지이름:태그명>
 docker pull [옵션] <이미지이름:태그명>
 docker images
-docker inspect [옵션] <이미지이름:태그명>
+docker inspect [옵션] <이미지이름:태그명>     // 컨테이너 이미지의 메타
 docker rmi [옵션] <이미지이름:태그명>
 ```
 
@@ -50,16 +50,30 @@ docker top [옵션] <컨테이너이름>      // 컨테이너 내에서 동작�
 docker logs [옵션] <컨테이너이름>     // 컨테이너가 생성한 로그 확인
 ```
 
+```
+docker logs webserver
+docker logs -f webserver
+```   
 ![image](https://user-images.githubusercontent.com/43658658/152711727-93423248-90b1-4ea7-b346-46a89544d9e2.png)   
 - `-f` 옵션은 로그를 포그라운드로 실행해서 실시간으로 로그 정보를 볼 수 있습니다.
 
+```
+docker top webserver
+```   
 ![image](https://user-images.githubusercontent.com/43658658/152711822-075196a1-f60f-4db5-be97-e1a974d5f7a7.png)   
 - `docker top` : 컨테이너 내부에서 실행 중인 프로세스를 확인할 수 있습니다.
 
 컨테이너로 들어가 bash 셀 터미널을 띄웁니다.   
+```
+docker inspect --format '{{.NetworkSettings.IPAddress}}' webserver
+alias cip="docker inspect --format '{{.NetworkSettings.IPAddress}}' webserver"    // 명령어가 너무 길기 때문에 앨리아스를 지정할 수도 있습니다.
+```   
 ![image](https://user-images.githubusercontent.com/43658658/152713294-4aed25a3-b22e-40e7-bcf2-4d1cb6c29950.png)   
 - `/usr/share/nginx/html/` 경로에 웹 페이지들이 있습니다.
-- `exit`를 통해 컨테이너에서 빠져나올 수 있습니다.
+
+`exit`를 통해 컨테이너에서 빠져나올 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/152714139-515e2f52-c64b-47b7-af6d-971d170bd945.png)
+
 
 
 
