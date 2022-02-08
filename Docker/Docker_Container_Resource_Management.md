@@ -188,6 +188,34 @@ docker run -it --rm --device-write-iops /dev/sda:100 -m 500m --name c1 -d ubuntu
 ![image](https://user-images.githubusercontent.com/43658658/152996665-a56863ae-189f-4a18-a608-900477192049.png)   
 ![image](https://user-images.githubusercontent.com/43658658/152996628-8866c9df-b4af-492d-ba7f-9fd70cb817f1.png)
 
+## mysql 이미지로 컨테이너 올리기
+
+조건   
+- 이름 : db
+- 포트 : 3306:3306
+- Memory : 200MB
+- Swap : 300MB
+- CPU core : 1
+- MYSQL_ROOT_PASSWORD : pass
+
+```
+docker run --name db -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass -m 200m --memory-swap 500m --cpuset-cpus 0 mysql
+```
+
+```
+docker exec -it db /bin/bash
+```
+
+```
+/# mysql -u root -p
+password: {MYSQL_ROOT_PASSWORD}
+```
+
+```
+docker stats
+```
+
+![image](https://user-images.githubusercontent.com/43658658/153003051-ca120a78-2bba-4df1-920b-9a4885e42e63.png)
 
 
 
