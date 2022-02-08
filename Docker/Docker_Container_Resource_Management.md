@@ -183,6 +183,10 @@ docker run -it --rm --device-write-iops /dev/sda:100 -m 500m --name c1 -d ubuntu
 ![image](https://user-images.githubusercontent.com/43658658/152995715-9d8fdc84-672d-4e3e-9c93-7a7510d6dfdc.png)   
 - cAdvisor를 확인할 수 있습니다.
 
+`Docker Containers`를 클릭하면 개별 컨테이너에 대한 지표들을 볼 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/152996376-5a6f809f-f068-4854-9bec-d926fd7e3cc2.png)   
+![image](https://user-images.githubusercontent.com/43658658/152996665-a56863ae-189f-4a18-a608-900477192049.png)   
+![image](https://user-images.githubusercontent.com/43658658/152996628-8866c9df-b4af-492d-ba7f-9fd70cb817f1.png)
 
 
 
