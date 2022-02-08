@@ -63,7 +63,7 @@ docker run -d --cpuset-cpus 0-3 ubuntu:1.14
 
 ```
 docker run --cpuset-cpus 1 --name c1 stress stress -c 1
-htop
+htop        // 전체 CPU core 2개에 대한 부하를 보여줍니다.
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/152725023-b16f3ec0-97f3-4289-8c2a-c6d455e543a4.png)   
 - 인덱스를 1로 주어 2번째 cpu core에 부하가 발생함을 볼 수 있습니다.
@@ -81,6 +81,7 @@ docker run --cpuset-cpus 0-1 --name c2 -d stress stress -c 1
 ![image](https://user-images.githubusercontent.com/43658658/152725981-d8acaeb2-61a1-413b-b504-da0e2b05ce08.png)   
 - cpu 2개를 합쳐서 100%가 되도록 부하를 줍니다.
 
+상대적 비율로 CPU를 할당할 때는 `docker run` 뒤에 command를 쓰지 않습니다.   
 ```
 docker run -c 2048 --name cload1 -d stress      // CPU를 기본값보다 2배 할당
 docker run --name cload2 -d stress
@@ -89,10 +90,10 @@ docker run -c 512 --name cload4 -d stress       // CPU를 기본값보다 0.5배
 ```   
 
 ```
-docker stats
+docker stats        // 프로세스 별 부하를 보여줍니다.
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/152988454-3ce6dd2e-e9eb-4348-b18b-9e74bd97f666.png)   
-- 전체 2
+- 전체 CPU core 2개에 100% 부하를 주어 총 200% 부하에서 상대적 비율에 맞게 4개의 CPU에 할당합니다(4 : 2 : 1 : 1)
 
 
 > <h3>Block I/O 제한</h3>
