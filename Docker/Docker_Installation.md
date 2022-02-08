@@ -14,6 +14,9 @@
 도커를 설치하기 위해 **요구하는 패키지**를 모두 설치합니다.   
 ```
 sudo apt-get update
+```
+
+```
 sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
@@ -38,6 +41,9 @@ echo \
 
 ```
 sudo apt-get update       // 앞서 리포지토리 URL을 등록해 주었기 때문에 반드시 업데이트를 해야 합니다.
+```
+
+```
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 ```
 
