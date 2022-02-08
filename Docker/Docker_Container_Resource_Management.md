@@ -81,6 +81,20 @@ docker run --cpuset-cpus 0-1 --name c2 -d stress stress -c 1
 ![image](https://user-images.githubusercontent.com/43658658/152725981-d8acaeb2-61a1-413b-b504-da0e2b05ce08.png)   
 - cpu 2개를 합쳐서 100%가 되도록 부하를 줍니다.
 
+```
+docker run -c 2048 --name cload1 -d stress      // CPU를 기본값보다 2배 할당
+docker run --name cload2 -d stress
+docker run -c 512 --name cload3 -d stress       // CPU를 기본값보다 0.5배 할당
+docker run -c 512 --name cload4 -d stress       // CPU를 기본값보다 0.5배 할당
+```   
+
+```
+docker stats
+```   
+![image](https://user-images.githubusercontent.com/43658658/152988454-3ce6dd2e-e9eb-4348-b18b-9e74bd97f666.png)   
+- 전체 2
+
+
 > <h3>Block I/O 제한</h3>
 
 - `--blkio-weight`, `--blkio-weight-device` : Block I/O의 Quota를 상대값으로 설정. default 500. 100~1000까지 할당 가능.
