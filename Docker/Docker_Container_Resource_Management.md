@@ -61,6 +61,8 @@ docker run -d --cpu-share 2048 ubuntu:1.14
 docker run -d --cpuset-cpus 0-3 ubuntu:1.14
 ```
 
+> <h3>CPU 리소스 제한 실습</h3>
+
 ```
 docker run --cpuset-cpus 1 --name c1 stress stress -c 1
 htop        // 전체 CPU core 2개에 대한 부하를 보여줍니다.
@@ -108,12 +110,84 @@ docker run -it --rm --device-write-bps /dev/vda:1mb ubuntu:latest /bin/bash
 docker run -it --rm --device-write-iops /dev/vda:10 ubuntu:latest /bin/bash
 ```
 
+`lsblk`를 통해 현재 마운트 되어 있는 디스크를 봅니다.   
+```
+lsblk
+```   
+![image](https://user-images.githubusercontent.com/43658658/152991908-6be951ff-34ad-4dfc-9af8-7ea0daee896b.png)   
+
+`sda` 디스크를 고르고, 쿼터가 10인 디스크 성능으로 컨테이너를 하나 올린 뒤 컨테이너 터미널로 들어갑니다..   
+```
+docker run -it --rm --device-write-iops /dev/sda:10 ubuntu /bin/bash
+```
+
+터미널에서 블럭 사이즈 1M를 10번 file1을 통해 입/출력하는 성능 테스트를 진행합니다.   
+```
+/# dd if=/dev/zero of=file1 bs=1M count=10 oflag=direct
+```   
+![image](https://user-images.githubusercontent.com/43658658/152992571-00f5ec35-4c4e-4ea1-b24c-fb7f9bc29ddc.png)
+
+이번엔 쿼터가 100인 `sda` 디스크 성능으로 컨테이너를 올리고 터미널로 접속합니다.   
+```
+docker run -it --rm --device-write-iops /dev/sda:100 ubuntu /bin/bash
+```
+
+마찬가지로 같은 스펙으로 성능 테스트를 진행합니다.   
+```
+/# dd if=/dev/zero of=file1 bs=1M count=10 oflag=direct
+```   
+![image](https://user-images.githubusercontent.com/43658658/152992918-b5664db4-bd2a-48de-9e19-218aa6959da1.png)   
+- 성능 차이가 확연히 다른 것을 확인할 수 있습니다.
+
 ## 컨테이너 사용 리소스 확인 툴
 
 - `docker stats` : 실행중인 컨테이너의 런타임 통계
 - `docker event` : Docker HOST의 실시간 event 정보를 수집해서 출력.
 
 - `cAdvisor` : 컨테이너 리소스 모니터링 애플리케이션.
+
+> <h3>cAdvisor 사용</h3>
+
+=> [cAdvisor 설치](https://github.com/google/cadvisor)   
+
+위 사이트에 접속한 뒤 아래에 **README.md** 부분의 코드를 복사해서 그대로 Docker HOST에서 실행합니다.   
+![image](https://user-images.githubusercontent.com/43658658/152994440-96678ad3-4ede-4cbb-8ffb-e23fbd25479d.png)   
+```
+VERSION=v0.36.0 # use the latest release version from https://github.com/google/cadvisor/releases
+sudo docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=8080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  --privileged \
+  --device=/dev/kmsg \
+  gcr.io/cadvisor/cadvisor:$VERSION
+```
+
+```
+docker ps -a
+```   
+![image](https://user-images.githubusercontent.com/43658658/152995437-4a38cde2-b8bb-402b-a978-2cc3547ca2c3.png)   
+- `cadvisor` 컨테이너가 실행되었습니다.
+
+메모리와 디스크 I/O를 할당한 컨테이너를 하나 실행합니다.   
+```
+docker run -it --rm --device-write-iops /dev/sda:100 -m 500m --name c1 -d ubuntu /bin/bash
+```
+
+이제 웹 브라우저에서 **Docker HOST의 IP 주소**에 **8080번 포트**로 접속합니다.   
+![image](https://user-images.githubusercontent.com/43658658/152995715-9d8fdc84-672d-4e3e-9c93-7a7510d6dfdc.png)   
+- cAdvisor를 확인할 수 있습니다.
+
+
+
+
+
+
 
 
 
