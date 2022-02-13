@@ -108,16 +108,100 @@ docker volume ls
 docker volume rm <컨테이너 볼륨 UUID>
 ```
 
+> <h3>웹데이터 readonly 서비스로 컨테이너에 지원</h3>
+
+```
+(Docker Host) --------------> (컨테이너)
+/webdata/index.html           /usr/share/nginx/html
+```
+
+먼저 Docker Host에 `/webdata`를 만들고 안에 `index.html`을 만듭니다.   
+```
+mkdir /webdata
+cd /webdata
+echo "<h1>Hello World</h1>" > index.html
+```
+
+이제 nginx 컨테이너의 `/usr/share/nginx/html`을 `/webdata`에 **readonly** 방식으로 마운트하여 실행합니다.   
+```
+docker run -d -v /webdata:/usr/share/nginx/html:ro -p 80:80 --name web nginx
+```
+
+그리고 `curl` 명령을 이용해 `localhost:80`을 확인하면 `index.html`의 내용이 출력됩니다.   
+```
+curl localhost:80
+```   
+![image](https://user-images.githubusercontent.com/43658658/153749042-0db23efd-4495-41c5-9b26-53627921921e.png)
 
 ## 컨테이너 끼리 데이터 공유
 
-web content generator -> /webdata/index.html -> web server
+두 개의 컨테이너가 Docker Host의 같은 디스크를 바라보게 하면 데이터를 공유할 수 있습니다.
 
+```
+web content generator ---------------> /webdata/index.html -----------> web server
+(df -h 명령이 10초 마다 실행되어 /webdata/index.html에 저장)              /webdata:/usr/share/nginx/html
+```
+
+먼저 실습용 디렉토리를 하나 만들고, 그 안에 `df.sh` 스크립트 파일을 만듭니다.   
+```
+mkdir lab8
+cd lab8
+vim df.sh
+```
+
+`<df.sh>`   
+``` bash
+#!/bin/bash
+mkdir -p /webdata
+while true
+do
+  df -h > /webdata/index.html
+  sleep 10
+done
+```
+
+`dockerfile`을 만듭니다.   
+```
+vim dockerfile
+```
+
+`<dockerfile>`   
+```
+FROM ubuntu:18.04
+ADD df.sh /bin/df.sh
+RUN chmod +x /bin/df.sh
+ENTRYPOINT ["/bin/df.sh"]  
+```   
+- **ADD** : df.sh 파일을 컨테이너 속 /bin/df.sh에 넣습니다.
+- **RUN** : 컨테이너가 빌드될 때 /bin/df.sh 파일에 대한 실행(x) 권한을 부여합니다.
+- **ENTRYPOINT** : CMD와 같은 역할을 하는데 docker 명령어 뒤에 파라미터에 상관없이 무조건 컨테이너가 실행될 때 /bin/df.sh 명령을 하도록 합니다.
+
+이제 컨테이너를 빌드합니다.   
+```
+docker build -t df .
+```
+
+만들어진 컨테이너 이미지로 df라는 컨테이너를 실행하는데, Docker Host의 `/webdata`에 컨테이너의 `/webdata`를 마운트합니다.
 ```
 docker run -d -v /webdata:/webdata --name df smlinux/df
-docker run -d -v /webdata:/usr/share/nginx/html:ro ubuntu   # 웹 데이터 readonly 서비스로 지원
 ```
 
+`cat` 명령으로 확인해보면 Docker Host의 `/webdata/index.html`에는 `df -h`가 실행된 결과가 나타나는 것을 확인할 수 있습니다.   
+```
+cat /webdata/index.html
+```   
+![image](https://user-images.githubusercontent.com/43658658/153749935-0c828af0-8629-4836-a6f0-d226b97e57fd.png)
+
+이제 웹 서버를 만들고 컨테이너가 Docker Host의 `/webdata`를 공유합니다.   
+```
+docker run -d -v /webdata:/usr/share/nginx/html:ro --name web -p 80:80 nginx   # 웹 데이터 readonly 서비스로 지원
+```
+
+`curl` 명령어를 이용해 `localhost:80`로 접속해 웹 페이지를 확인합니다.   
+```
+curl localhost:80
+```   
+![image](https://user-images.githubusercontent.com/43658658/153750132-dc0dad0d-cd75-46eb-a28f-b2ffce90f453.png)
 
 
 
