@@ -2,7 +2,7 @@
 
 ## docker0 (172.17.0.1)
 
-- virtual ethernet bridge: `172.17.0.0/16`
+- virtual ethernet bridge 네트워크 : `172.17.0.0/16`
 - **G/W** 역할을 합니다.
 - L2 통신기반
 - container 생성 시 `veth` 인터페이스를 생성합니다(Sandbox).
@@ -60,7 +60,7 @@ docker run -d --name web -P nginx
 ![image](https://user-images.githubusercontent.com/43658658/153752176-268cb90e-6493-4d09-885f-763b4f2ae50a.png)   
 - `nginx`의 dockerfile은 `EXPOSE`에 80번 포트 하나만 노출되어 있어 80번 포트만 무작위 호스트 포트와 포트포워딩 설정이 되었습니다.
 
-## user-defined bridge network 생성
+## 컨테이너에 정적 IP 부여하기
 
 컨테이너 IP가 `172.17.0.0/16` 내에서 DHCP 방식으로 생성되지 않고, **정적 IP를 할당**하고 싶다면,
 
@@ -68,12 +68,12 @@ docker run -d --name web -P nginx
 
 **user-defined bridge network**를 새로 생성하면 됩니다.
 
-`docker network ls` 명령은 현재 Docker 네트워크 내의 인터페이스 리스트를 나타냅니다.   
+`docker network ls` 명령은 현재 Docker HOST 내 **Network** 리스트를 나타냅니다.   
 ```
 docker network ls
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/153752284-92b44711-d251-474f-a36d-8a70f0bc9b75.png)   
-- 기본으로 3개의 인터페이스가 있는데, 그 중 `bridge` 인터페이스가 **docker0**입니다.
+- 기본으로 3개의 네트워크가 있는데, 그 중 `bridge` 네트워크가 **docker0**가 있는 네트워크입니다.
 
 **user-defined bridge network**를 생성합니다.   
 ```
@@ -82,23 +82,55 @@ docker network create --driver bridge --subnet 192.168.100.0/24 --gateway 192.16
 - `--driver bridge`는 디폴트 값
 - `--gateway`를 주지 않게 되면 디폴트로 `192.168.100.1` 식으로 서브넷의 네트워크를 따라 1번 호스트로 생성됩니다.
 
+다시 Docker 네트워크의 리스트를 확인합니다.   
 ```
 docker network ls
+```   
+![image](https://user-images.githubusercontent.com/43658658/153752372-77a6d291-fcb3-44f7-81c0-2201ee6bcd73.png)   
+- `mynet`이라는 bridge 유형의 네트워크가 만들어졌습니다.
+
+`inspect` 명령을 통해 네트워크 설정을 확인할 수 있습니다.   
 ```
+docker inspect mynet
+```   
+![image](https://user-images.githubusercontent.com/43658658/153752425-a4b6010d-fc2a-4bfb-ae89-7fb71e042412.png)
 
 ```
-docker run -d --name appjs --net mynet --ip 192.168.100.100 -p 8080:8080 appjs
-```
-
-```
-curl localhost:8080
-```
+docker run -it --name c1 --net mynet --ip 192.168.100.100 busybox
+/ # ip addr
+```   
+![image](https://user-images.githubusercontent.com/43658658/153752739-a69a6bba-3709-45c6-8bfa-0e93cfc79cf4.png)
 
 ## 컨테이너 끼리 통신
 
 ```
-docker run -d --name mysql -v /dbdata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=pass -e MYSQL_PASSWORD=pass mysql
+eth0(172.16.0.202) ------> docker0(172.17.0.1) ------> wordpress(172.17.0.2:80) ------> mysql(172.17.0.3)
+외부에서 80번 포트로 접속    80번 포트로 포트포워딩       웹 서버                           웹 서버의 데이터를 저장
 ```
 
+먼저 **mysql 컨테이너**를 실행합니다.
 ```
-docker run -d --name wordpress -p 80:80 -e MYSQL_
+docker run -d --name mysql -v /dbdata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=wordpress -e MYSQL_PASSWORD=wordpress mysql:5.7
+```   
+- `MYSQL_PASSWORD=wordpress` : 워드프레스에서 접속하기 위한 일반 사용자 비밀번호 설정.
+
+**wordpress 컨테이너**를 실행합니다.   
+```
+docker run -d --name wordpress --link mysql:mysql -p 80:80 -e WORDPRESS_DB_PASSWORD=wordpress wordpress:4
+```   
+- `--link <연동할 컨테이너 이름>:<앨리아스>` : 현재 실행할 컨테이너를 mysql과 연동합니다.
+- `-e WORDPRESS_DB_PASSWORD=wordpress` : mysql과 연동될 때 사용할 패스워드 할당.
+
+웹 브라우저를 통해 `172.16.0.202:80`로 접속합니다.   
+![image](https://user-images.githubusercontent.com/43658658/153753313-3e908158-2746-49a1-a274-79b21c3bc7f5.png)   
+- **한국어**로 선택합니다.
+
+정보를 입력하고 Wordpress를 설치합니다.   
+![image](https://user-images.githubusercontent.com/43658658/153753362-915f8948-690d-4f15-8f63-8ec208ef03d4.png)
+
+Wordpress가 설치완료 되었습니다.   
+![image](https://user-images.githubusercontent.com/43658658/153753503-898628d7-badc-45dd-ab6f-d5af148c35a7.png)
+
+Docker Host의 `/dbdata`의 리스트를 보면 `wordpress`가 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/153753587-663d72bb-4e7d-4225-98f5-26fe156f9e66.png)
+
