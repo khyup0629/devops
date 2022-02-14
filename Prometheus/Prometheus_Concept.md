@@ -197,9 +197,18 @@ scrape_configs:
   - file:
     - /etc/prometheus/sd/bllu_custom.json
     refresh_interval: 10s   # 갱신 주기
+ec2_sd_configs:   # ec2 API를 이용해 ec2 인스턴스를 가져옵니다.
+- endpoint: ""
+  region: ap-northeast-2
+  refresh_interval: 10s
+  port: 9100
+  filters:
+  - name: tag:monitoring   # 태그에 monitoring이 true인 ec2를 가져옵니다.
+    values:
+    - "ture"
 ```   
 
-```
+``` python
 # bllu_custom.json
 [
   {
@@ -214,3 +223,16 @@ scrape_configs:
   }
 ]
 ```
+
+- relabeling : label의 meta label 중 하나로 relabeling.   
+애초에 label에 나타내는 항목이 아니라면 relabeling 해도 label에 나타나지 않습니다.
+
+``` python
+- source_labels: [__meta_ec2_tag_Name]   # Before labeling에서 __meta_ec2_tag_Name 을 instance 로 relabeling 합니다.
+    separator: ;
+    regex: (.*)
+    target_label: instance
+    replacement: $1
+    action: replace
+```   
+![image](https://user-images.githubusercontent.com/43658658/153896938-79ac11c7-b5e1-44f3-9ab4-0c1f942ae805.png)
