@@ -4,6 +4,26 @@
 
 여러 컨테이너의 실행을 설정하고 한데 모아 `.yaml` 파일로 저장.
 
+## Docker Compose 설치
+
+=> [Docker Compose 설치 방법](https://docs.docker.com/compose/install/)
+
+Docker Compose의 최신 버전을 설치합니다.   
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+
+**실행 권한**을 줍니다.   
+```
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+**Docker compose**가 잘 설치되었는지 확인합니다.   
+```
+docker-compose version
+```   
+![image](https://user-images.githubusercontent.com/43658658/153803937-eec695a9-8d94-499f-b6d6-73f8028c0fcf.png)
+
 ## Docker Compose 문법
 
 ```
@@ -109,7 +129,174 @@ services:
 
 ## 빌드에서 운영까지
 
+=> [Docker Compose를 활용한 예제](https://docs.docker.com/compose/gettingstarted/)
+
 1. 서비스 디렉토리 생성
+
+```
+mkdir composetest
+cd composetest
+vim app.py
+```
+
+<app.py>   
+```
+import time
+
+import redis
+from flask import Flask
+
+app = Flask(__name__)
+cache = redis.Redis(host='redis', port=6379)
+
+def get_hit_count():
+    retries = 5
+    while True:
+        try:
+            return cache.incr('hits')
+        except redis.exceptions.ConnectionError as exc:
+            if retries == 0:
+                raise exc
+            retries -= 1
+            time.sleep(0.5)
+
+@app.route('/')
+def hello():
+    count = get_hit_count()
+    return 'Hello World! I have been seen {} times.\n'.format(count)
+```
+
+빌드할 때 `requirements.txt`를 참조해 라이브러리를 설치합니다.   
+(dockerfile에서 RUN 커맨드를 이용해 해당 내용을 구현합니다)   
+```
+vim requirements.txt
+```
+
+<requirements.txt>   
+```
+flask
+redis
+```
+
 2. dockerfile 생성
+
+```
+vim dockerfile
+```
+
+```
+# syntax=docker/dockerfile:1
+FROM python:3.7-alpine
+WORKDIR /code
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+EXPOSE 5000
+COPY . .
+CMD ["flask", "run"]
+```
+
 3. docker-compose.yml 생성
+
+```
+vim docker-compose.yml
+```
+
+```
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+  redis:
+    image: "redis:alpine"
+```
+
 4. docker-compose 
+
+```
+docker-compose up
+```
+
+웹 브라우저에서 `172.16.0.202:8000`으로 접속하면 아래 내용이 표시됩니다.   
+![image](https://user-images.githubusercontent.com/43658658/153805490-cfaadd05-6dba-4b85-ad58-45a9f1e2a878.png)
+
+새로고침하면 숫자가 1씩 상승합니다.
+
+5. 기존의 yaml 파일을 수정
+
+먼저 [Ctrl] + [c] 로 포그라운드로 실행되고 있는 app.py를 중지합니다.
+
+이제 yaml 파일을 수정합니다.   
+```
+vim docker-compose.yml
+```   
+
+```
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+  redis:
+    image: "redis:alpine"
+```
+
+6. 백그라운드 모드로 재실행
+
+이번에는 docker-compose를 백그라운드 모드로 실행합니다.   
+(app.py 내용이 변경되면 바로 반영됩니다)   
+```
+docker-compose up -d
+```   
+
+```
+docker-compose ps
+```   
+![image](https://user-images.githubusercontent.com/43658658/153805925-946fee8d-5e0e-42d5-9f05-8ebce53f99f5.png)
+
+7. app.py 내용 수정
+
+```
+vim app.py
+```
+
+맨 아래에 `Hello World!`를 `Hello Docker!`로 수정합니다.   
+```
+import time
+
+import redis
+from flask import Flask
+
+app = Flask(__name__)
+cache = redis.Redis(host='redis', port=6379)
+
+def get_hit_count():
+    retries = 5
+    while True:
+        try:
+            return cache.incr('hits')
+        except redis.exceptions.ConnectionError as exc:
+            if retries == 0:
+                raise exc
+            retries -= 1
+            time.sleep(0.5)
+
+@app.route('/')
+def hello():
+    count = get_hit_count()
+    return 'Hello Docker! I have been seen {} times.\n'.format(count)
+```
+
+`172.16.0.202:8000`으로 접속하면 수정사항이 바로 적용되어 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/153806395-57228379-8553-4d17-8fd5-352c3fe9d1a6.png)
+
+
