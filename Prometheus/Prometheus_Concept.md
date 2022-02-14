@@ -229,10 +229,10 @@ ec2_sd_configs:   # ec2 API를 이용해 ec2 인스턴스를 가져옵니다.
 
 ``` python
 - source_labels: [__meta_ec2_tag_Name]   # Before labeling에서 __meta_ec2_tag_Name 을 instance 로 relabeling 합니다.
-    separator: ;
-    regex: (.*)
-    target_label: instance
-    replacement: $1
-    action: replace
+  separator: ;
+  regex: (.*)   # 정규표현식: (.*)는 전체 문자열을 의미합니다. () : 그룹 지정, . : any character, * : 0 or more
+  target_label: instance
+  replacement: $1   # source_labels의 value가 바뀌는 형식
+  action: replace
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/153896938-79ac11c7-b5e1-44f3-9ab4-0c1f942ae805.png)
