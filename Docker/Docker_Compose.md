@@ -322,14 +322,14 @@ docker-compose down
 
 => [튜토리얼 사이트](https://docs.docker.com/samples/wordpress/)
 
-1. 서비스 디렉토리 생성
+> <h3>1. 서비스 디렉토리 생성</h3>
 
 ```
 mkdir my_wordpress
 cd my_wordpress
 ```
 
-2. docker-compose.yml 파일 작성
+> <h3>2. docker-compose.yml 파일 작성</h3>
 
 ```
 vim docker-compose.yml
@@ -369,11 +369,12 @@ volumes:
   wordpress_data: {}
 ```   
 - `db_data`와 `wordpress_data` 디렉토리는 Docker Host의 `/var/lib/docker/volumes` 경로 내에 UUID 대신 `my_wordpress_db_data`와 `my_wordpress_wordpress_data`로 마운트 되어 있습니다.   
-![image](https://user-images.githubusercontent.com/43658658/153812684-c433a494-befa-4f80-af0f-8cc75f96f5fa.png)
-
+![image](https://user-images.githubusercontent.com/43658658/153812684-c433a494-befa-4f80-af0f-8cc75f96f5fa.png)   
+    * Docker Host의 `/db_data`, `/wordpress_data`에 마운트되어 있지 않습니다.
+    * wordpress와 mysql이 연동되어 `db_data`에 `wordpress`가 있는 것을 확인할 수 있습니다.
 - mysql의 환경 변수에서 `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`를 wordpress의 환경 변수 `WORDPRESS_DB_NAME`, `WORDPRESS_DB_USER`, `WORDPRESS_DB_PASSWORD`에 각각 매칭시켜줍니다.
 
-3. docker-compose로 컨테이너 실행
+> <h3>3. docker-compose로 컨테이너 실행</h3>
 
 ```
 docker-compose up -d
