@@ -11,6 +11,8 @@
 - 프로메테우스 설정 파일에 항목들이 있습니다.
 - ex) 프로메테우스 수집과 관련된 항목, alerting 등
 
+### global
+
 ``` python
 global:
   scrape_interval: 15s   # 스크랩 주기
@@ -19,14 +21,19 @@ global:
   external_labels: # 시스템의 label
   query_log_file: /etc/prometheus/query.log   # 프로메테우스에 쿼리를 날렸을 때 로그를 남길 경로
 ```   
+
+### rule_files
+
 ``` python
 rule_files:
   /etc/prometheus/rules/*.yaml   # rule, alert에 대한 파일
   # rules.yaml: 사전에 PromQL을 캐싱해서 프로메테우스의 부하를 줄이는 역할
   # alerts.yaml: # metric이 설정한 조건을 만족하면 alert
 ```   
+
+#### /etc/prometheus/rules/rules.yaml
+
 ``` python
-/etc/prometheus/rules/rules.yaml   
 groups:
   name: bllu
   interval: 10s
@@ -37,8 +44,10 @@ groups:
     labels:
       bllu: test   # rule로 미리 쿼리한 샘플에 `bllu="test"`로 labeling을 해서 캐시된 샘플임을 알려줄 수 있습니다.
 ```   
+
+#### /etc/prometheus/rules/alerts.yaml
+
 ``` python
-/etc/prometheus/rules/alerts.yaml
 groups:
   name: bllu-alert
   interval: 10s
@@ -56,6 +65,8 @@ groups:
 ```   
 rules와 alerts은 프로메테우스 페이지의 해당 위치에 명시되어 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/153884970-3977e8c6-0941-4fdb-af1c-d8277fab966d.png)
+
+### scrape_configs
 
 ``` python
 scrape_configs:
@@ -80,6 +91,8 @@ ec2_sd_configs:   # ec2 API를 이용해 ec2 인스턴스를 가져옵니다.
     - "ture"
 ```   
 
+#### bllu_custom.json
+
 ``` python
 # bllu_custom.json
 [
@@ -96,10 +109,15 @@ ec2_sd_configs:   # ec2 API를 이용해 ec2 인스턴스를 가져옵니다.
 ]
 ```
 
+### relabeling
+
 - relabeling : label의 meta label 중 하나로 relabeling.   
 애초에 label에 나타내는 항목이 아니라면 relabeling 해도 label에 나타나지 않습니다.
 
+#### relabel_configs
+
 ``` python
+relabel_configs:
 - source_labels: [__meta_ec2_tag_Name]   # Before labeling에서 __meta_ec2_tag_Name 을 instance 로 relabeling 합니다.
   separator: ;
   regex: (.*)   # 정규표현식: (.*)는 전체 문자열을 의미합니다. () : 그룹 지정, . : any character, * : 0 or more
