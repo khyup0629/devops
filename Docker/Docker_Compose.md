@@ -85,7 +85,7 @@ volumes:
 - `-f <.yml 파일>` : yaml 파일 실행으로 컨테이너 생성
 - `ps` : 컨테이너 목록 표시
 - `logs <서비스 이름>` : 컨테이너 로그 출력
-- `run <서비스이름> <실행 명령어>` : 컨테이너 실행
+- `run <서비스이름> <실행 명령어>` : 현재 실행중인 컨테이너에 <실행 명령어>를 전달.
 - `start` : 컨테이너 시작
 - `stop` : 컨테이너 정지
 - `restart` : 컨테이너 재시작
@@ -97,41 +97,11 @@ volumes:
 - `rm` : 컨테이너 삭제
 - `down` : 리소스 삭제
 
-## Docker Compose 파일로 컨테이너 실행
-
-1. 서비스 디렉토리 생성
-
-```
-mkdir webserver
-cd webserver
-```
-
-2. docker-compose.yml 생성
-
-```
-cat > docker-compose.yml
-version: '3'
-services:
-    web:
-        image: httpd:latest
-        ports:
-            - "80:80"
-        links:
-            - mysql:db
-        command: apachectl -DFOREGROUND
-    mysql:
-        image: mysql:latest
-        command:mysqld
-        environment:
-```
-
-3. docker-compose 명령어
-
 ## 빌드에서 운영까지
 
 => [Docker Compose를 활용한 예제](https://docs.docker.com/compose/gettingstarted/)
 
-1. 서비스 디렉토리 생성
+> <h3>1. 서비스 디렉토리 생성</h3>
 
 ```
 mkdir composetest
@@ -178,7 +148,7 @@ flask
 redis
 ```
 
-2. dockerfile 생성
+> <h3>2. dockerfile 생성</h3>
 
 ```
 vim dockerfile
@@ -198,7 +168,7 @@ COPY . .
 CMD ["flask", "run"]
 ```
 
-3. docker-compose.yml 생성
+> <h3>3. docker-compose.yml 생성</h3>
 
 ```
 vim docker-compose.yml
@@ -215,7 +185,7 @@ services:
     image: "redis:alpine"
 ```
 
-4. docker-compose 
+> <h3>4. docker-compose으로 컨테이너 빌드 및 실행</h3>
 
 ```
 docker-compose up
@@ -226,7 +196,7 @@ docker-compose up
 
 새로고침하면 숫자가 1씩 상승합니다.
 
-5. 기존의 yaml 파일을 수정
+> <h3>5. 기존의 yaml 파일을 수정</h3>
 
 먼저 [Ctrl] + [c] 로 포그라운드로 실행되고 있는 app.py를 중지합니다.
 
@@ -248,12 +218,14 @@ services:
       FLASK_ENV: development
   redis:
     image: "redis:alpine"
-```
+```   
+- `volumes`에서 마운트 설정을 합니다.
+    - `app.py`가 들어있는 현재 디렉토리를 컨테이너 내부 `/code`에 마운트하여 이미지를 다시 빌드하지 않고도 컨테이너 내부 코드가 수정됩니다.
+- `environment` 키에서 `FLASK_ENV` 키를 `development`로 설정해 **개발 모드**로 설정하면, **변경된 코드가 바로 로드**됩니다.
 
-6. 백그라운드 모드로 재실행
+> <h3>6. 백그라운드 모드로 재실행</h3>
 
 이번에는 docker-compose를 백그라운드 모드로 실행합니다.   
-(app.py 내용이 변경되면 바로 반영됩니다)   
 ```
 docker-compose up -d
 ```   
@@ -263,7 +235,7 @@ docker-compose ps
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/153805925-946fee8d-5e0e-42d5-9f05-8ebce53f99f5.png)
 
-7. app.py 내용 수정
+> <h3>7. app.py 내용 수정</h3>
 
 ```
 vim app.py
@@ -298,5 +270,123 @@ def hello():
 
 `172.16.0.202:8000`으로 접속하면 수정사항이 바로 적용되어 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/153806395-57228379-8553-4d17-8fd5-352c3fe9d1a6.png)
+
+> <h3>8. scale up</h3>
+
+`scale` 명령을 사용해 컨테이너를 확장할 수 있습니다.   
+```
+docker-compose scale redis=3
+```   
+
+```
+docker-compose ps
+```   
+![image](https://user-images.githubusercontent.com/43658658/153807534-9cf09644-34dc-405d-a51e-c2e5e0367072.png)
+
+> <h3>9. flask의 환경 변수 확인하기</h3>
+
+env는 flask의 환경 변수를 확인하는 명령어입니다.   
+
+`docker-compose run <실행되고 있는 컨테이너 이름> <실행 명령어>`를 이용해 환경 변수를 확인할 수 있습니다.
+```
+docker-compose run web env
+```   
+![image](https://user-images.githubusercontent.com/43658658/153808538-4290afa2-e27c-4346-9d2c-5a59120c1fd0.png)
+
+> <h3>10. 로그 확인하기</h3>
+
+```
+docker-compose logs web
+```   
+![image](https://user-images.githubusercontent.com/43658658/153808642-018b5696-bce8-4785-b53d-3906aef7f02b.png)
+
+> <h3>11. 컨테이너 중지</h3>
+
+```
+docker-compose stop
+```
+
+```
+docker-compose ps
+```   
+![image](https://user-images.githubusercontent.com/43658658/153809064-8cad2e1a-e8cd-42a1-aa02-bfb6dfd4178f.png)
+
+> <h3>12. 컨테이너 종료</h3>
+
+```
+docker-compose down
+```   
+![image](https://user-images.githubusercontent.com/43658658/153809086-dceeab3c-1acc-432c-94a6-b63543123213.png)
+
+## MySQL을 사용하는 Wordpress 운영
+
+=> [튜토리얼 사이트](https://docs.docker.com/samples/wordpress/)
+
+1. 서비스 디렉토리 생성
+
+```
+mkdir my_wordpress
+cd my_wordpress
+```
+
+2. docker-compose.yml 파일 작성
+
+```
+vim docker-compose.yml
+```
+
+```
+version: "3.9"
+    
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+volumes:
+  db_data: {}
+  wordpress_data: {}
+```   
+- `db_data`와 `wordpress_data` 디렉토리는 Docker Host의 `/var/lib/docker/volumes` 경로 내에 UUID 대신 `my_wordpress_db_data`와 `my_wordpress_wordpress_data`로 마운트 되어 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/153812684-c433a494-befa-4f80-af0f-8cc75f96f5fa.png)
+
+- mysql의 환경 변수에서 `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`를 wordpress의 환경 변수 `WORDPRESS_DB_NAME`, `WORDPRESS_DB_USER`, `WORDPRESS_DB_PASSWORD`에 각각 매칭시켜줍니다.
+
+3. docker-compose로 컨테이너 실행
+
+```
+docker-compose up -d
+```
+
+```
+docker-compose ps
+```
+
+`172.16.0.202:8000`으로 접속하면 아래와 같이 워드프레스 설치 화면이 나타납니다.   
+![image](https://user-images.githubusercontent.com/43658658/153811251-d825c1b6-ae40-4f23-84dc-b8db65f4823d.png)
+
+
+
 
 
