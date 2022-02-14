@@ -54,4 +54,62 @@ volumes:
   * `no` : 재시작 되지 않음.
   * `always` : 컨테이너를 수동으로 끄기 전까지 항상 재시작.
   * `on-failure` : 오류가 있을 시 재시작
-- `depends_on` : 컨테이너 간 종속성을 정의. 정의한 컨테이너가 먼저 동작해야 합니다.
+- `depends_on` : `depends_on` 안에 정의된 컨테이너가 먼저 실행됩니다.
+
+## Docker Compose 명령어
+
+`docker-compose` 커멘드로 시작합니다.
+
+- `up` : 컨테이너 생성/시작
+    - `up -d` : 백그라운드로 생성
+- `-f <.yml 파일>` : yaml 파일 실행으로 컨테이너 생성
+- `ps` : 컨테이너 목록 표시
+- `logs <서비스 이름>` : 컨테이너 로그 출력
+- `run <서비스이름> <실행 명령어>` : 컨테이너 실행
+- `start` : 컨테이너 시작
+- `stop` : 컨테이너 정지
+- `restart` : 컨테이너 재시작
+- `pause` : 컨테이너 일시 정지
+- `unpause` : 컨테이너 재개
+- `port` : 공개 포트 번호 표시
+- `config` : 구성 확인
+- `kill` : 실행 중인 컨테이너 강제 정지
+- `rm` : 컨테이너 삭제
+- `down` : 리소스 삭제
+
+## Docker Compose 파일로 컨테이너 실행
+
+1. 서비스 디렉토리 생성
+
+```
+mkdir webserver
+cd webserver
+```
+
+2. docker-compose.yml 생성
+
+```
+cat > docker-compose.yml
+version: '3'
+services:
+    web:
+        image: httpd:latest
+        ports:
+            - "80:80"
+        links:
+            - mysql:db
+        command: apachectl -DFOREGROUND
+    mysql:
+        image: mysql:latest
+        command:mysqld
+        environment:
+```
+
+3. docker-compose 명령어
+
+## 빌드에서 운영까지
+
+1. 서비스 디렉토리 생성
+2. dockerfile 생성
+3. docker-compose.yml 생성
+4. docker-compose 
