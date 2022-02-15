@@ -535,5 +535,137 @@ curl -XPOST -v http://localhost:9090/-/reload
 tip) 그라파나 대시보드를 구성할 때 PromQL을 모두 구성하는 것은 사실상 **비효율적**입니다.   
 샘플들을 **적절하게 가공**해서 사용하도록 합시다.
 
+## blackbox-exporter 설치
+
+java, spring, kotlin, flask 등과 같은 언어들이 동작하는 **워크로드**를 모니터링할 때 이용합니다.
+
+```
+cd /devops_prometheus/compose-files/blackbox-exporter
+vim docker-compose.yml
+```
+
+#### docker-compose.yml
+
+``` python
+version: '3.8'
+services:
+  black-exporter:
+    container_name: blackbox-exporter
+    image: prom/blackbox-exporter:master
+    ports:
+      - "9115:9115"
+    volumes:
+      - ../../config/blackbox-exporter/blackbox.yml:/config/blackbox.yml
+
+networks:
+  default:
+    external:
+      name: monitoring
+```
+
+```
+cd ../../config/blackbox-exporter
+vim blackbox.yml
+```
+
+#### blackbox.yml
+
+``` python
+modules:
+  http_2xx:
+    http:
+      no_follow_redirects: false
+      preferred_ip_protocol: ip4
+      valid_http_versions:
+        - HTTP/1.1
+        - HTTP/2
+      valid_status_codes: [ ]
+    prober: http
+    timeout: 5s
+```
+
+```
+docker-compose up -d
+docker-compose ps
+```
+
+```
+cd ../prometheus
+vim prometheus.yml
+```
+
+#### prometheus.yml
+
+``` python
+global:
+  scrape_interval:     15s
+  scrape_timeout:      10s
+  evaluation_interval: 1m
+  external_labels:
+    monitor: 'dev-prometheus'
+  query_log_file: /etc/prometheus/query.log
+
+# rule file list evaluated by `global.evaluation_interval`
+rule_files:
+  - /etc/prometheus/rules/*.yaml
+
+alerting:
+  alertmanagers:
+  - scheme: http
+    api_version: v2
+    path_prefix: /
+    static_configs:
+    - targets:
+      - "alertmanager_1:9082"
+      - "alertmanager_2:9084"
+
+scrape_configs:
+  - job_name: prometheus
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ 'localhost:9090' ]
+
+  - job_name: node-exporter
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ 'node-exporter:9100' ]
+
+  - job_name: nginx-prometheus-exporter
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ 'nginx-prometheus-exporter:9113' ]
+
+  # http://localhost:9115/probe?module=http_2xx&target=http://host.docker.internal:9090
+  - job_name: 'blackbox-http-2xx'
+    metrics_path: /probe
+    params:
+      module: [ http_2xx ]
+    static_configs:
+      - targets:
+          - http://host.docker.internal:9090
+          - http://host.docker.internal:3000
+          - http://host.docker.internal:8080
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+```
+
+```
+curl -XPOST -v http://localhost:9090/-/reload
+```
+
+![image](https://user-images.githubusercontent.com/43658658/154036630-86580b06-d69f-462a-bfad-59ec9eae3631.png)
+
+마찬가지로 grafana dashboard로 접속해서 blackbox-exporter와 관련된 샘플을 그라파나에 임포트합니다.   
+![image](https://user-images.githubusercontent.com/43658658/154037116-0006ed6e-3172-42e6-a308-faca2485c11c.png)
+
+
 
 
