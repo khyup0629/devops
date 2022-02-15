@@ -400,8 +400,8 @@ networks:
     external:
       name: monitoring
 ```   
-- `-nginx.scrape-uri http://nginx/metrics` : 스크랩 할 때는 nginx의 매트릭을 가져오겠다는 의미입니다.
-- `-web.telemetry-path=/metrics` : 외부로 매트릭을 노출하는 경로.
+- `-nginx.scrape-uri http://nginx/metrics` : `http://nginx/metrics`를 스크랩해서 프로메테우스가 이해할 수 있도록 변경합니다.
+- `-web.telemetry-path=/metrics` : 스크랩한 매트릭을 외부로 노출하는 경로.   
 
 nginx의 매트릭이 `http://nginx/metrics` 경로로 제공되도록 하기 위해서는 `nginx.conf` 파일을 설정해주어야 합니다.   
 ```
@@ -450,7 +450,7 @@ http {
     }
 }
 ```   
-- `location /metrics`, `stub_status on;` : `http://nginx/metrics`의 경로로 nginx 상태 제공을 허락합니다.
+- `location /metrics`, `stub_status on;` : `http://nginx/metrics`의 경로로 nginx 상태 제공을 허락합니다.   
 
 ```
 docker-compose up -d
@@ -464,6 +464,58 @@ curl http://localhost:8080
 `<호스트IP주소>:8080/metrics` 경로로 접속하면 nginx 매트릭이 출력됩니다.   
 ```
 curl -v http://localhost:8080/metrics
+```
+![image](https://user-images.githubusercontent.com/43658658/154012243-c9554f94-3c70-4b6b-b494-70c0203effde.png)
+
+`<호스트IP주소>:9113/metrics` 경로로 접속하면 `http://<호스트IP주소>:8080/metrics`를 스크랩한 뒤 프로메테우스가 이해할 수 있도록 변환한 매트릭이 보여집니다.   
+![image](https://user-images.githubusercontent.com/43658658/154012124-92242c83-c944-4d79-bb4e-e85beb27eb11.png)
+
+nginx-prometheus-exporter를 프로메테우스의 타겟으로 반영하기 위해 `prometheus.yml` 파일을 수정합니다.   
+``` python
+global:
+  scrape_interval:     15s
+  scrape_timeout:      10s
+  evaluation_interval: 1m
+  external_labels:
+    monitor: 'dev-prometheus'
+  query_log_file: /etc/prometheus/query.log
+
+# rule file list evaluated by `global.evaluation_interval`
+rule_files:
+  - /etc/prometheus/rules/*.yaml
+
+alerting:
+  alertmanagers:
+  - scheme: http
+    api_version: v2
+    path_prefix: /
+    static_configs:
+    - targets:
+      - "alertmanager_1:9082"
+      - "alertmanager_2:9084"
+
+scrape_configs:
+  - job_name: prometheus
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ 'localhost:9090' ]
+
+  - job_name: node-exporter
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ 'node-exporter:9100' ]
+
+  - job_name: nginx-prometheus-exporter
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ 'nginx-prometheus-exporter:9113' ]
+```
+
+```
+curl -XPOST -v http://localhost:9090/-/reload
 ```
 
 
