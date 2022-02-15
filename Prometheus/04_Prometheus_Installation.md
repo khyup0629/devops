@@ -518,4 +518,22 @@ scrape_configs:
 curl -XPOST -v http://localhost:9090/-/reload
 ```
 
+## nginx-prometheus-exporter를 위한 그라파나 대시보드 구성
+
+구글링해서 `Grafana Dashboard`를 검색합니다.   
+
+또는
+
+=> [그라파나 대시보드 샘플](https://grafana.com/grafana/dashboards/)
+
+![image](https://user-images.githubusercontent.com/43658658/154013602-12bbed54-cdec-43bb-a823-bd685509bf94.png)   
+![image](https://user-images.githubusercontent.com/43658658/154013634-48185b80-7767-4273-b181-6dd52b5269be.png)   
+![image](https://user-images.githubusercontent.com/43658658/154013704-ac2cb402-daad-4f32-8ff4-3e24e020229c.png)   
+![image](https://user-images.githubusercontent.com/43658658/154013761-b9e5fb75-bb69-4432-8e6b-049d90544a3f.png)   
+![image](https://user-images.githubusercontent.com/43658658/154013966-3861dc75-6059-40e4-938f-c3a9b0716e98.png)
+
+tip) 그라파나 대시보드를 구성할 때 PromQL을 모두 구성하는 것은 사실상 **비효율적**입니다.   
+샘플들을 **적절하게 가공**해서 사용하도록 합시다.
+
+
 
