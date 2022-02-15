@@ -6,7 +6,7 @@
 
 > <h3>1. 서비스 디렉토리 만들기</h3>
 
-디렉토리 구성은 아래와 같습니다.
+디렉토리 구성은 아래와 같습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/153972808-3e8c4e86-1950-450c-a99c-c3eebffbc0d7.png)
 
 ```
