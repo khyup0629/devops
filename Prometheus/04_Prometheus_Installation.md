@@ -90,41 +90,41 @@ scrape_configs:
     static_configs:
       - targets: [ 'localhost:9090' ]
 
-  - job_name: node-exporter
-    scrape_interval: 15s
-    metrics_path: /metrics
-    static_configs:
-      - targets: [ 'node-exporter:9100' ]
-
-  - job_name: nginx-prometheus-exporter
-    scrape_interval: 15s
-    metrics_path: /metrics
-    static_configs:
-      - targets: [ 'nginx-prometheus-exporter:9113' ]
-
-  # http://localhost:9115/probe?module=http_2xx&target=http://host.docker.internal:9090
-  - job_name: 'blackbox-http-2xx'
-    metrics_path: /probe
-    params:
-      module: [ http_2xx ]
-    static_configs:
-      - targets:
-          - http://host.docker.internal:9090
-          - http://host.docker.internal:3000
-          - http://host.docker.internal:8080
-    relabel_configs:
-      - source_labels: [ __address__ ]
-        target_label: __param_target
-      - source_labels: [ __param_target ]
-        target_label: instance
-      - target_label: __address__
-        replacement: blackbox-exporter:9115
-
-  - job_name: sample-python
-    scrape_interval: 15s
-    metrics_path: /metrics
-    static_configs:
-      - targets: [ 'host.docker.internal:8080' ]
+#  - job_name: node-exporter
+#    scrape_interval: 15s
+#    metrics_path: /metrics
+#    static_configs:
+#      - targets: [ 'node-exporter:9100' ]
+#
+#  - job_name: nginx-prometheus-exporter
+#    scrape_interval: 15s
+#    metrics_path: /metrics
+#    static_configs:
+#      - targets: [ 'nginx-prometheus-exporter:9113' ]
+#
+#  # http://localhost:9115/probe?module=http_2xx&target=http://host.docker.internal:9090
+#  - job_name: 'blackbox-http-2xx'
+#    metrics_path: /probe
+#    params:
+#      module: [ http_2xx ]
+#    static_configs:
+#      - targets:
+#          - http://host.docker.internal:9090
+#          - http://host.docker.internal:3000
+#          - http://host.docker.internal:8080
+#    relabel_configs:
+#      - source_labels: [ __address__ ]
+#        target_label: __param_target
+#      - source_labels: [ __param_target ]
+#        target_label: instance
+#      - target_label: __address__
+#        replacement: blackbox-exporter:9115
+#
+#  - job_name: sample-python
+#    scrape_interval: 15s
+#    metrics_path: /metrics
+#    static_configs:
+#      - targets: [ 'host.docker.internal:8080' ]
 
 #  - job_name: 'dj-custom'
 #    scrape_interval: 10s
