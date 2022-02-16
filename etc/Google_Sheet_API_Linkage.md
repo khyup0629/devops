@@ -25,7 +25,7 @@
 ![image](https://user-images.githubusercontent.com/43658658/154221986-ca469166-e725-4357-962c-13aab21f341d.png)
 
 **서비스 계정**을 클릭해 접속한 다음 `키 > 키 추가 > 새 키 만들기`를 클릭합니다.   
-![image](https://user-images.githubusercontent.com/43658658/154222034-adbf0be6-6fb0-4f48-8689-2d84fc261fe5.png)
+![image](https://user-images.githubusercontent.com/43658658/154222657-35e744e2-5ba4-48f9-86b3-a395266434f2.png)
 
 `json` 형식으로 만들어줍니다.   
 ![image](https://user-images.githubusercontent.com/43658658/154222054-b54e4b5a-fa67-4e08-a0bc-425a9acd56d9.png)   
