@@ -47,6 +47,15 @@
 ![image](https://user-images.githubusercontent.com/43658658/154262629-3e08ecf1-83b7-4038-bd61-055bec148391.png)
 
 이제 시트의 `A1`에 원하는 본문 내용 형식을 작성합니다.   
+```
+{name}님으로부터 휴가 신청이 접수 되었습니다.
+
+휴가 신청 날짜 :
+{start} ~ {end}
+
+사유 :
+{comment}
+```   
 ![image](https://user-images.githubusercontent.com/43658658/154262820-327d4281-13a5-4c89-b5c7-3f7fc53fd4bb.png)   
 - `{name}, {start}, {end}, {comment}`에는 각각 `이름, 휴가 시작일, 휴가 종료일, 사유`가 들어갈 예정입니다.
 - 이후 `Apps Script`에서 구현할 것입니다.
