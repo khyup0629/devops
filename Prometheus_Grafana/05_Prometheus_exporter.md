@@ -662,8 +662,9 @@ scrape_configs:
     scrape_interval: 15s
     metrics_path: /metrics
     static_configs:
-      - targets: [ 'host.docker.internal:8080' ]
-```
+      - targets: [ '172.16.0.202:8080' ]
+```   
+- `172.16.0.202:8080`으로 설정한 이유는 `app.py`가 컨테이너 바깥(Docker Host)에서 구동되고 있기 때문입니다.
 
 ```
 cd ../../compose-files/prometheus
