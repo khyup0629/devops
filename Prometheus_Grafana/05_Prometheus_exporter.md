@@ -670,14 +670,18 @@ scrape_configs:
 ```
 cd ../../compose-files/prometheus
 docker-compose down; docker-compose up
-```
+```   
 
+python flask와 잘 연결된 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/154510473-2437a0a0-4158-4bac-b5c4-4e8d808521f5.png)
+
+이제 그라파나 대시보드 구성을 진행하겠습니다.   
 => [prometheus-flask-exporter 그라파나 대시보드 json 샘플](https://github.com/rycus86/prometheus_flask_exporter/blob/master/examples/sample-signals/grafana/dashboards/example.json)
 
-위 깃허브 사이트로 접속해서 `json` 내용을 전체 복사합니다.   
+위 깃허브 사이트로 접속해서 `json` 내용을 **전체 복사**합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/154497722-01081336-46f2-4e99-a2db-4bfe9085b2a3.png)
 
-그라파나 페이지로 접속해서 임포트합니다.   
+그라파나 페이지로 접속해서 **임포트**합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/154501121-96e23bc0-8423-4e73-8d54-cba52a0dcb58.png)   
 ![image](https://user-images.githubusercontent.com/43658658/154501191-d36bb931-c21c-4470-8f84-ca17955656d5.png)
 
