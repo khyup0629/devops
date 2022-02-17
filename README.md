@@ -6,6 +6,8 @@
 
 ## 📈 Prometheus & Grafana
 
+- [Grafana 자동 새로고침 설정](https://github.com/khyup0629/devops/blob/main/Prometheus_Grafana/Grafana_refresh_setting.md#%EA%B7%B8%EB%9D%BC%ED%8C%8C%EB%82%98-%EC%9E%90%EB%8F%99-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8-%EC%84%A4%EC%A0%95)
+
 ## etc
 
 - [MobaXterm 설치](https://github.com/khyup0629/devops/blob/main/etc/Mobaxterm_Installation.md#mobaxterm-%EC%84%A4%EC%B9%98)
@@ -14,3 +16,4 @@
 
 ## TroubleShooting
 
+- [프로메테우스 포트 오류로 인한 Down 상태 해결]()
