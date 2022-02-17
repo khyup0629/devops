@@ -16,4 +16,4 @@
 
 ## TroubleShooting
 
-- [프로메테우스 포트 오류로 인한 Down 상태 해결]()
+- [프로메테우스 포트 오류로 인한 Down 상태 해결](https://github.com/khyup0629/devops/blob/main/troubleshooting/%ED%94%84%EB%A1%9C%EB%A9%94%ED%85%8C%EC%9A%B0%EC%8A%A4_TCP_%EC%97%90%EB%9F%AC.md#%ED%94%84%EB%A1%9C%EB%A9%94%ED%85%8C%EC%9A%B0%EC%8A%A4-tcp-%EC%97%90%EB%9F%AC)
