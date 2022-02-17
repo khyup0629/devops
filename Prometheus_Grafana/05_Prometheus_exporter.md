@@ -665,6 +665,7 @@ scrape_configs:
       - targets: [ '172.16.0.202:8080' ]
 ```   
 - `172.16.0.202:8080`으로 설정한 이유는 `app.py`가 컨테이너 바깥(Docker Host)에서 구동되고 있기 때문입니다.
+- `localhost`, `host.docker.internal`로 설정하면 **에러 발생**.
 
 ```
 cd ../../compose-files/prometheus
@@ -680,12 +681,8 @@ docker-compose down; docker-compose up
 ![image](https://user-images.githubusercontent.com/43658658/154501121-96e23bc0-8423-4e73-8d54-cba52a0dcb58.png)   
 ![image](https://user-images.githubusercontent.com/43658658/154501191-d36bb931-c21c-4470-8f84-ca17955656d5.png)
 
-`대시보드 설정`에 들어가서 자동 refresh 기능을 추가하겠습니다.   
-![image](https://user-images.githubusercontent.com/43658658/154502879-d0cbc532-7db6-4d24-9434-f902f342b1a3.png)   
-![image](https://user-images.githubusercontent.com/43658658/154502995-4e9c0657-5039-41b6-9ceb-f53bc3495861.png)   
-
-`5s`와 `10s`에 대한 선택 항목이 나타납니다.   
-![image](https://user-images.githubusercontent.com/43658658/154503089-eec128b7-9fba-4849-9e30-a72cd72eefbf.png)
+모니터링이 잘 되고 있음을 볼 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/154508381-f8bf52e1-1d47-4716-a74f-f5cd8aea6833.png)
 
 
 
