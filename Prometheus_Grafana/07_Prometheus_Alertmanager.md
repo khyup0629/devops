@@ -5,6 +5,14 @@
 
 ## 1. Setup & Configuration
 
+`alertmanager`의 **config 파일**을 만듭니다.
+```
+cd devops_prometheus/config/alertmanager
+vim config.yml
+```
+
+#### config.yml
+
 그냥 `Copy & Paste` 하면 안됩니다.   
 ``` python
 global:
