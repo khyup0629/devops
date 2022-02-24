@@ -52,7 +52,12 @@ Slack Webhook URL을 입력하고, `template`의 이름을 작성합니다.
 
    {{ end }}
 {{ end }}
-```
+```   
+- `*<문자열>*` : 굵은 글씨 출력.
+- `{{ range .Alerts }}` : alert이 발생한 만큼 loop를 돕니다.
+- `{{ or .ValueString "[no value]" }}` : alert이 발생했을 때 value값을 나타냅니다.
+- `{{ .Annotations.<항목> }}` : `alert rules`를 생성할 때 4번 항목에서 작성한 `URL, Description` 등을 조회합니다.
+- `{{ range .Labels.SortedPairs }}` : 발생한 alert의 label의 key-`{{ .Name }}`, value-`{{ .Value }}`들을 모두 출력.
 
 ### 테스트
 
