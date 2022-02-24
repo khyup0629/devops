@@ -32,6 +32,7 @@ ex) **Ansible**, Puppet, Chef, Salt Stack
 # 이미지 빌더 도구
 
 AWS EC2의 AMI 같은 이미지를 빌드할 수 있는 도구입니다.
+
 ex) 패커(packer), AWS EC2 Image Builder(AMI)
 
 
