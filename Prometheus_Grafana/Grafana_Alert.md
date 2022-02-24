@@ -18,7 +18,7 @@
 - 쿼리의 조건이 위반되면 pending 상태가 되는데 pending 상태가 30초 이상이면 알람 발생.
 
 `annotations`를 작성합니다(이후에 template에서 annotation으로 조회 가능)   
-![image](https://user-images.githubusercontent.com/43658658/155491358-d55a13bc-c527-4094-a8a3-dad7f959c44f.png)
+![image](https://user-images.githubusercontent.com/43658658/155495697-1871f110-4743-48f8-a23a-2c4e97fcca21.png)
 
 > <h3>Slack 알림 설정</h3>
 
