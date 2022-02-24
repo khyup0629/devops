@@ -2,25 +2,18 @@
 
 네트워크, 로드밸런서, 저장소, 서버 등의 **인프라 자원**을 수동 설정이 아닌 **코드를 이용**하여 **프로비저닝하고 관리**하는 것
 
-ex) Terraform, CloudFormation, Pulumi, Azure ARM Template
+ex) **Terraform**, CloudFormation, Pulumi, Azure ARM Template
 
-## 선언형 설정, 절차형 설정
+## 선언형 설정
 
-> <h3>선언형 설정</h3>
+**선언적**으로 정의.
 
-선언적으로 정의.
+```
+서버 이름 : ~
+서버 클래스 : ~
 
-ex) Terraform
-
-> <h3>절차형 설정</h3>
-
-순차적으로 명령어를 수행.
-
-1. 패키지 업데이트
-2. nginx 설치
-3. 방화벽 설정
-
-ex) Ansible
+(...)
+```
 
 # 형상 관리 (Configuration Management)
 
@@ -29,11 +22,21 @@ ex) Ansible
 
 ex) **Ansible**, Puppet, Chef, Salt Stack
 
+## 절차형 설정
+
+**순차적**으로 명령어를 수행.
+
+```
+1. 패키지 업데이트
+2. nginx 설치
+3. 방화벽 설정
+```
+
 # 이미지 빌더 도구
 
-AWS EC2의 AMI 같은 이미지를 빌드할 수 있는 도구입니다.
+AWS EC2의 AMI 같은 **이미지를 빌드할 수 있는 도구**입니다.
 
-ex) 패커(packer), AWS EC2 Image Builder(AMI)
+ex) **packer**, AWS EC2 Image Builder(AMI)
 
 
 
