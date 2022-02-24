@@ -23,8 +23,8 @@ ex) Ansible
 
 # 형상 관리 (Configuration Management)
 
-서버 운영체제 상에 **필요한 소프트웨어를 설치**하고 **원하는 설정으로 관리**하는 것을 **코드를 이용**하는 것.
-= Configuration as Code
+서버 운영체제 상에 **필요한 소프트웨어를 설치**하고 **원하는 설정으로 관리**하는 것을 **코드를 이용**하는 것.   
+= Configuration as Code   
 ex) **Ansible**, Puppet, Chef, Salt Stack
 
 # 이미지 빌더 도구
