@@ -59,6 +59,12 @@ Slack Webhook URL을 입력하고, `template`의 이름을 작성합니다.
 - `{{ .Annotations.<항목> }}` : `alert rules`를 생성할 때 4번 항목에서 작성한 `URL, Description` 등을 조회합니다.
 - `{{ range .Labels.SortedPairs }}` : 발생한 alert의 label의 key-`{{ .Name }}`, value-`{{ .Value }}`들을 모두 출력.
 
+`Notification policies`에 접근해 [Edit] 버튼을 누릅니다.   
+![image](https://user-images.githubusercontent.com/43658658/155505421-69b0d069-8c9b-4655-b8fd-91c1a07476df.png)
+
+앞서 생성한 **Slack 타입 Contact point**를 선택합니다.   
+![image](https://user-images.githubusercontent.com/43658658/155505559-6126de8f-7e56-4813-876f-9829698297c8.png)
+
 ### 테스트
 
 `alert rules`에서 **CPU 사용량**의 임계치를 `1`로 낮춰봅니다.   
@@ -95,11 +101,16 @@ docker restart <그라파나 컨테이너 ID>
 이름을 작성하고, 타입은 `Email`로 합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155494108-ab6b0501-3070-4876-bee5-1dfaa5aa6ceb.png)
 
+`Notification Policies`로 들어가서 [New policy] 버튼을 누릅니다.   
+![image](https://user-images.githubusercontent.com/43658658/155504986-67dc55f7-667a-49fe-8771-80c9e4089181.png)
+
+[Add matcher] 버튼을 눌러서 Label 조건을 적어주고, `Contact point`는 앞서 생성한 **Email 타입 Contact point**로 선택합니다.   
+![image](https://user-images.githubusercontent.com/43658658/155505239-5c37382c-062b-4df7-94ed-a2324f31c7ce.png)
+
 ### 테스트
 
 마찬가지로 CPU 사용량의 기준을 `1`로 설정해서 테스트를 진행해봅니다.
 
 이메일을 통해 정상적으로 알림이 오는 것을 확인할 수 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155494311-690148ed-2101-4b90-afb8-38e93ed3fc92.png)
-
 
