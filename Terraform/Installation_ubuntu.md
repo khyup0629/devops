@@ -84,10 +84,10 @@ vim ~/.terraformrc
 
 #### < .terraformrc >
 
-**캐시 디렉토리**를 설정합니다.   
 ```
 plugin_cache_dir   = "$HOME/.terraform.d/plugin-cache"
-```
+```   
+- **캐시 디렉토리**를 설정합니다.   
 
 다음으로, 위에서 설정한 캐시 디렉토리를 만듭니다.   
 ```
