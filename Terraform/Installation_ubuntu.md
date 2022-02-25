@@ -48,11 +48,11 @@ touch ~/.bashrc
 terraform -install-autocomplete
 ```   
 
-`.bashrc` 파일을 살펴보면 가장 아래에 자동완성과 관련된 설정이 추가된 것을 확인할 수 있습니다.   
+`.bashrc` 파일을 살펴보면 자동완성과 관련된 설정 내용이 추가된 것을 확인할 수 있습니다.   
 ```
 cat ~/.bashrc
 ```   
-![image](https://user-images.githubusercontent.com/43658658/155712243-d802d1b6-b87d-4adc-8ffc-cee5147be4a3.png)
+![image](https://user-images.githubusercontent.com/43658658/155716156-a2c6a951-6a20-45b5-a0c4-1e273d086a2a.png)
 
 자동완성 설정을 적용하기 위해 `bash` 명령으로 bash shell을 다시 시작합니다.   
 ```
