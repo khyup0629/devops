@@ -10,6 +10,8 @@
 
 ## 🎶 Terraform
 
+- [Terraform 설치 및 설정(Ubuntu)](https://github.com/khyup0629/devops/blob/main/Terraform/Installation_ubuntu.md#%ED%85%8C%EB%9D%BC%ED%8F%BC-%EC%84%A4%EC%B9%98%EC%9A%B0%EB%B6%84%ED%88%AC)
+
 ## etc
 
 - [MobaXterm 설치](https://github.com/khyup0629/devops/blob/main/etc/Mobaxterm_Installation.md#mobaxterm-%EC%84%A4%EC%B9%98)
