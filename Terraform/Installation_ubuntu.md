@@ -82,7 +82,7 @@ bash
 vim ~/.terraformrc
 ```
 
-#### .terraformrc
+#### < .terraformrc >
 
 **캐시 디렉토리**를 설정합니다.   
 ```
