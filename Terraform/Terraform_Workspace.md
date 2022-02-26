@@ -106,3 +106,40 @@ tf apply
 
 ![image](https://user-images.githubusercontent.com/43658658/155828101-1f1d871c-db24-412c-8c6c-8efbd873edc0.png)
 
+> <h3>Data source 사용하기</h3>
+
+local provider의 data source를 사용해보겠습니다.   
+![image](https://user-images.githubusercontent.com/43658658/155828305-60a8a361-8471-4442-9928-259f98eaa463.png)
+
+`main.tf`의 아래에 다음의 내용을 추가합니다.   
+```
+# main.tf
+provider "local" {
+  
+}
+resource "local_file" "foo" {
+    filename = "${path.module}/foo.txt"
+    content  = "Hello World!"
+}
+data "local_file" "bar" {
+    filename = "${path.module}/bar.txt"
+}
+output "file_bar" {
+    value = data.local_file.bar
+}
+```
+
+`bar.txt` 파일을 읽기 위해선 파일이 존재해야겠죠.   
+```
+cat > bar.txt
+Hello World!
+```
+
+변경사항을 적용합니다.   
+```
+tf apply
+```   
+![image](https://user-images.githubusercontent.com/43658658/155828479-206a15b4-3e6c-4ab2-b504-74ce077be1f6.png)   
+- `main.tf`의 `data` 섹션이 bar.txt 파일을 읽어들입니다.
+- `output` 섹션이 `file_bar`라는 이름의 Object를 생성하여 bar.txt 파일의 내용을 출력합니다.
+
