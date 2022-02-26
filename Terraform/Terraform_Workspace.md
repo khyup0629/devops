@@ -8,6 +8,8 @@
 
 ## 워크스페이스 생성
 
+> <h3>1. Write</h3>
+
 ```
 mkdir 01-start
 cd 01-start
@@ -68,5 +70,39 @@ terraform init
 `.terraform` 폴더에는 현재 워크스페이스의 provider, module이 설치됩니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155827801-c8793eeb-7f34-4b24-b7b9-5416ee0db4ae.png)
 
-`.terraform.lock.hcl` 파일에는 CI/CD 파이프라인 구성에 필요한 정보가 있습니다.   
+`.terraform.lock.hcl` 파일에는 **CI/CD 파이프라인 구성**에 필요한 정보가 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155827836-cf77ff19-087b-4412-81c2-c9819712a31c.png)
+
+(꿀팁)`alias` 지정을 통해 `terraform` 명령어를 줄여서 사용합시다.   
+```
+alias tf=terraform
+```
+
+> <h3>2. Plan</h3>
+
+**Apply**하기 전 변경 사항을 체크합니다.   
+```
+tf plan
+```   
+![image](https://user-images.githubusercontent.com/43658658/155827909-a8877db1-f741-4914-b84b-698d33a7e86f.png)
+
+> <h3>3. Apply</h3>
+
+변경사항을 적용합니다.   
+```
+tf apply
+```   
+![image](https://user-images.githubusercontent.com/43658658/155828007-4373fda1-fc1e-446d-9273-c569f0d058d1.png)
+
+현재 디렉토리에 `foo.txt` 파일이 생성된 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/155828047-deb3f7af-6115-4b7e-acfe-90eafbaaacdc.png)   
+![image](https://user-images.githubusercontent.com/43658658/155828058-060da429-21f9-42bd-8686-a84e3f50adc5.png)
+
+그 밖에도 `.terraform.tfstate` 파일이 생성된 것을 볼 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/155828090-5a1ff1d9-8b74-4b2f-8d24-93ac82013eb5.png)
+
+이 파일에는 현재 리소스에 대한 정보가 JSON 형식으로 저장되어 있습니다.   
+- 이 파일을 기준으로 나중에 main.tf를 변경할 때 변경사항을 체크합니다.   
+
+![image](https://user-images.githubusercontent.com/43658658/155828101-1f1d871c-db24-412c-8c6c-8efbd873edc0.png)
+
