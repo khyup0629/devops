@@ -11,7 +11,7 @@ Write, Plan, Apply 방식
 
 > <h3>2. Plan</h3>   
 
-- `terraform plan`을 실행해서 인프라를 생성하기 전 기존 인프라와 비교해 변경된 점, 설정 구성을 체크합니다.   
+- `terraform plan`을 실행해서 **Apply**하기 전 기존 인프라와 비교해 변경된 점, 설정 구성을 체크합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155824952-de00dfff-0e39-4708-822e-42d7e66047a7.png)   
 ![image](https://user-images.githubusercontent.com/43658658/155824990-98c02aa8-b75f-4506-840e-2794a67d94d2.png)
 
@@ -60,4 +60,9 @@ Module 중 하나를 클릭해 접속해보면 여러 탭들을 확인할 수 �
 
 ![image](https://user-images.githubusercontent.com/43658658/155825888-0adaf0c5-8f09-4479-9d5c-555a8c3f76f4.png)
 
+## Docs
 
+테라폼의 공식 문서들이 모여있는 곳입니다.   
+![image](https://user-images.githubusercontent.com/43658658/155826302-67cf8815-6212-4225-bfc9-e52062874ad6.png)
+
+테라폼을 이용하면서 많이 참고해야 할 부분입니다.
