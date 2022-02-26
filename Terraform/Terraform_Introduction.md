@@ -26,8 +26,6 @@ Write, Plan, Apply 방식
 `레지스트리`는 테라폼을 이용하면서 사용할 **provider**와 **module**을 찾을 수 있는 곳입니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155825040-f466c141-175f-4338-bd47-9dbe12d59414.png)
 
-![image](https://user-images.githubusercontent.com/43658658/155825045-2eb8edff-efcc-48cc-a420-ebdf49fd1e1c.png)   
 - Provider : AWS, GCP, Azure와 같은 인프라 환경
-- Module : 인프라 리소스 그룹 템플릿(Instance + Security Group + EBS)
-
-
+- Module : 인프라 리소스 그룹 템플릿(Instance + Security Group + EBS)   
+![image](https://user-images.githubusercontent.com/43658658/155825045-2eb8edff-efcc-48cc-a420-ebdf49fd1e1c.png)   
