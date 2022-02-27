@@ -177,5 +177,31 @@ data "local_file" "bar" {
 output "file_bar" {
     value = data.local_file.bar
 }
+
+# Create a VPC
+resource "aws_vpc" "foo" {
+  cidr_block = "10.0.0.0/16"
+}
 ```
+
+`aws`라는 **새로운 provider**를 추가했기 때문에 `terraform init`을 실행합니다.   
+```
+tf init
+```
+
+다음으로 apply하기 전 변경 사항을 알아봅니다.   
+```
+tf plan
+```   
+![image](https://user-images.githubusercontent.com/43658658/155871323-c11b92c3-3e76-4e94-bdef-0e4b98c6163f.png)
+
+마지막으로 적용합니다.   
+```
+tf apply
+```
+
+**AWS 콘솔**의 `VPC`로 접근해보면 `CIDR 10.0.0.0/16`인 VPC가 생성된 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/155871385-29932100-00c6-49c9-b58d-6706e176067a.png)
+
+
 
