@@ -371,5 +371,78 @@ AWS VPC는 이미 생성한 VPC의 **CIDR 변경을 지원하지 않습니다.**
 
 **삭제하고 추가하는 경우, 기존의 리소스를 지우는 행위를 진행하기 때문에 서비스에 치명적인 영향을 미칠 수 있습니다.**
 
+> <h3>VPC용 Data Sources 이용하기</h3>
+
+VPC용 Data Sources를 이용해보겠습니다.   
+사이드바에서 `VPC > Data Sources > aws_vpcs`로 접근합니다.   
+![image](https://user-images.githubusercontent.com/43658658/155873848-0f72c9df-86fd-4bcf-b971-ce50fd4203d7.png)   
+- `aws_vpcs`는 하나의 리전 내의 VPC의 목록들을 ID 형태로 보여줍니다.
+
+`main.tf` 파일에 해당 내용을 추가합니다.   
+```
+vim main.tf
+```
+
+```
+provider "local" {
+
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
+resource "local_file" "foo" {
+    filename = "${path.module}/foo.txt"
+    content  = "Hello World!"
+}
+
+data "local_file" "bar" {
+    filename = "${path.module}/bar.txt"
+}
+
+output "file_bar" {
+    value = data.local_file.bar
+}
+
+# Create a VPC
+resource "aws_vpc" "foo" {
+  cidr_block = "10.123.0.0/16"
+
+  tags = {
+    "Name" = "This is test vpc"
+  }
+}
+
+
+output "vpc_foo" {
+    value = aws_vpc.foo
+}
+
+data "aws_vpcs" "foo" {}
+
+output "vpcs_foo" {
+    value = data.aws_vpcs.foo
+}
+```
+
+적용합니다.   
+```
+tf apply
+```   
+![image](https://user-images.githubusercontent.com/43658658/155874536-a71558fd-dcc0-457c-9c5a-8bfdd29db2c2.png)   
+- `id` : 리전
+- `ids` : vpc의 id
+
+> <h3>리소스 삭제</h3>
+
+`main.tf`에 작성된 리소스들을 모두 삭제할 수 있습니다.   
+```
+tf destroy
+```   
+![image](https://user-images.githubusercontent.com/43658658/155874790-1a1e43ac-3f1d-4875-9d56-8a72f07ca4fa.png)
+
+**AWS 콘솔**을 살펴보면 생성되었던 VPC가 지워진 것을 확인할 수 있습니다.
 
 
