@@ -50,3 +50,13 @@ hyeob@hyeob:~/01-start$ aws configure get region
 ap-northeast-1
 ```
 
+**환경변수**를 제거하기 위해 `unset`을 이용합니다.   
+```
+unset AWS_PROFILE
+```
+
+등록한 환경변수를 제거하면 다시 디폴트값으로 돌아옵니다.   
+```
+hyeob@hyeob:~/01-start$ aws configure get region
+ap-northeast-2
+```
