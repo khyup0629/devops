@@ -1,6 +1,6 @@
 # AWS CLI 설치(ubuntu)
 
-=> [AWS CLI 설치 방법](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+=> [AWS CLI 설치 방법(AWS 공식 문서)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 먼저 `AWS CLI`를 설치하기 전 사전 작업을 진행합니다.   
 ```
