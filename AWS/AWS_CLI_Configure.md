@@ -1,7 +1,7 @@
 # AWS Configure
 
 `AWS CLI`를 설치하고 진행되어야 하는 과정입니다.   
-=> [AWS CLI 설치 과정]()
+=> [AWS CLI 설치 과정](https://github.com/khyup0629/devops/blob/main/AWS/AWS_CLI_Installation_In_Ubuntu.md#aws-cli-%EC%84%A4%EC%B9%98ubuntu)
 
 ## 명령어로 등록하기
 
