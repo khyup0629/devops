@@ -146,7 +146,7 @@ tf apply
 > <h3>AWS provider 사용하기</h3>
 
 AWS provider를 이용하기 위해서는 `AWS CLI Credential` 설정을 먼저 진행해주어야 합니다.   
-=> [AWS CLI Credential 설정]()
+=> [AWS CLI Credential 설정](https://github.com/khyup0629/devops/blob/main/AWS/AWS_CLI_Credential_Configuration.md#aws-cli%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9E%90%EA%B2%A9%EC%A6%9D%EB%AA%85-config)
 
 위 자격증명 설정을 진행하셨다면 아래의 Docs를 참고하며 실습을 진행합니다.   
 => [AWS provider Documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
