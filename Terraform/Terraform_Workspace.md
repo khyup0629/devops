@@ -203,5 +203,173 @@ tf apply
 **AWS 콘솔**의 `VPC`로 접근해보면 `CIDR 10.0.0.0/16`인 VPC가 생성된 것을 확인할 수 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155871385-29932100-00c6-49c9-b58d-6706e176067a.png)
 
+생성한 VPC의 출력값을 보겠습니다.   
+
+```
+vim main.tf
+```
+
+```
+provider "local" {
+
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
+resource "local_file" "foo" {
+    filename = "${path.module}/foo.txt"
+    content  = "Hello World!"
+}
+
+data "local_file" "bar" {
+    filename = "${path.module}/bar.txt"
+}
+
+output "file_bar" {
+    value = data.local_file.bar
+}
+
+# Create a VPC
+resource "aws_vpc" "foo" {
+  cidr_block = "10.0.0.0/16"
+}
+
+
+output "vpc_foo" {
+    value = aws_vpc.foo
+}
+```   
+- `resource`의 경우 `output`을 추가할 때 `value`를 `resource` 뒤의 파라미터(aws_vpc, foo)를 .으로 연결시켜주면 됩니다(`aws_vpc.foo`)
+
+apply를 하면 `vpc_foo`라는 이름의 **output이 추가**된 것을 확인할 수 있습니다.   
+```
+tf apply
+```   
+![image](https://user-images.githubusercontent.com/43658658/155872960-0946fcb8-7744-47c7-9b3b-9bd5ba7bc03f.png)   
+- vpc에 대한 정보를 보여줍니다.
+
+> <h3>리소스 변경하기</h3>
+
+기존에 aws에 생성한 `VPC`에 태그 네임을 추가해보겠습니다.
+
+```
+vim main.tf
+```
+
+```
+provider "local" {
+
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
+resource "local_file" "foo" {
+    filename = "${path.module}/foo.txt"
+    content  = "Hello World!"
+}
+
+data "local_file" "bar" {
+    filename = "${path.module}/bar.txt"
+}
+
+output "file_bar" {
+    value = data.local_file.bar
+}
+
+# Create a VPC
+resource "aws_vpc" "foo" {
+  cidr_block = "10.0.0.0/16"
+
+  tags = {
+    "Name" = "This is test vpc"
+  }
+}
+
+
+output "vpc_foo" {
+    value = aws_vpc.foo
+}
+```
+
+apply를 통해 적용합니다.   
+```
+tf apply
+```   
+![image](https://user-images.githubusercontent.com/43658658/155873280-a27eb95c-9648-4fb3-a841-a0b3cce48327.png)   
+- Tags 값의 경우 변경 사항으로 적용합니다.
+
+**AWS 콘솔**로 접근해 살펴보면 이름이 추가된 것을 확인할 수 있고, [태그]탭에도 `Name` 키가 추가된 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/155873159-2229cc4d-4587-4378-97a8-04c510523805.png)   
+![image](https://user-images.githubusercontent.com/43658658/155873168-d734ade8-70b1-4798-8a51-96c4735b0a57.png)
+
+이번엔 `CIDR`의 값을 변경해보겠습니다.   
+
+```
+vim main.tf
+```
+
+```
+provider "local" {
+
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
+resource "local_file" "foo" {
+    filename = "${path.module}/foo.txt"
+    content  = "Hello World!"
+}
+
+data "local_file" "bar" {
+    filename = "${path.module}/bar.txt"
+}
+
+output "file_bar" {
+    value = data.local_file.bar
+}
+
+# Create a VPC
+resource "aws_vpc" "foo" {
+  cidr_block = "10.123.0.0/16"
+
+  tags = {
+    "Name" = "This is test vpc"
+  }
+}
+
+
+output "vpc_foo" {
+    value = aws_vpc.foo
+}
+```
+
+적용합니다.   
+```
+tf apply
+```   
+
+분명 `CIDR` 값을 변경했는데, 태그값을 추가한 것과는 다르게 리소스를 삭제(destroy)했다가 다시 추가(add)합니다.
+![image](https://user-images.githubusercontent.com/43658658/155873356-381536b8-d814-4ecc-abc9-27357b359aa0.png)   
+
+AWS VPC는 이미 생성한 VPC의 **CIDR 변경을 지원하지 않습니다.**   
+그렇기 때문에 CIDR 값을 변경하려하면, **기존 리소스를 지우고 새로운 리소스를 생성**하려 하는 것입니다.
+
+> <h3>리소스를 변경할 때 주의사항</h3>
+
+위의 예제에서 보았듯, `Terraform`은 **리소스의 인자값**이 AWS에서 변경 가능한지 아닌지 인지하고 있습니다.
+
+`tf apply`에서 `yes`를 입력하기 전 항상 인자값의 변경에 대해 이처럼 변경(`Changed`)하는 것인지, 삭제하고 추가(`Destroy` and `Add`)하는 것인지 체크해야합니다.
+
+**삭제하고 추가하는 경우, 기존의 리소스를 지우는 행위를 진행하기 때문에 서비스에 치명적인 영향을 미칠 수 있습니다.**
+
 
 
