@@ -47,7 +47,7 @@ module "consul" {
 
 ## 테라폼 리포지토리의 모듈 사용해보기
 
-``` bash
+``` terraform
 provider "aws" {
   region = "ap-northeast-2"
 }
