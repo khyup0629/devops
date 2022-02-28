@@ -1,4 +1,4 @@
-# 테라폼 variable 블럭
+# 테라폼 variable
 
 - variable 선언 형식   
 ``` terraform
@@ -106,7 +106,12 @@ module "route_table__private" {
 }
 ```
 
-> <h3>환경변수 선언</h3>
+`variable`을 선언만 하고 변수값을 대입하지 않으면 `tf apply`를 실행할 때 어떤 값을 넣을 것인지 물어봅니다.   
+![image](https://user-images.githubusercontent.com/43658658/155942292-7ebd3d1a-8f13-42ff-8ee2-d44bbcff8ff4.png)
+
+## 변수값 대입 방법
+
+> <h3>환경변수</h3>
 
 `TF_VAR_`를 변수이름 앞에 붙여 환경 변수로 선언할 수 있습니다.   
 ```
