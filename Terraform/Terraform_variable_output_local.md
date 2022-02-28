@@ -5,7 +5,7 @@
 variable "<variable name>" {}
 ```
 
-```
+``` terraform
 # main.tf
 provider "aws" {
   region = "ap-northeast-2"
