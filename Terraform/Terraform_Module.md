@@ -163,4 +163,10 @@ tf apply
 ![image](https://user-images.githubusercontent.com/43658658/155930638-771f81f8-8ed4-443a-9a6d-0af785e36de4.png)   
 ![image](https://user-images.githubusercontent.com/43658658/155930679-129057e3-9c40-4dc0-97da-26d8ebf880bd.png)
 
+# Module, variable, local, output
 
+각 블럭의 쓰임을 개발에 비교하면 다음과 같을 수 있겠습니다.   
+- **Module** = 'function'
+- **variable** = 'argument'. 모듈이라는 함수에 들어가는 인자들.
+- **local** = 'local variable'. 모듈이라는 함수에 쓰이는 로컬 변수들.
+- **output** = 'return value'. 모듈이라는 함수의 리턴값
