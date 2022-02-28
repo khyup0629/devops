@@ -5,7 +5,7 @@
 > <h3>Local Path</h3>
 
 모듈이 로컬에 위치한 경우 아래와 같이 path로 설정할 수 있습니다.   
-```
+``` terraform
 module "consul" {
   source = "./consul"
 }
@@ -14,7 +14,7 @@ module "consul" {
 > <h3>Terraform Registry</h3>
 
 모듈이 레지스트리에 위치한 경우 `<NAMESPACE>/<NAME>/<PROVIDER>` 형식으로 참조할 수 있습니다.
-```
+``` terraform
 module "consul" {
   source = "hashicorp/consul/aws"
   version = "0.1.0"
@@ -22,7 +22,7 @@ module "consul" {
 ```
 
 프라이빗 레지스트리에 위치한 경우 `<HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>`의 형식으로 참조합니다.   
-```
+``` terraform
 module "consul" {
   source = "app.terraform.io/example-corp/k8s-cluster/azurerm"
   version = "1.1.0"
@@ -32,14 +32,14 @@ module "consul" {
 > <h3>GitHub</h3>
 
 깃 리포지토리에 위치했을 때 HTTPS를 통해 가져오는 경우   
-```
+``` terraform
 module "consul" {
   source = "github.com/hashicorp/example"
 }
 ```
 
 SSH를 통해 가져오는 경우   
-```
+``` terraform
 module "consul" {
   source = "git@github.com:hashicorp/example.git"
 }
@@ -52,7 +52,7 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-module "vpc" {
+module "vpc" {   # 모듈 블럭의 형식은 module "<module name>" {}
   source  = "tedilabs/network/aws//modules/vpc"
   version = "0.24.0"
 
@@ -71,9 +71,9 @@ module "subnet_group__public" {
   source  = "tedilabs/network/aws//modules/subnet-group"
   version = "0.24.0"
 
-  name                    = "${module.vpc.name}-public"
+  name                    = "${module.vpc.name}-public"  # 모듈을 참조할 때는 module.<module name>.<output>
   vpc_id                  = module.vpc.id
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = true   # public ip 자동 할당
 
   subnets = {
     "${module.vpc.name}-public-001/az1" = {
@@ -95,7 +95,7 @@ module "subnet_group__private" {
 
   name                    = "${module.vpc.name}-private"
   vpc_id                  = module.vpc.id
-  map_public_ip_on_launch = false
+  map_public_ip_on_launch = false   # public ip 자동 할당하지 않음.
 
   subnets = {
     "${module.vpc.name}-private-001/az1" = {
@@ -123,7 +123,7 @@ module "route_table__public" {
   ipv4_routes = [
     {
       cidr_block = "0.0.0.0/0"
-      gateway_id = module.vpc.internet_gateway_id
+      gateway_id = module.vpc.internet_gateway_id   # vpc가 생성될 때 생성되는 internet gateway에 장착.
     },
   ]
 
@@ -139,7 +139,7 @@ module "route_table__private" {
 
   subnets = module.subnet_group__private.ids
 
-  ipv4_routes = []
+  ipv4_routes = []   # 프라이빗에는 트래픽이 흐르지 않도록.
 
   tags = {}
 }
