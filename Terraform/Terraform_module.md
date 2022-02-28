@@ -4,7 +4,7 @@
 
 > <h3>Local Path</h3>
 
-모듈이 로컬에 위치한 경우 아래와 같이 path로 설정할 수 있습니다.   
+모듈이 **로컬**에 위치한 경우 아래와 같이 path로 설정할 수 있습니다.   
 ``` terraform
 module "consul" {
   source = "./consul"
@@ -13,7 +13,7 @@ module "consul" {
 
 > <h3>Terraform Registry</h3>
 
-모듈이 레지스트리에 위치한 경우 `<NAMESPACE>/<NAME>/<PROVIDER>` 형식으로 참조할 수 있습니다.
+모듈이 **레지스트리**에 위치한 경우 `<NAMESPACE>/<NAME>/<PROVIDER>` 형식으로 참조할 수 있습니다.
 ``` terraform
 module "consul" {
   source = "hashicorp/consul/aws"
@@ -21,7 +21,7 @@ module "consul" {
 }
 ```
 
-프라이빗 레지스트리에 위치한 경우 `<HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>`의 형식으로 참조합니다.   
+**프라이빗 레지스트리**에 위치한 경우 `<HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>`의 형식으로 참조합니다.   
 ``` terraform
 module "consul" {
   source = "app.terraform.io/example-corp/k8s-cluster/azurerm"
@@ -31,14 +31,16 @@ module "consul" {
 
 > <h3>GitHub</h3>
 
-깃 리포지토리에 위치했을 때 HTTPS를 통해 가져오는 경우   
+**깃 리포지토리**에 위치했을 때   
+
+**HTTPS**를 통해 가져오는 경우   
 ``` terraform
 module "consul" {
   source = "github.com/hashicorp/example"
 }
 ```
 
-SSH를 통해 가져오는 경우   
+**SSH**를 통해 가져오는 경우   
 ``` terraform
 module "consul" {
   source = "git@github.com:hashicorp/example.git"
@@ -46,6 +48,11 @@ module "consul" {
 ```
 
 ## 테라폼 리포지토리의 모듈 사용해보기
+
+테라폼 리포지토리 내에 있는 모듈인 `Tedilabs`의 `Network` 모듈을 이용해 보겠습니다.   
+=> [Tedilabs Module 테라폼 리포지토리](https://registry.terraform.io/modules/tedilabs/network/aws/latest)
+
+위의 링크로 접속해 원하는 `Submodules` 찾아 `Readme`, `Input`, `Output` 등에 대한 정보를 찾아볼 수 있습니다.
 
 ``` terraform
 provider "aws" {
@@ -56,7 +63,7 @@ module "vpc" {   # 모듈 블럭의 형식은 module "<module name>" {}
   source  = "tedilabs/network/aws//modules/vpc"
   version = "0.24.0"
 
-  name                  = "fastcampus"
+  name                  = "test"
   cidr_block            = "10.0.0.0/16"
 
   internet_gateway_enabled = true
@@ -120,7 +127,7 @@ module "route_table__public" {
 
   subnets = module.subnet_group__public.ids
 
-  ipv4_routes = [
+  ipv4_routes = [   # 라우팅 규칙
     {
       cidr_block = "0.0.0.0/0"
       gateway_id = module.vpc.internet_gateway_id   # vpc가 생성될 때 생성되는 internet gateway에 장착.
@@ -139,8 +146,21 @@ module "route_table__private" {
 
   subnets = module.subnet_group__private.ids
 
-  ipv4_routes = []   # 프라이빗에는 트래픽이 흐르지 않도록.
+  ipv4_routes = []   # 프라이빗에는 트래픽이 흐르지 않도록 라우팅 규칙 설정 X
 
   tags = {}
 }
 ```
+
+위의 코드를 적용시켜봅니다.   
+```
+tf init
+tf apply
+```
+
+`AWS 콘솔`로 접근해보면 아래와 같이 **VPC, Public Subnet, Private Subnet, Public Route table, Private Route table**을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/155930596-718498c8-dcbb-4904-94e6-3575ee9964ff.png)   
+![image](https://user-images.githubusercontent.com/43658658/155930638-771f81f8-8ed4-443a-9a6d-0af785e36de4.png)   
+![image](https://user-images.githubusercontent.com/43658658/155930679-129057e3-9c40-4dc0-97da-26d8ebf880bd.png)
+
+
