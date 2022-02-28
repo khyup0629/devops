@@ -11,6 +11,9 @@
 ## 🎶 Terraform
 
 - [Terraform 설치 및 설정(Ubuntu)](https://github.com/khyup0629/devops/blob/main/Terraform/Installation_ubuntu.md#%ED%85%8C%EB%9D%BC%ED%8F%BC-%EC%84%A4%EC%B9%98%EC%9A%B0%EB%B6%84%ED%88%AC)
+- [모듈을 이용해 AWS VPC 생성](https://github.com/khyup0629/devops/blob/main/Terraform/Terraform_Module_AWS_VPC.md#aws-vpc-%EC%83%9D%EC%84%B1)
+- [모듈을 이용해 AWS EC2 인스턴스 생성](https://github.com/khyup0629/devops/blob/main/Terraform/Terraform_Module_AWS_EC2.md#aws-ec2-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)
+
 
 ## etc
 
