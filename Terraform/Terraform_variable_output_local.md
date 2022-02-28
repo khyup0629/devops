@@ -139,7 +139,7 @@ unset TF_VAR_vpc_name
 vim terraform.tfvars
 ```
 
-```
+``` terraform
 # terraform.tfvars
 vpc_name = "test"
 ```
@@ -185,4 +185,16 @@ tf apply -var="vpc_name=bllu"
 3. `terraform.tfvars`
 4. 환경 변수
 
+> <h3>variable의 속성</h3>
 
+- `default` : 변수에 아무 값도 없을 경우 나타나는 값.
+- `description` : 설명. 협업할 때 중요.
+- `type` : 자료형. 명시적으로 적어줄 필요는 없고, 테라폼이 알아서 추론하지만 협업할 때 중요.
+
+``` terraform
+variable "vpc_name" {
+  default = "bllu"
+  description = "vpc 이름"
+  type = string
+}
+```
