@@ -27,7 +27,7 @@ vim main.tf
 
 ![image](https://user-images.githubusercontent.com/43658658/155827134-4048daa8-d42e-42ad-bfd6-dd3a1e9f3cd0.png)  
 
-```
+``` terraform
 # main.tf
 provider "local" {
   
@@ -47,7 +47,7 @@ provider "local" {
 - `${<테라폼 함수>}` : 문자열 내에서 테라폼 함수에 대한 결과값을 이용하고 싶을 때 이용합니다.
 - `path.module` : 현재 `main.tf` 파일의 위치를 나타냅니다.
 
-```
+``` terraform
 # main.tf
 provider "local" {
   
@@ -112,7 +112,7 @@ local provider의 data source를 사용해보겠습니다.
 ![image](https://user-images.githubusercontent.com/43658658/155828305-60a8a361-8471-4442-9928-259f98eaa463.png)
 
 `main.tf`의 아래에 다음의 내용을 추가합니다.   
-```
+``` terraform
 # main.tf
 provider "local" {
   
@@ -154,7 +154,7 @@ AWS provider를 이용하기 위해서는 `AWS CLI Credential` 설정을 먼저 
 해당 내용을 `main.tf` 파일에 추가합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/155828618-0561a022-fc26-4cf8-9fb2-3b45d191f88e.png)
 
-```
+``` terraform
 # main.tf
 provider "local" {
 
@@ -209,7 +209,7 @@ tf apply
 vim main.tf
 ```
 
-```
+``` terraform
 provider "local" {
 
 }
@@ -259,7 +259,7 @@ tf apply
 vim main.tf
 ```
 
-```
+``` terraform
 provider "local" {
 
 }
@@ -314,7 +314,7 @@ tf apply
 vim main.tf
 ```
 
-```
+``` terraform
 provider "local" {
 
 }
@@ -383,7 +383,7 @@ VPC용 Data Sources를 이용해보겠습니다.
 vim main.tf
 ```
 
-```
+``` terraform
 provider "local" {
 
 }
