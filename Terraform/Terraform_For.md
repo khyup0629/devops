@@ -229,3 +229,53 @@ tf apply
 - `terraform.tfvars` 파일의 각 사용자들의 인자들 중 `is_developer = true`인 사용자는 `employee` 그룹에만 추가.
 - `for_each`문 안에 `for`문을 넣어 딕셔너리 형태로 만들어주는 트릭이 인상 깊습니다.
 
+**개발자**에게만 관리자접근을 허용하는 정책을 추가해보겠습니다.
+
+``` terraform
+
+...
+
+locals {
+  developers = [
+    for user in var.users:
+    user
+    if user.is_developer
+  ]
+}
+
+resource "aws_iam_user_policy_attachment" "developer" {
+  for_each = {
+    for user in local.developers:
+    user.name => user
+  }
+  
+  user = each.key   # 해당 이름의 사용자에게 아래의 관리자접근(AdministratorAccess) 정책을 허용합니다.
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  
+  depends_on = [   # aws_iam_user.this 리소스가 생성되어 있을 때만 해당 리소스를 실행한다는 의존성 속성입니다.
+    aws_iam_user.this
+  ]
+}
+
+output "developers" {
+  value = local.developers
+}
+
+output "high_level_users" {
+  value = [
+    for user in var.users:
+    user
+    if user.level > 5
+  ]
+}
+```
+
+```
+tf apply
+```   
+![image](https://user-images.githubusercontent.com/43658658/156317030-14839be0-be01-4c92-93cd-0fdef1c356ce.png)   
+- 개발자 사용자에는 `관리자 권한`이 부여된 것을 확인할 수 있습니다.
+
+![image](https://user-images.githubusercontent.com/43658658/156317384-f3504025-638e-4478-a383-01d0d9aa04d4.png)   
+- 개발자가 아닌 사용자에게는 `관리자 권한`이 부여되지 않았습니다.
+
