@@ -66,3 +66,8 @@ output "iam_user_access_key" {
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/156288725-a6a6ea0a-f8e7-4a93-800d-a2bd64625c3a.png)
 
+## 그룹 생성 및 사용자 그룹에 추가하기
+
+=> **[for문, 조건문을 활용한 IAM 사용자 생성 및 그룹 추가](https://github.com/khyup0629/devops/blob/main/Terraform/Terraform_For.md#for%EB%AC%B8%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%B4-aws-iam-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%83%9D%EC%84%B1%ED%95%B4%EB%B3%B4%EA%B8%B0)**
+
+
