@@ -64,5 +64,5 @@ output "iam_user_access_key" {
   value = {for k, v in aws_iam_access_key.lb: k => v.id}
 }
 ```   
-![image](https://user-images.githubusercontent.com/43658658/156288677-58783793-9ce0-41bb-abe0-b4c5039200b8.png)
+![image](https://user-images.githubusercontent.com/43658658/156288725-a6a6ea0a-f8e7-4a93-800d-a2bd64625c3a.png)
 
