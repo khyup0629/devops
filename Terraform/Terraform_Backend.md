@@ -10,6 +10,8 @@
 
 ## AWS S3 Backend
 
+=> [Terraform S3 Backend 사용 공식 문서](https://www.terraform.io/language/settings/backends/s3)
+
 먼저 `AWS 콘솔`에서 **버킷을 생성**합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/156328081-165da8ca-f10a-4d22-8203-42929373b396.png)
 
