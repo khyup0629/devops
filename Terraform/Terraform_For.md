@@ -119,7 +119,113 @@ output "print" {
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/156312237-bc5d3637-958d-4067-902f-6a12e428a16f.png)
 
+## for문을 이용해 AWS IAM 사용자 생성해보기
 
+``` terraform
+# main.tf
+provider "aws" {
+  region = "ap-northeast-2"
+}
 
+/*
+ * Groups
+ */
 
+resource "aws_iam_group" "developer" {   # developer라는 이름의 그룹 생성
+  name = "developer"
+}
+
+resource "aws_iam_group" "employee" {   # employee라는 이름의 그룹 생성
+  name = "employee"
+}
+
+output "groups" {
+  value = [
+    aws_iam_group.developer,
+    aws_iam_group.employee,
+  ]
+}
+
+/*
+ * Users
+ */
+ 
+variable "users" {   # terraform.tfvars에 정의된 값들이 users에 들어갑니다.
+  type = list(any)
+}
+
+resource "aws_iam_user" "this" {
+  # {"john" = {name = "john", level = 7, ... }, ... }의 딕셔너리 형태. key값은 사용자 이름. value값은 name, level, role, is_developer
+  for_each = {   
+    for user in var.users :
+    user.name => user
+  }
+
+  name = each.key
+
+  tags = {
+    level = each.value.level
+    role  = each.value.role
+  }
+}
+
+resource "aws_iam_user_group_membership" "this" {
+  for_each = {
+    for user in var.users :
+    user.name => user
+  }
+
+  user   = each.key
+  # 조건문을 이용해 is_developer가 true이면 developer, employee 두 그룹에 모두 추가. false이면 employee 그룹에만 추가.
+  # 특정 그룹에 넣고 싶을 때는 groups에 [그룹 이름1, 그룹 이름2, ... ] 리스트 형식으로 그룹 이름을 명시합니다.
+  groups = each.value.is_developer ? [aws_iam_group.developer.name, aws_iam_group.employee.name] : [aws_iam_group.employee.name]
+}
+```
+
+``` terraform
+# terraform.tfvars
+users = [
+  {
+    name = "john"
+    level = 7
+    role = "재무"
+    is_developer = false
+  },
+  {
+    name = "alice"
+    level = 1
+    role = "인턴 개발자"
+    is_developer = true
+  },
+  {
+    name = "tony"
+    level = 4
+    role = "데브옵스"
+    is_developer = true
+  },
+  {
+    name = "cindy"
+    level = 9
+    role = "경영"
+    is_developer = false
+  },
+  {
+    name = "hoon"
+    level = 3
+    role = "마케팅"
+    is_developer = false
+  },
+]
+```
+
+```
+tf init
+tf apply
+```   
+![image](https://user-images.githubusercontent.com/43658658/156313925-4983e053-c79b-4b07-8782-b4491d63740d.png)   
+![image](https://user-images.githubusercontent.com/43658658/156313973-94d8ab7c-d12b-4499-9cb7-c937746e3975.png)   
+![image](https://user-images.githubusercontent.com/43658658/156314081-83b50fa8-fc37-4900-bd45-ce7ba868b5a3.png)   
+- `terraform.tfvars` 파일의 각 사용자들의 인자들 중 `is_developer = true`인 사용자는 `developer`, `employee` 두 그룹에 추가.
+- `terraform.tfvars` 파일의 각 사용자들의 인자들 중 `is_developer = true`인 사용자는 `employee` 그룹에만 추가.
+- `for_each`문 안에 `for`문을 넣어 딕셔너리 형태로 만들어주는 트릭이 인상 깊습니다.
 
