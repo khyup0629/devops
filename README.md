@@ -1,5 +1,6 @@
 # DevOps Engineer
 
+<details markdown="1">
 ## 📂 AWS
 
 - [AWS CLI 설치(Ubuntu)](https://github.com/khyup0629/devops/blob/main/AWS/AWS_CLI_Installation_In_Ubuntu.md#aws-cli-%EC%84%A4%EC%B9%98ubuntu)
@@ -18,7 +19,7 @@
 - [그라파나에서 alert 지정하기](https://github.com/khyup0629/devops/blob/main/Prometheus_Grafana/Grafana_Alert.md#grafana-alert-%EC%84%A4%EC%A0%95)
 
 <details markdown="1">
-<summary>🎶 Terraform</summary>
+## <summary>🎶 Terraform</summary>
 
 - [Terraform 설치 및 설정(Ubuntu)](https://github.com/khyup0629/devops/blob/main/Terraform/Installation_ubuntu.md#%ED%85%8C%EB%9D%BC%ED%8F%BC-%EC%84%A4%EC%B9%98%EC%9A%B0%EB%B6%84%ED%88%AC)
 - [모듈을 이용해 AWS VPC 생성](https://github.com/khyup0629/devops/blob/main/Terraform/Terraform_Module_AWS_VPC.md#aws-vpc-%EC%83%9D%EC%84%B1)
