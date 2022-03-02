@@ -70,7 +70,7 @@ output "print" {
 {for s in var.list : s => upper(s)}
 ```
 
-만약 `list`가 `list = [a, b, c]`라면,
+만약 `list = ["a", "b", "c"]`라면,
 
 결과값의 형태는 `{a = A, b = B, c = C}`가 됩니다.   
 - `upper()`는 대문자로 바꿔주는 함수입니다.
@@ -91,6 +91,35 @@ output "print" {
 }
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/156310960-bccf3071-b870-4546-9828-aa739283532f.png)
+
+## if문을 적용한 for문
+
+``` terraform
+[for s in var.list : upper(s) if s != ""]
+```
+
+만약 `list = ["a", "", "b", ""]`이라면,
+
+결과값의 형태는 `["A", "B"]`가 됩니다.   
+- `upper(s) if s != ""`는 `s`가 `null`이 아니라면, 대문자로 추가하라는 의미입니다.
+
+``` terraform
+# main.tf
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
+variable "list" {
+  default = ["a", "", "b", ""]
+}
+
+output "print" {
+  value = [for s in var.list: upper(s) if s != ""]
+}
+```   
+![image](https://user-images.githubusercontent.com/43658658/156312237-bc5d3637-958d-4067-902f-6a12e428a16f.png)
+
+
 
 
 
