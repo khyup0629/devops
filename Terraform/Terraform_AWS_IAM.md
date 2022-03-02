@@ -59,4 +59,11 @@ resource "aws_iam_user_policy" "lb_ro" {
 }
 EOF
 }
+
+output "iam_user_access_key" {
+  value = {
+    name = values(aws_iam_user.lb).*.name
+    access_key = values(aws_iam_access_key.lb).*.id
+  }
+}
 ```
