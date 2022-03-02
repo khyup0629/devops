@@ -245,8 +245,8 @@ locals {
 
 resource "aws_iam_user_policy_attachment" "developer" {
   for_each = {
-    for user in local.developers:
-    user.name => user
+    for developer in local.developers:
+    developer.name => developer
   }
   
   user = each.key   # 해당 이름의 사용자에게 아래의 관리자접근(AdministratorAccess) 정책을 허용합니다.
