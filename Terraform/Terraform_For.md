@@ -121,6 +121,8 @@ output "print" {
 
 ## for문을 이용해 AWS IAM 사용자 생성해보기
 
+=> **[그룹에 IAM 사용자 추가(aws_iam_user_group_membership)](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership)**
+
 ``` terraform
 # main.tf
 provider "aws" {
