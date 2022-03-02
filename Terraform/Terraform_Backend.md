@@ -25,7 +25,7 @@ terraform {
 }
 ```
 
-콘솔에서 생성한 S3 버킷과 연동하기 위해 `terraform init`을 진행합니다.   
+콘솔에서 생성한 S3 버킷과 연동하기 위해 **테라폼 초기화**를 진행합니다.   
 ```
 tf init
 ```   
@@ -55,6 +55,7 @@ tf init
 생성된 토큰을 복사합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/156334121-012f92d6-950b-46ac-8271-a588eeb31dbf.png)
 
+`~/.terraformrc` 파일에 자격증명을 아래와 같이 작성하고, 발급받은 토큰을 붙여넣습니다.   
 ```
 vim ~/.terraformrc
 ```
@@ -77,13 +78,13 @@ terraform {
     organization = "Test-terraform-cloud-bllu"   # 자신이 생성한 Organization 이름을 입력합니다.
 
     workspaces {
-      name = "tf-cloud-backend"   # Terraform Cloud의 워크스페이스 이름을 입력합니다.
+      name = "tf-cloud-backend"   # 원하는 Terraform Cloud의 워크스페이스 이름을 입력합니다.
     }
   }
 }
 ```
 
-`Terraform Cloud`의 `Organization`과 연동하기 위해 테라폼을 초기화합니다.   
+`Terraform Cloud`의 `Organization`과 연동하기 위해 **테라폼을 초기화**합니다.   
 ```
 tf init
 ```   
@@ -210,6 +211,6 @@ tf apply
 ![image](https://user-images.githubusercontent.com/43658658/156335776-2c2a30f2-be77-4ffa-b94a-ffb694a32fff.png)   
 ![image](https://user-images.githubusercontent.com/43658658/156335813-fb92d00c-795a-4508-b1f4-9a9a047ee2c0.png)
 
-`States` 탭에서 현재 워크스페이스의 상태를 확인할 수 있습니다.   
+`States` 탭에서 **현재 워크스페이스의 상태**를 확인할 수 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/156335958-08f9116f-593e-4156-8f94-3aba2f5c8ba2.png)
 
