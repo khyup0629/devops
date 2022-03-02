@@ -33,12 +33,16 @@ resource "aws_iam_user" "lb" {
 }
 
 resource "aws_iam_access_key" "lb" {
-  user = aws_iam_user.lb["user-01"].name   # aws_iam_user.lb는 딕셔너리 형태이므로 ["user-01"] 형태로 호출합니다.
+  for_each = var.users   # 액세스 키를 사용자별로 할당
+  
+  user = aws_iam_user.lb[each.key].name   # aws_iam_user.lb는 딕셔너리 형태이므로 [each.key] 형태로 호출합니다.
 }
 
 resource "aws_iam_user_policy" "lb_ro" {
+  for_each = var.users   # 정책을 사용자별로 할당
+  
   name = "test"
-  user = aws_iam_user.lb["user-01"].name
+  user = aws_iam_user.lb[each.key].name
   
   policy = <<EOF
 {
@@ -49,12 +53,10 @@ resource "aws_iam_user_policy" "lb_ro" {
         "ec2:Describe*"
       ],
       "Effect": "Allow",
-      "Resource": "*"vim 
+      "Resource": "*"
     }
   ]
 }
 EOF
 }
 ```
-
-현재로서는 액세스 키와 정책을 생성할 때 유저를 생성할 때처럼 반복을 활용해서 효율적으로 생성할 수 있는 방법을 모르겠습니다.
