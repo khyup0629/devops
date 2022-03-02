@@ -61,9 +61,8 @@ EOF
 }
 
 output "iam_user_access_key" {
-  value = {
-    name = values(aws_iam_user.lb).*.name
-    access_key = values(aws_iam_access_key.lb).*.id
-  }
+  value = {for k, v in aws_iam_access_key.lb: k => v.id}
 }
-```
+```   
+![image](https://user-images.githubusercontent.com/43658658/156288677-58783793-9ce0-41bb-abe0-b4c5039200b8.png)
+
