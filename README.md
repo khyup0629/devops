@@ -10,14 +10,23 @@
 
 </details>
 
-## 🐳 Docker
+<details markdown="1">
+<summary>🐳 Docker</summary>
 
-## ➰ Kubernetes
+</details>
 
-## 📈 Prometheus & Grafana
+<details markdown="1">
+<summary>➰ Kubernetes</summary>
+
+</details>
+
+<details markdown="1">
+<summary>📈 Prometheus & Grafana</summary>
 
 - [Grafana 자동 새로고침 설정](https://github.com/khyup0629/devops/blob/main/Prometheus_Grafana/Grafana_refresh_setting.md#%EA%B7%B8%EB%9D%BC%ED%8C%8C%EB%82%98-%EC%9E%90%EB%8F%99-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8-%EC%84%A4%EC%A0%95)
 - [그라파나에서 alert 지정하기](https://github.com/khyup0629/devops/blob/main/Prometheus_Grafana/Grafana_Alert.md#grafana-alert-%EC%84%A4%EC%A0%95)
+
+</details>
 
 <details markdown="1">
 ## <summary>🎶 Terraform</summary>
