@@ -1,13 +1,14 @@
 # DevOps Engineer
 
 <details markdown="1">
-## 📂 AWS
+<summary>📂 AWS</summary>
 
 - [AWS CLI 설치(Ubuntu)](https://github.com/khyup0629/devops/blob/main/AWS/AWS_CLI_Installation_In_Ubuntu.md#aws-cli-%EC%84%A4%EC%B9%98ubuntu)
 - [AWS CLI 자격증명 설정](https://github.com/khyup0629/devops/blob/main/AWS/AWS_CLI_Credential_Configuration.md#aws-cli%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9E%90%EA%B2%A9%EC%A6%9D%EB%AA%85-config)
 - [AWS CLI Configuration 진행 방법](https://github.com/khyup0629/devops/blob/main/AWS/AWS_CLI_Configure.md#aws-configure)
 - [AWS MFA 설정 방법](https://github.com/khyup0629/devops/blob/main/AWS/AWS_MFA.md#mfa-%EC%84%A4%EC%A0%95-%EB%B0%A9%EB%B2%95)
 
+</details>
 
 ## 🐳 Docker
 
