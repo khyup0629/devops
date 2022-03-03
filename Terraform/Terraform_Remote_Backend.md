@@ -91,5 +91,20 @@ output "high_level_users" {
 }
 ```
 
-`Terraform cloud`에 원격으로 올라가 있습니다.
+```
+tf init
+tf apply
+```
+
+위 코드를 적용하면, `Terraform cloud`의 해당 `Organization`에 원격으로 올라갑니다.
+
+아래의 명령어는 현재 워크스페이스에서 생성된 리소스들에 대해 결과값으로 보여줍니다.   
+```
+tf state list
+```   
+![image](https://user-images.githubusercontent.com/43658658/156481485-d76b4dde-e187-4035-b685-8b7ebdbc84ce.png)
+
+이는 `Terraform Cloud`의 `Workspace > Overview > Resources`에 명시된 것들과 같습니다.   
+![image](https://user-images.githubusercontent.com/43658658/156481637-e4101fbf-91bd-498d-ae57-6d1ae9aa7b24.png)
+
 
