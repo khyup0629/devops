@@ -146,7 +146,7 @@ tf apply
 ```
 tf state list
 ```   
-![image](https://user-images.githubusercontent.com/43658658/156520904-4d4b93c6-77c1-47d9-adb6-aa88dd7e56de.png)
+![image](https://user-images.githubusercontent.com/43658658/156522227-7505b1c8-8cb7-4e99-9e3e-fe33d3499073.png)
 
 만약 인터넷 게이트웨이를 교체해야 한다면 아래와 같이 인터넷 게이트웨이 리소스에 `taint`를 걸어둘 수 있습니다.   
 ```
