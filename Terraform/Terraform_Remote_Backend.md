@@ -253,6 +253,44 @@ tf apply
 **삭제 -> 생성** 과정 없이 리소스가 변경된 것을 확인할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/43658658/156514463-41c33ce5-cf26-4715-86fc-ed97c6e3cbe3.png)
 
+## terraform state rm
+
+테라폼으로 관리하는 리소스 중 **리소스를 유지**하지만 **테라폼으로 관리를 원하지 않는 경우** 이용합니다.
+
+위에서 사용한 코드를 그대로 이용합니다.   
+
+`list` 명령어로 리소스 명을 살펴봅니다.   
+```
+tf state list
+```
+
+`alice` 유저에게 줬던 **관리자 권한**을 지워보겠습니다.   
+![image](https://user-images.githubusercontent.com/43658658/156515505-dc203f3d-c67e-4c51-ba73-b36382bb9a04.png)
+
+먼저, `main.tf` 파일에서 해당 내용을 지웁니다.   
+![image](https://user-images.githubusercontent.com/43658658/156516521-8b45a4d7-7b4c-4f52-a8b0-b9bcb15c9977.png)
+
+그리고 `rm` 명령어를 통해 리소스를 지웁니다.   
+```
+tf state rm 'aws_iam_user_policy_attachment.developer["alice"]'
+```
+
+마지막으로 **apply**를 적용해봅니다.   
+```
+tf apply
+```
+
+결과를 살펴보면 `AWS 콘솔`에는 여전히 데이터가 남아있지만, `terraform state list`를 실행하면 해당 리소스가 지워진 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/156515908-b422539e-40a7-4e80-b55a-9d6c67cf784e.png)   
+![image](https://user-images.githubusercontent.com/43658658/156515936-1575e28b-2aa7-445d-9deb-ecd9ee1403b3.png)
+
+## terraform state pull
+
+**Remote Backend**에서 **상태 파일**을 로컬로 끌어옵니다.
+
+```
+tf state pull > a.tfstate
+```
 
 
 
