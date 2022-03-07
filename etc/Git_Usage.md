@@ -126,4 +126,59 @@ git log
 
 # 브랜치 사용
 
+- 여러 사람이 협업해야 할 때 충돌을 방지하기 위해서는 **브랜치**가 필요합니다.   
+![image](https://user-images.githubusercontent.com/43658658/156960155-b5db88bc-0033-4ff4-9639-cbda9631104c.png)
+
+관리자는 브랜치들을 **적절히 병합(merge)** 하고 **퀄리티**와 **안정성**을 관리해야 합니다.
+
+현재 브랜치 목록을 살펴봅시다.   
+```
+git branch
+```   
+![image](https://user-images.githubusercontent.com/43658658/156960569-e37b7d64-52a7-4d44-a5e8-4dad06ad3904.png)
+
+뒤에 아규먼트를 붙여주게 되면 그 아규먼트를 이름으로 한 브랜치가 생성됩니다.   
+```
+git branch test1
+```   
+
+브랜치 목록을 살펴보면 `test1`이 추가된 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/156960616-913342f4-7b0b-437e-aad7-54b011b27432.png)
+
+`*`는 현재 위치한 브랜치를 의미합니다. 브랜치를 이동하기 위해서는 `checkout` 명령어를 활용합니다.   
+```
+git checkout test1
+```   
+
+현재 브랜치가 `test1`로 옮겨갑니다.   
+![image](https://user-images.githubusercontent.com/43658658/156960642-eaafd53f-4c59-43ea-8bba-8056f608fc3c.png)
+
+`test1` 브랜치에서 `hello.html` 내용을 변경해봅니다.   
+```
+# hello.html
+<html>
+<body>
+ Hello World Commit 2
+ Test Branch
+</body>
+</html>
+```
+
+```
+git status
+```
+
+변경한 파일을 추가하고 커밋합니다.   
+```
+git add hello.html
+git commit -m "Branch test1"
+```
+
+다시 `master` 브랜치로 돌아옵니다.   
+```
+git checkout master
+```
+
+
+
 
