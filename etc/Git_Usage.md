@@ -382,7 +382,7 @@ git push
 
 1. 공유하길 원하는 리포지토리로 들어가서 `Fork` 버튼을 누릅니다.   
 ![image](https://user-images.githubusercontent.com/43658658/157028823-b67058c0-73e7-4bec-9382-d1265ba7e9a1.png)   
-- 그럼 현재 자신의 계정에 사본 리포지토리가 만들어집니다.
+- 현재 자신의 계정에 사본 리포지토리가 만들어집니다.
 2. 사본 리포지토리 URL을 이용해 `git clone`을 수행합니다.
 3. 가져온 리포지토리 디렉토리로 접근해 파일을 추가/변경합니다.
 4. `git add *`, `git commit -m `, `git push`를 수행합니다.
