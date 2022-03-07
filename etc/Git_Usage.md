@@ -179,6 +179,101 @@ git commit -m "Branch test1"
 git checkout master
 ```
 
+`hello.html` 파일을 열면 `test1` 브랜치에서 수정했던 파일 내용 이전의 내용이 나타납니다.   
+```
+notepad hello.html
+```   
+![image](https://user-images.githubusercontent.com/43658658/156999924-ec4d530f-c45a-4b29-b85b-e22a4544c593.png)
+
+`master` 브랜치에서 `test1` 브랜치의 내용을 병합해보겠습니다.   
+```
+git merge test1
+```   
+![image](https://user-images.githubusercontent.com/43658658/157000367-75ef4ea7-2e6f-45bb-898f-95b4b0a7b4e0.png)
+
+`hello.html` 파일의 내용을 확인해보면, `test1`에서 수정했던 내용이 반영된 것을 볼 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/157000347-de86c358-a4f4-4610-ab2d-1a7b770e9deb.png)
+
+`-d` 옵션을 주어 브랜치를 삭제할 수 있습니다.   
+```
+git branch -d test1
+```
+
+# 병합에서 동시성 이슈를 해결하는 방법
+
+```
+notepad hello.html
+```
+
+```
+# hello.html
+<html>
+<body>
+</body>
+</html>
+```
+
+```
+git add hello.html
+git commit -mm "Updated hello.html"
+git status
+```
+
+```
+git branch Test_Branch
+git checkout Test_Branch
+notepad hello.html
+```
+
+```
+# hello.html
+<html>
+<body>
+Edit in Test_Branch
+</body>
+</html>
+```
+
+```
+git add hello.html
+git commit -m "Updated hello.html"
+git status
+```
+
+```
+git checkout master
+notepad hello.html
+```
+
+```
+# hello.html
+<html>
+<body>
+Edit in Master Branch
+</body>
+</html>
+```
+
+```
+git add hello.html
+git commit -m "Edit in Master Branch"
+```
+
+현재 merge 하기 전 두 브랜치에서 `hello.html` 파일에 대한 수정을 거쳤습니다.   
+이대로 Test_Branch 브랜치를 master 브랜치에 merge하게 되면 아래와 같은 현상이 발생합니다.   
+```
+git merge Test_Branch
+```   
+![image](https://user-images.githubusercontent.com/43658658/157003152-b54ec6b6-271d-47dd-8eb9-f6af0b77f04c.png)
+
+상태를 보면 아래와 같이 `both modified` 문구가 나타납니다.
+```
+git status
+```   
+![image](https://user-images.githubusercontent.com/43658658/157003288-ea5118f2-05aa-48a8-a256-e2c0589149d3.png)
+
+
+
 
 
 
