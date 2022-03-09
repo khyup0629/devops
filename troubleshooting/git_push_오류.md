@@ -5,7 +5,7 @@ git push 시 해당 오류가 발생하며 Push가 되지 않았습니다.
 
 # 토큰 생성
 
-=> [토근 생성 가이드](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+=> [토큰 생성 가이드](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 위 가이드를 보고 토큰을 생성합니다.
 
