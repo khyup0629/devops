@@ -10,9 +10,10 @@ Github의 Private 레포지토리는 유료 플랜으로 사용 가능했었으�
 
 ## 아키텍쳐
 
-1. 각 사용자가 로컬에서 코드 작성 후 브랜치를 생성하여 Private 레포지토리로 Push
-2. Push한 버전에 대해 Pull Request
-3. 관리자가 Pull Request에 대해 검토 후 main 또는 master 브랜치에 Merge
+![image](https://user-images.githubusercontent.com/43658658/157387768-cf64e075-fb89-4633-9936-15b9e30013d5.png)   
+1. 각 사용자가 로컬에서 코드 작성 후 브랜치(User1, User2, User3)를 생성하여 Private 레포지토리로 **Push**
+2. 각 사용자는 Github에서 **Push**한 브랜치에 대해 **Pull Request**
+3. 관리자가 **Pull Request**에 대해 검토 후 **main** 또는 **master** 브랜치에 **Merge**
 
 ## 협업에서의 유의사항
 
