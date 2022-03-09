@@ -27,8 +27,8 @@
 
 ## 🐱‍👤 Git
 
-- [Git 사용 방법](https://github.com/khyup0629/devops/blob/main/etc/Git_Usage.md#git-%EC%84%A4%EC%B9%98)
-- [Github Private으로 협업하기](https://github.com/khyup0629/devops/blob/main/etc/Github_Private_Collaboration.md#github-private%EC%9C%BC%EB%A1%9C-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0)
+- [Git 사용 방법](https://github.com/khyup0629/devops/blob/main/Git/Git_Usage.md#git-%EC%84%A4%EC%B9%98)
+- [Github Private으로 협업하기](https://github.com/khyup0629/devops/blob/main/Git/Github_Private_Collaboration.md#github-private%EC%9C%BC%EB%A1%9C-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0)
 
 
 ## etc
