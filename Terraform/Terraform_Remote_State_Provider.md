@@ -160,7 +160,7 @@ module "route_table__private" {
 vpc_name = "remote-state"
 ```
 
-다음으로 EC2 디렉토리르 만들고 `main.tf`를 작성합니다.
+다음으로 EC2 디렉토리 만들고 `main.tf`를 작성합니다.
 
 ``` terraform
 # main.tf
@@ -172,12 +172,15 @@ data "terraform_remote_state" "network" {
   backend = "local"
 
   config = {
-    path = "${path.module}/../network/terraform.tfstate"
+    # ${path.module}는 현재 main.tf 파일의 경로. 
+    # 현재 경로에서 상위 디렉토리로 갔다가 network 디렉토리로 들어가서 tfstate 파일을 path로 삼습니다.
+    path = "${path.module}/../network/terraform.tfstate"   
   }
 }
 
+# Network의 outputs이 제대로 설정되어 있어야 참조 가능.
 locals {
-  vpc_name      = data.terraform_remote_state.network.outputs.vpc_name
+  vpc_name      = data.terraform_remote_state.network.outputs.vpc_name   # Network main.tf의 output을 참조.
   subnet_groups = data.terraform_remote_state.network.outputs.subnet_groups
 }
 
@@ -218,6 +221,21 @@ terraform init
 terraform apply
 ```
 
+`apply`하면 Network 디렉토리에 상태 파일(tfstate)이 생성된 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/157398787-c116b717-ec1b-43c3-9fda-d6bc00af1584.png)
+
+이제 **ec2**로 접근해서 `apply`해봅니다.   
+```
+terraform init
+terraform apply
+```
+
+ec2-instance는 data 블럭으로 `terraform_remote_state`를 갖고 있고,   
+backend 종류는 `local`, path는 Network 폴더 내에 `tfstate` 파일을 가리키고 있습니다.
+
+Network 폴더 내에서 `terraform apply`를 했을 때의 `output`을 참조해서 가져올 수 있습니다.
+
+이렇게 ec2 폴더는 Network 폴더가 `apply`되어야만 `tfstate`를 **참조할 수 있기 때문**에 의존성이 있습니다.
 
 
 
