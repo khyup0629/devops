@@ -18,7 +18,7 @@ Get-Service ssh-agent | Select StartType
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/157788657-3b2b4b1d-3f9b-4fc8-b8f5-366ab06cded6.png)
 
-위와 같이 `Disabled` 상태라면 시작 타입을 수동으로 설정합니다.   
+위와 같이 `Disabled` 상태라면 시작 타입을 수동으로 설정합니다(관리자 권한 실행 필요).   
 ```
 Get-Service -Name ssh-agent | Set-Service -StartupType Manual
 ```   
