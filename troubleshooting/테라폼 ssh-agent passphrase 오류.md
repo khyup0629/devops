@@ -6,7 +6,7 @@ EC2 서버를 만들고 특정 명령어를 프로비저닝하는 테라폼 코�
 Failed to parse ssh private key: ssh: this private key is passphrase protected
 ```
 
-그리고 [ssh-agent 설정하기(windows)]()의 내용대로 `ssh-add` 까지 진행했음에도 불구하고 여전히 아래와 같이 플랜에서 `SSH Agent: false`가 나타납니다.   
+그리고 [ssh-agent 설정하기(windows)](https://github.com/khyup0629/devops/blob/main/AWS/AWS_SSH_Agent.md#ssh-agentwindows)의 내용대로 `ssh-add` 까지 진행했음에도 불구하고 여전히 아래와 같이 플랜에서 `SSH Agent: false`가 나타납니다.   
 
 ```
 aws_instance.provisioner (remote-exec):   SSH Agent: false
