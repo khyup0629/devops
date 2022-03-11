@@ -71,13 +71,12 @@ Get-Service ssh-agent
 ssh-add <프라이빗 키 파일 이름>
 ```
 
-## 퍼블릭 키 파일 배포
+## AWS 퍼블릭 키 등록
 
-위에서 만든 사용자 키를 사용하려면 공개 키(~\.ssh\id_ed25519.pub)의 콘텐츠를 서버의 `C:\Users\<username>\.ssh\`에 있는 `authorized_keys`라는 텍스트 파일에 배치되어야 합니다.
+`EC2 콘솔 > 키 페어 > 작업 > 키 페어 가져오기`   
+![image](https://user-images.githubusercontent.com/43658658/157827264-033b9726-8554-436f-83f1-65b1a6d22f47.png)
 
-```
-ssh hongikit@domain1@contoso.com mkdir C:\Users\hongikit\.ssh\
-```
+`[찾아보기]` 버튼을 눌러 위에서 등록한 프라이빗 키와 페어를 이루는 **퍼블릭 키**를 선택합니다.   
+![image](https://user-images.githubusercontent.com/43658658/157827390-9515411a-32e2-4064-ae2d-7c00b14d08d6.png)
 
-
-
+이제 Windows에서 같은 키 페어를 사용하는 인스턴스에 대해 password와 private key 요구 없이 바로 접근이 가능합니다.
