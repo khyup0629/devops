@@ -143,6 +143,7 @@ EOT
 #       type = "ssh"
 #       user = "ubuntu"
 #       host = self.public_ip   # 현재 생성한 인스턴스의 퍼블릭 ip로 접근.
+#       agent = true
 #     }
 #   }
 # }
