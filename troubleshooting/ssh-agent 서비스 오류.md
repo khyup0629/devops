@@ -12,17 +12,19 @@ Get-Service ssh-agent
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/157788647-b5c62b6f-197c-41e5-94dd-763abe840ce1.png)
 
+ssh-agent의 실행 타입을 봅니다.   
 ```
 Get-Service ssh-agent | Select StartType
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/157788657-3b2b4b1d-3f9b-4fc8-b8f5-366ab06cded6.png)
 
-위와 같이 `Disabled`라면 수동으로 서비스를 시작하도록 설정할 수 있습니다(관리자 권한 실행 필요).   
+서버를 다시 부팅할 때마다 시작하려면 서버의 관리자 권한 PowerShell 프롬프트에서 다음 명령을 실행합니다.
 ```
-Get-Service -Name ssh-agent | Set-Service -StartupType Manual
+Get-Service -Name ssh-agent | Set-Service -StartupType Automatic
 ```   
 
+다시 `StartType`을 확인합니다.   
 ```
 Get-Service ssh-agent | Select StartType
 ```   
-![image](https://user-images.githubusercontent.com/43658658/157789420-c02b3cf1-f5ff-43aa-a5b7-094ba3347573.png)
+![image](https://user-images.githubusercontent.com/43658658/157790531-506d81ff-7634-4401-9470-69bc3b061e2a.png)
