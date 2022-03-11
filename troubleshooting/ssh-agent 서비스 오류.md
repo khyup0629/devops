@@ -18,13 +18,14 @@ Get-Service ssh-agent | Select StartType
 ```   
 ![image](https://user-images.githubusercontent.com/43658658/157788657-3b2b4b1d-3f9b-4fc8-b8f5-366ab06cded6.png)
 
-서버를 다시 부팅할 때마다 시작하려면 서버의 관리자 권한 PowerShell 프롬프트에서 다음 명령을 실행합니다.
+위와 같이 `Disabled` 상태라면 시작 타입을 수동으로 설정합니다.   
 ```
-Get-Service -Name ssh-agent | Set-Service -StartupType Automatic
+Get-Service -Name ssh-agent | Set-Service -StartupType Manual
 ```   
 
 다시 `StartType`을 확인합니다.   
 ```
 Get-Service ssh-agent | Select StartType
 ```   
-![image](https://user-images.githubusercontent.com/43658658/157790531-506d81ff-7634-4401-9470-69bc3b061e2a.png)
+![image](https://user-images.githubusercontent.com/43658658/157791060-c846c2bd-4973-4fe1-943b-28289a5eefed.png)
+
