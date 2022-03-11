@@ -21,7 +21,7 @@
 - `triggers` 속성 내에 변동 사항이 있을 것 같은 내용에 대해서 작성합니다.
 - 내용을 변경하고, `apply`하면 리소스는 **삭제 후 생성**됩니다.
 
-예를 들어, 아래와 같이 `triggers`에 들어있다면, 해당 id값, 파일에 대한 내용들이 변경되면 트리거됩니다.   
+예를 들어, 아래와 같이 `triggers`에 들어있다면, 해당 id값, 파일에 대한 내용들이 변경되면 반영됩니다.   
 ```
   triggers = {
     insteance_id = aws_instance.provisioner.id
