@@ -2,7 +2,7 @@
 
 이 과정은 현재 `Certificate Manager`에 SSL 인증서가 등록이 되어 있다는 전제 하에 진행되는 과정입니다.
 
-=> [Let's Encrypt를 이용한 SSL 인증서 발급 및 클라우드 등록]()
+=> [Let's Encrypt를 이용한 SSL 인증서 발급 및 클라우드 등록](https://github.com/khyup0629/devops/blob/main/etc/Let's%20Encrypt%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SSL%20%EC%9D%B8%EC%A6%9D%EC%84%9C%20%EB%B0%9C%EA%B8%89%20%EB%B0%8F%20%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C%20%EB%93%B1%EB%A1%9D.md#lets-encrypt%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89)
 
 ## 로드밸런서 인프라 구축
 
@@ -62,3 +62,5 @@ SSL 인증서를 발급 받을 때 사용한 도메인으로 로드밸런싱이 
 
 ## 주의할 점!
 
+인증서를 발급 받을 때 **<인증한 도메인>에 대해서 HTTPS가 적용**되고,   
+기존 LB의 **엔드포인트로는 적용되지 않습니다.**
