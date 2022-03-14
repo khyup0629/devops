@@ -49,7 +49,7 @@ cp -rp cert.pem cert.crt
 ![image](https://user-images.githubusercontent.com/43658658/158109555-3589db44-bf86-4d50-93d5-7c6dbc38d46a.png)
 
 인증서 내보내기 마법사가 시작됩니다.   
-![image](https://user-images.githubusercontent.com/43658658/158109582-904a0926-35d6-4b54-a0d7-c25e6ace5421.png)
+![image](https://user-images.githubusercontent.com/43658658/158111105-12f7edcb-dc5b-4fe1-98f2-32d8d38d8278.png)
 
 아래와 같이 진행하여 `CA.crt` Root CA 인증서 파일을 내보냅니다.   
 ![image](https://user-images.githubusercontent.com/43658658/158109600-80caadfb-b744-4c7f-ba35-b67546a1ab24.png)   
