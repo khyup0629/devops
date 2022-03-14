@@ -7,6 +7,11 @@
 - [AWS CLI Configuration 진행 방법](https://github.com/khyup0629/devops/blob/main/AWS/AWS_CLI_Configure.md#aws-configure)
 - [AWS MFA 설정 방법](https://github.com/khyup0629/devops/blob/main/AWS/AWS_MFA.md#mfa-%EC%84%A4%EC%A0%95-%EB%B0%A9%EB%B2%95)
 
+## 🧶 NCP
+
+- []()
+
+
 ## 🐳 Docker
 
 
