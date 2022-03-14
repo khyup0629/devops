@@ -64,3 +64,9 @@ SSL 인증서를 발급 받을 때 사용한 도메인으로 로드밸런싱이 
 
 인증서를 발급 받을 때 **<인증한 도메인>에 대해서 HTTPS가 적용**되고,   
 기존 LB의 **엔드포인트로는 적용되지 않습니다.**
+
+참고 사이트 :   
+- [Let's Encrypt을 이용한 SSL 인증서 발급 및 등록](https://navercloudplatform.medium.com/%EC%9D%B4%EB%A0%87%EA%B2%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EC%84%B8%EC%9A%94-lets-encrypt-%EB%AC%B4%EB%A3%8C-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89%EB%B6%80%ED%84%B0-%EB%93%B1%EB%A1%9D-%EA%B4%80%EB%A6%AC%EA%B9%8C%EC%A7%80-feat-certificate-manager-d259f469e83d)
+- [Let's Encrypt을 이용한 SSL 인증서 발급 및 등록 - 1](https://manvscloud.com/?p=1445)
+- [NCP NPLB 공식 문서](https://guide.ncloud-docs.com/docs/networking-loadbalancer-proxylbconsole#%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0-%EB%A6%AC%EC%8A%A4%EB%84%88%EA%B0%80-tls%EC%9D%B8-%EA%B2%BD%EC%9A%B0)
+- [NCP Certificate Manager 공식 문서](https://guide.ncloud-docs.com/docs/ko/security-security-15-1)
