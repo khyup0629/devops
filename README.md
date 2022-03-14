@@ -9,7 +9,7 @@
 
 ## 🧶 NCP
 
-- []()
+- [네트워크 프록시 로드밸런서(NPLB)에 SSL 인증서 적용](https://github.com/khyup0629/devops/blob/main/NCP/NPLB%EC%97%90%20SSL%20%EC%9D%B8%EC%A6%9D%EC%84%9C%20%EC%A0%81%EC%9A%A9.md#%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9D%EC%8B%9C-%EB%A1%9C%EB%93%9C%EB%B0%B8%EB%9F%B0%EC%84%9Cnplb%EC%97%90-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%A0%81%EC%9A%A9)
 
 
 ## 🐳 Docker
