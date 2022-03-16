@@ -1,4 +1,6 @@
-- influxDB v2.1.1 환경 구축(컨테이너)
+# influxDB v2.x 환경에서 데이터 쓰기 및 그라파나 대시보드 구축(Flux 쿼리문)
+
+> <h3>influxDB v2.1.1 환경 구축(컨테이너)</h3>
 
 ```
 docker run -d --name influxdb -p 8086:8086 influxdb:2.1.1
@@ -17,6 +19,8 @@ influxDB 1.7 버전 이하 : influxQL 쿼리 언어
 2. Password 을 입력합니다.
 3. Organization 을 입력합니다.
 4. Bucket 을 입력합니다.
+
+> <h3>클라이언트와 influxDB 연결</h3>
 
 이제 **influxDB**의 `write API`를 통해 매트릭을 원하는 **클라이언트**와 연결해 데이터를 가져와야 합니다.
 
@@ -66,9 +70,54 @@ write_api.write(bucket, org, point)
 
 (Tip!)influxDB는 일반적인 DB에서 사용되는 Database, Table이란 용어 대신 Bucket, Measurement라는 용어를 사용합니다.
 
+> <h3>그라파나 대시보드에 나타내기(Flux 쿼리문)</h3>
 
+아래의 쿼리문을 통해 그라파나 대시보드를 나타낼 수 있습니다.   
+```
+<query>
+from(bucket: "hongikit")
+  |> range(start: v.timeRangeStart, stop: -7m)
+  |> filter(fn: (r) => r._measurement == "<measurement 이름>")
+  |> filter(fn: (r) => r.<tag 필드 명> == "<tag 필드 값>")
+  |> filter(fn: (r) => r._field == "<field 명>")  
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+```
 
-- timeShift 함수를 이용해 Flux 쿼리문 작성
-- CDN Request 1, 2 금일, 전일, 전주 하나의 대시보드에 표현
-- LG CDN 기존 대시보드 Flux 환경으로 마이그레이션
-- Hit 대시보드 Alert 설정 및 가독성 높이기`
+<설명>
+
+- `range(start: <데이터 시작 점>, stop: <데이터 끝 점>)` : start ~ stop 사이의 데이터를 표시합니다.
+- `r._measurement == "<measurement 이름>"` : 특정 Measurement를 필터링합니다.
+- `r.<tag 필드 명> == "<tag 필드 값>"` : 특정 tag 필드가 특정 값을 나타내는 데이터를 필터링합니다.
+- `r._field == "<field 명>"` : 특정 field의 데이터를 필터링합니다.
+- `aggregateWindow(every: <기간>, fn: mean, createEmpty: false)` : 해당 기간 동안 평균값을 보여주고, 빈 값은 허용하지 않습니다.
+
+`timeShift` 함수와 range의 범위를 적절히 조정하면, 하나의 패널에 금일, 전일, 전주 등에 대한 데이터를 나타낼 수 있습니다.   
+```
+<query> 전일에 대한 쿼리문
+from(bucket: "hongikit")
+  |> range(start: -48h, stop: -24h7m)
+  |> timeShift(duration: 24h)
+  |> filter(fn: (r) => r._measurement == "<measurement 이름>")
+  |> filter(fn: (r) => r.<tag 필드 명> == "<tag 필드 값>")
+  |> filter(fn: (r) => r._field == "<field 명>")  
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+```
+- `range`를 하루 뒤로 밀고, `timeShift`를 하루 앞으로 당기면 현재의 `timestamp`에 하루 전의 데이터를 찍을 수 있습니다.
+
+하나의 패널 안에 `금일`에 대한 Flux 쿼리문과 `전일`에 대한 Flux 쿼리문을 같이 추가합니다.   
+![image](https://user-images.githubusercontent.com/43658658/158562035-51dbb33b-6b9d-405d-be3d-5715eb41286f.png)
+
+> <h3>그라파나 패널 Alert 설정</h3>
+
+![image](https://user-images.githubusercontent.com/43658658/158562631-54335212-5875-43e0-b9ca-a167431caf58.png)   
+- Evaluate every : Condition을 검사하는 주기
+- For : Condition을 위반하는 기간
+- query(<Query 이름>, <시작 점>, <끝 점>) : Query로 선별한 특정 데이터에 대해 시작 점 ~ 끝 점 사이에 Condition 위반 여부 판단.
+- `IS ABOVE` : 이상, `IS BELOW` 등의 옵션 지정 가능.
+
+![image](https://user-images.githubusercontent.com/43658658/158563284-bac39175-bd7f-476e-912c-732690d4e5ab.png)   
+- `If no data or all values are null` : 데이터가 없다면 Alerting
+- `If execution error or timeout` : 실행 에러 또는 지연 시간 초과이면 Alerting
+- `Notifications` : `Send to`를 통해 알림이 발생될 플랫폼을 지정하고, 발송될 메시지를 입력합니다(예 : Slack)
