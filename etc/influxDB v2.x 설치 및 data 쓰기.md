@@ -104,6 +104,9 @@ from(bucket: "hongikit")
   |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
   |> yield(name: "mean")
 ```
+
+<설명>
+
 - `range`를 하루 뒤로 밀고, `timeShift`를 하루 앞으로 당기면 현재의 `timestamp`에 하루 전의 데이터를 찍을 수 있습니다.
 
 하나의 패널 안에 `금일`에 대한 Flux 쿼리문과 `전일`에 대한 Flux 쿼리문을 같이 추가합니다.   
@@ -112,12 +115,18 @@ from(bucket: "hongikit")
 > <h3>그라파나 패널 Alert 설정</h3>
 
 ![image](https://user-images.githubusercontent.com/43658658/158562631-54335212-5875-43e0-b9ca-a167431caf58.png)   
+
+<설명>
+
 - Evaluate every : Condition을 검사하는 주기
 - For : Condition을 위반하는 기간
 - query(<Query 이름>, <시작 점>, <끝 점>) : Query로 선별한 특정 데이터에 대해 시작 점 ~ 끝 점 사이에 Condition 위반 여부 판단.
 - `IS ABOVE` : 이상, `IS BELOW` 등의 옵션 지정 가능.
 
 ![image](https://user-images.githubusercontent.com/43658658/158563284-bac39175-bd7f-476e-912c-732690d4e5ab.png)   
+
+<설명>
+
 - `If no data or all values are null` : 데이터가 없다면 Alerting
 - `If execution error or timeout` : 실행 에러 또는 지연 시간 초과이면 Alerting
 - `Notifications` : `Send to`를 통해 알림이 발생될 플랫폼을 지정하고, 발송될 메시지를 입력합니다(예 : Slack)
