@@ -31,7 +31,7 @@ influxDB 1.7 버전 이하 : influxQL 쿼리 언어
 ![image](https://user-images.githubusercontent.com/43658658/158556888-4ad17f92-3dc6-4372-ba45-20349975d9a1.png)
 ![image](https://user-images.githubusercontent.com/43658658/158556978-e7f56cac-8cf5-45a6-9940-81c4f2d37c58.png)
 
-클라이언트와 연결하는 부분입니다.   
+클라이언트와 연결하는 부분(`Initialize the Client`)입니다.   
 ``` python
 from datetime import datetime
 
@@ -46,7 +46,7 @@ bucket = "<bucket 명>"
 with InfluxDBClient(url="http://<ip 주소>:8086", token=token, org=org) as client:
 ```
 
-데이터를 쓰는 방식은 `Option 2`의 **Data Point**를 이용했습니다.   
+데이터를 쓰는 방식(`Write Data`)은 `Option 2`의 **Data Point**를 이용했습니다.   
 ``` python
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
