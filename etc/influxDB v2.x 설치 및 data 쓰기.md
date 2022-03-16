@@ -22,7 +22,7 @@ influxDB 1.7 버전 이하 : influxQL 쿼리 언어
 
 > <h3>클라이언트와 influxDB 연결</h3>
 
-이제 **influxDB**의 `write API`를 통해 매트릭을 원하는 **클라이언트(데이터를 수집할 서버)**와 연결해 데이터를 가져와야 합니다.
+이제 **influxDB**의 `write API`를 통해 매트릭을 원하는 **클라이언트(데이터를 수집할 서버)** 와 연결해 데이터를 가져와야 합니다.
 
 `Data` 탭으로 들어가면 각 언어 별로 노드를 연결하고 `Write API`를 이용하는 방법이 나와있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/158555783-09ccd200-a43d-4d53-8c36-289ce4382327.png)
