@@ -1,0 +1,6 @@
+context: {}
+
+remote_states:
+  "network":
+    organization: "Test-terraform-cloud-bllu"
+    workspace: "tf-cloud-backend"
