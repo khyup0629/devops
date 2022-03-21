@@ -1,4 +1,4 @@
-# Error acquiring the state lock 에러
+# Error acquiring the state lock, message: resource not found
 
 `terraform apply` 시 아래의 에러가 발생하였습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/159256210-96325292-dfb5-4496-b4dd-f1668d8c3fa6.png)
