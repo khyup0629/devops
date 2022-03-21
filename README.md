@@ -48,4 +48,7 @@
 
 - [프로메테우스 포트 오류로 인한 Down 상태 해결](https://github.com/khyup0629/devops/blob/main/troubleshooting/%ED%94%84%EB%A1%9C%EB%A9%94%ED%85%8C%EC%9A%B0%EC%8A%A4_TCP_%EC%97%90%EB%9F%AC.md#%ED%94%84%EB%A1%9C%EB%A9%94%ED%85%8C%EC%9A%B0%EC%8A%A4-tcp-%EC%97%90%EB%9F%AC)
 - [git push 오류 해결](https://github.com/khyup0629/devops/blob/main/troubleshooting/git_push_%EC%98%A4%EB%A5%98.md#git-push-%EC%98%A4%EB%A5%98)
+- [(Terraform)Error acquiring the state lock, message: resource not found](https://github.com/khyup0629/devops/blob/main/troubleshooting/Error%20acquiring%20the%20state%20lock%2C%20message:%20resource%20not%20found.md#error-acquiring-the-state-lock-%EC%97%90%EB%9F%AC)
+- [(Terraform)Error locking state: Error acquiring the state lock](https://github.com/khyup0629/devops/blob/main/troubleshooting/Error%20locking%20state:%20Error%20acquiring%20the%20state%20lock.md#error-locking-state-error-acquiring-the-state-lock)
+
 
