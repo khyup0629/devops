@@ -1,7 +1,11 @@
 # Could not open a connection to your authentication agent.
 
 `ssh-add` 명령어를 실행하는 과정에서 위의 에러 메시지를 확인했습니다.   
-![image](https://user-images.githubusercontent.com/43658658/159402014-41bc1c6c-5a3b-42c4-b0a3-9f64fcc69416.png)   
+
+```
+hyeob@hyeob:~/private-key$ ssh-add hyeob-home-keypair.pem
+Could not open a connection to your authentication agent.
+```
 
 ## 해결 방법
 
