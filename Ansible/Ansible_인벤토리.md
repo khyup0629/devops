@@ -15,16 +15,18 @@
 (인벤토리 파일은 딱히 확장자 명이 있는 건 아니고, 임의로 붙여서 사용할 수 있습니다)   
 ![image](https://user-images.githubusercontent.com/43658658/159396205-0ac004b8-80e2-4348-be31-56feada05181.png)
 
+파일의 ip 주소는 `terraform output`을 통해서 확인할 수도 있고, 직접 `AWS 콘솔`에 접근해서 확인할 수도 있습니다.
+
 ```
 # amazon.inv
-3.35.53.163
-3.34.253.165
+13.209.11.129
+3.36.58.47
 ```
 
 ```
 # ubuntu.inv
-ec2-3-34-49-77.ap-northeast-2.compute.amazonaws.com
-ec2-13-209-20-108.ap-northeast-2.compute.amazonaws.com
+ec2-3-34-135-32.ap-northeast-2.compute.amazonaws.com
+ec2-52-79-202-181.ap-northeast-2.compute.amazonaws.com
 ```
 
 `[`, `]`를 사용해서 그룹을 만들어 줄 수도 있습니다.   
@@ -32,11 +34,11 @@ ec2-13-209-20-108.ap-northeast-2.compute.amazonaws.com
 ```
 # simple.inv
 [amazon]
-3.35.53.163
-3.34.253.165
+13.209.11.129
+3.36.58.47
 [ubuntu]
-ec2-3-34-49-77.ap-northeast-2.compute.amazonaws.com
-ec2-13-209-20-108.ap-northeast-2.compute.amazonaws.com
+ec2-3-34-135-32.ap-northeast-2.compute.amazonaws.com
+ec2-52-79-202-181.ap-northeast-2.compute.amazonaws.com
 ```
 
 `[all]`이라는 기본 그룹은 인벤토리에 정의되어 있는 모든 주소를 포함하고 있습니다.
@@ -46,12 +48,12 @@ ec2-13-209-20-108.ap-northeast-2.compute.amazonaws.com
 ```
 # alias.inv
 [amazon]
-amazon1 ansible_host=3.35.53.163
-amazon2 ansible_host=3.34.253.165
+amazon1 ansible_host=13.209.11.129
+amazon2 ansible_host=3.36.58.47
 
 [ubuntu]
-ubuntu1 ansible_host=ec2-3-34-49-77.ap-northeast-2.compute.amazonaws.com
-ubuntu2 ansible_host=ec2-13-209-20-108.ap-northeast-2.compute.amazonaws.com
+ubuntu1 ansible_host=ec2-3-34-135-32.ap-northeast-2.compute.amazonaws.com
+ubuntu2 ansible_host=ec2-52-79-202-181.ap-northeast-2.compute.amazonaws.com
 ```
 
 `ansible_user`를 통해 인스턴스의 사용자 정보까지 적어줄 수 있습니다.
@@ -59,12 +61,12 @@ ubuntu2 ansible_host=ec2-13-209-20-108.ap-northeast-2.compute.amazonaws.com
 ```
 # vars.inv
 [amazon]
-amazon1 ansible_host=3.35.53.163 ansible_user=ec2-user
-amazon2 ansible_host=3.34.253.165 ansible_user=ec2-user
+amazon1 ansible_host=13.209.11.129 ansible_user=ec2-user
+amazon2 ansible_host=3.36.58.47 ansible_user=ec2-user
 
 [ubuntu]
-ubuntu1 ansible_host=ec2-3-34-49-77.ap-northeast-2.compute.amazonaws.com ansible_user=ubuntu
-ubuntu2 ansible_host=ec2-13-209-20-108.ap-northeast-2.compute.amazonaws.com ansible_user=ubuntu
+ubuntu1 ansible_host=ec2-3-34-135-32.ap-northeast-2.compute.amazonaws.com ansible_user=ubuntu
+ubuntu2 ansible_host=ec2-52-79-202-181.ap-northeast-2.compute.amazonaws.com ansible_user=ubuntu
 
 # 하위 그룹 기능 : [그룹명:children] 밑에는 하위 그룹 대상을 써줍니다.
 [linux:children]
