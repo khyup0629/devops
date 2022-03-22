@@ -7,7 +7,7 @@
   - command, script, apt, service
 - `콜렉션` (Collection): 모듈의 집합.
 
-``` yaml
+``` terraform
 # Playbook
 - name: Play 1
   hosts: ubuntu
@@ -59,7 +59,7 @@ ubuntu
 ```
 
 다음으로 `ubuntu`, `amazon linux` 순서로 nginx 패키지를 설치하는 플레이북을 작성합니다.   
-``` yaml
+``` terraform
 # install-nginx.yaml
 - name: Install Nginx on Ubuntu
   hosts: ubuntu
@@ -102,7 +102,7 @@ ansible-playbook -i inventory install-nginx.yaml
 ```
 
 아래와 같이 설치가 진행됩니다.   
-``` cli
+```
 PLAY [Install Nginx on Ubuntu] *******************************************************
 
 TASK [Gathering Facts] ***************************************************************
