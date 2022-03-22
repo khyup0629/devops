@@ -50,8 +50,8 @@
 - [git push 오류 해결](https://github.com/khyup0629/devops/blob/main/troubleshooting/git_push_%EC%98%A4%EB%A5%98.md#git-push-%EC%98%A4%EB%A5%98)
 - [(Terraform)Error acquiring the state lock, message: resource not found](https://github.com/khyup0629/devops/blob/main/troubleshooting/Error%20acquiring%20the%20state%20lock%2C%20message:%20resource%20not%20found.md#error-acquiring-the-state-lock-message-resource-not-found)
 - [(Terraform)Error locking state: Error acquiring the state lock](https://github.com/khyup0629/devops/blob/main/troubleshooting/Error%20locking%20state:%20Error%20acquiring%20the%20state%20lock.md#error-locking-state-error-acquiring-the-state-lock)
-- [Could not open a connection to your authentication agent.(ssh-add)](https://github.com/khyup0629/devops/blob/main/troubleshooting/Could%20not%20open%20a%20connection%20to%20your%20authentication%20agent.md#could-not-open-a-connection-to-your-authentication-agent)
-- [Permissions 0444 for 'hyeob-home-keypair.pem' are too open.(ssh-add)](https://github.com/khyup0629/devops/blob/main/troubleshooting/Permissions%200444%20for%20'hyeob-home-keypair.pem'%20are%20too%20open.md#permissions-0444-for-hyeob-home-keypairpem-are-too-open)
+- [(ssh-add)Could not open a connection to your authentication agent.](https://github.com/khyup0629/devops/blob/main/troubleshooting/Could%20not%20open%20a%20connection%20to%20your%20authentication%20agent.md#could-not-open-a-connection-to-your-authentication-agent)
+- [(ssh-add)Permissions 0444 for 'hyeob-home-keypair.pem' are too open.](https://github.com/khyup0629/devops/blob/main/troubleshooting/Permissions%200444%20for%20'hyeob-home-keypair.pem'%20are%20too%20open.md#permissions-0444-for-hyeob-home-keypairpem-are-too-open)
 
 
 
