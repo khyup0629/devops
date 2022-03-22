@@ -13,12 +13,21 @@ ansible <그룹명> -m <모듈명> [-a <모듈 옵션명>] [-i <인벤토리 파
 ```
 
 아래의 명령으로 `ping`을 보내보겠습니다.   
+(여기서 `ping`은 네트워크에서 말하는 ping이 아니라 대상 호스트에 연결 후 **python 사용 가능 여부**를 확인하는 명령어입니다)   
 ```
 ansible -i amazon.inv -m ping all
 ```
 
 (여기서 잠깐!) AWS 인스턴스와 연결하기 위해서는 사전에 우분투 서버의 ssh-agent에 인스턴스의 `private key`가 등록되어 있어야 합니다.   
 => [ssh-agent 가 private key를 캐싱할 수 있도록 등록해 주는 ssh-add 명령어 사용법](https://github.com/khyup0629/devops/blob/main/etc/ssh-agent%20%EA%B0%80%20private%20key%EB%A5%BC%20%EC%BA%90%EC%8B%B1%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8F%84%EB%A1%9D%20%EB%93%B1%EB%A1%9D%ED%95%B4%20%EC%A3%BC%EB%8A%94%20ssh-add%20%EB%AA%85%EB%A0%B9%EC%96%B4%20%EC%82%AC%EC%9A%A9%EB%B2%95.md#ssh-agent-%EA%B0%80-private-key%EB%A5%BC-%EC%BA%90%EC%8B%B1%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8F%84%EB%A1%9D-%EB%93%B1%EB%A1%9D%ED%95%B4-%EC%A3%BC%EB%8A%94-ssh-add-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95)
+
+만약 ssh-agent를 사용하지 않지만 ssh key를 통해서 접근하고 싶다고 한다면,   
+```
+ansible -i amazon.inv -m ping all -u ec2-user --private-key <private key 파일 경로>
+```   
+`--private-key` 옵션을 통해 `private key 파일 경로`를 명시해 접근할 수도 있습니다.
+
+아래 실습은 `ssh-agent`를 사용한다는 전제로 작성되었습니다.
 
 아래의 에러가 나타나는데 이는 `amazon linux` 운영체제 서버로 접근할 때 사용자명을 설정해주지 않아 발생하는 문제입니다.   
 사용자명을 명시하지 않으면 디폴트로 현재 우분투 서버의 사용자명으로 접근하게 됩니다.   
