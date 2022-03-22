@@ -12,8 +12,11 @@
 ansible <그룹명> -m <모듈명> [-a <모듈 옵션명>] [-i <인벤토리 파일명>]
 ```
 
+## ping 모듈 활용
+
+앤서블에서 `ping` 모듈은 네트워크에서 말하는 ping이 아니라 대상 호스트에 연결 후 **python 사용 가능 여부**를 확인하는 역할을 합니다.
+
 아래의 명령으로 `ping`을 보내보겠습니다.   
-(여기서 `ping`은 네트워크에서 말하는 ping이 아니라 대상 호스트에 연결 후 **python 사용 가능 여부**를 확인하는 명령어입니다)   
 ```
 ansible -i amazon.inv -m ping all
 ```
@@ -52,4 +55,104 @@ ansible -i amazon.inv -m ping all -u ec2-user
 
 정상적으로 핑이 갑니다.   
 ![image](https://user-images.githubusercontent.com/43658658/159404447-6a2dd1ce-70c6-44dd-a19f-876f73dcbb8b.png)
+
+## command 모듈 활용
+
+`command` 모듈은 대상 호스트 안에서 명령어를 수행할 수 있도록 합니다.   
+
+`vars.inv` 안에서 `ubuntu` 그룹의 호스트들로 접근해 `uptime` 명령을 실행해 해당 서버가 실행되고 있는 시간을 출력해봅니다.
+
+```
+ansible -i vars.inv -m command -a "uptime" ubuntu
+```
+
+```
+ubuntu1 | CHANGED | rc=0 >>
+ 04:01:46 up  1:33,  1 user,  load average: 0.16, 0.03, 0.01
+
+ubuntu2 | CHANGED | rc=0 >>
+ 04:01:55 up  1:33,  1 user,  load average: 0.00, 0.00, 0.00
+```
+
+## setup 모듈 활용
+
+`setup` 모듈은 상세(Facts)를 수집하는 모듈입니다.
+
+```
+ansible localhost -m setup
+```   
+(앤서블에서는 `localhost`도 해석됩니다)
+
+아래는 현재 localhost 상세 정보 결과값입니다.   
+```
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "ansible_all_ipv4_addresses": [
+            "172.17.0.1",
+            "172.16.0.202",
+            "172.20.0.1"
+        ],
+        "ansible_all_ipv6_addresses": [
+            "fe80::42:3dff:fe82:a1cd",
+            "fe80::20c:29ff:feee:de2f",
+            "fe80::e4a1:10ff:fed3:dc4d",
+            "fe80::900c:a5ff:fe67:bdec",
+            "fe80::2412:79ff:fe5b:5732",
+            "fe80::42:5aff:fef0:d6a0",
+            "fe80::c83a:81ff:fe80:2e7b",
+            "fe80::b8b7:54ff:fe76:bcf6",
+            "fe80::6410:e2ff:fec5:f52",
+            "fe80::8029:4bff:fe76:2549",
+            "fe80::140b:d2ff:fe8e:b1ec",
+            "fe80::60b7:e9ff:fed7:132",
+            "fe80::24c8:44ff:fef5:6f"
+        ],
+        "ansible_apparmor": {
+            "status": "enabled"
+        },
+        "ansible_architecture": "x86_64",
+        "ansible_bios_date": "12/12/2018",
+        "ansible_bios_vendor": "Phoenix Technologies LTD",
+        "ansible_bios_version": "6.00",
+        "ansible_board_asset_tag": "NA",
+        "ansible_board_name": "440BX Desktop Reference Platform",
+        "ansible_board_serial": "NA",
+        "ansible_board_vendor": "Intel Corporation",
+        "ansible_board_version": "None",
+        "ansible_br_dbdae2c84833": {
+```
+
+상세 정보는 앞에 접두어(prefix)로 `ansible_`이 붙어 모두 앤서블 변수로 정의됩니다.
+
+## apt 모듈 활용
+
+apt 모듈은 우분투에서 패키지를 관리하는 명령어입니다.   
+
+`Git`을 최신 모듈로 다운 받아보겠습니다.   
+(`--become` 옵션을 주면 관리자 권한으로 명령을 실행할 수 있습니다)   
+
+```
+ansible -i vars.inv -m apt -a "name=git state=latest update_cache=yes" ubuntu --become
+```
+
+`command` 모듈을 이용해 `git`이 제대로 설치되었는지 확인해봅시다.   
+```
+ansible -i vars.inv -m command -a "git --version" ubuntu
+```
+
+```
+ubuntu2 | CHANGED | rc=0 >>
+git version 2.25.1
+ubuntu1 | CHANGED | rc=0 >>
+git version 2.25.1
+```
+
+패키지를 `삭제`하고 싶다면 `state=absent`로 입력합니다.   
+
+```
+ansible -i vars.inv -m apt -a "name=git state=absent update_cache=yes" ubuntu --become
+```
+
+
+
 
