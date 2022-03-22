@@ -43,6 +43,9 @@
 - [구글 폼을 이용한 휴가 신청서 작성 및 이메일 발송 트리거 구현](https://github.com/khyup0629/devops/blob/main/etc/Google_Form_onFormSubmit.md#%EA%B5%AC%EA%B8%80-%ED%8F%BC-onformsubmit)
 - [IaC, 형상 관리, 이미지 빌더 개념](https://github.com/khyup0629/devops/blob/main/etc/IaC_configuration_management_image_build.md#iac-infrastructure-as-code)
 - [Let's Encrypt를 이용한 SSL 인증서 발급 및 클라우드 등록](https://github.com/khyup0629/devops/blob/main/etc/Let's%20Encrypt%EB%A5%BC%20%ED%86%B5%ED%95%9C%20SSL%20%EC%9D%B8%EC%A6%9D%EC%84%9C%20%EB%B0%9C%EA%B8%89%20%EB%B0%8F%20%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C%20%EB%93%B1%EB%A1%9D.md#lets-encrypt%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89)
+- [ssh-agent 가 private key를 캐싱할 수 있도록 등록해 주는 ssh-add 명령어 사용법](https://github.com/khyup0629/devops/blob/main/etc/ssh-agent%20%EA%B0%80%20private%20key%EB%A5%BC%20%EC%BA%90%EC%8B%B1%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8F%84%EB%A1%9D%20%EB%93%B1%EB%A1%9D%ED%95%B4%20%EC%A3%BC%EB%8A%94%20ssh-add%20%EB%AA%85%EB%A0%B9%EC%96%B4%20%EC%82%AC%EC%9A%A9%EB%B2%95.md#ssh-agent-%EA%B0%80-private-key%EB%A5%BC-%EC%BA%90%EC%8B%B1%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8F%84%EB%A1%9D-%EB%93%B1%EB%A1%9D%ED%95%B4-%EC%A3%BC%EB%8A%94-ssh-add-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95)
+
+
 
 ## TroubleShooting
 
