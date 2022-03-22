@@ -41,7 +41,26 @@
 
 ## 플레이북을 이용해 우분투, 아마존 리눅스에 nginx 패키지 설치하기
 
+먼저 인벤토리 파일을 아래와 같이 작성합니다.   
 ```
+# inventory
+
+[amazon]
+amazon1 ansible_host=13.209.11.129 ansible_user=ec2-user
+amazon2 ansible_host=3.36.58.47 ansible_user=ec2-user
+
+[ubuntu]
+ubuntu1 ansible_host=ec2-3-34-135-32.ap-northeast-2.compute.amazonaws.com ansible_user=ubuntu
+ubuntu2 ansible_host=ec2-52-79-202-181.ap-northeast-2.compute.amazonaws.com ansible_user=ubuntu
+
+[linux:children]
+amazon
+ubuntu
+```
+
+다음으로 `ubuntu`, `amazon linux` 순서로 nginx 패키지를 설치하는 플레이북을 작성합니다.   
+```
+# install-nginx.yaml
 - name: Install Nginx on Ubuntu
   hosts: ubuntu
   become: true
@@ -76,3 +95,57 @@
       state: started
 ```
 
+플레이북을 실행하는 명령어는 `ansible-playbook`입니다.
+
+```
+ansible-playbook -i inventory install-nginx.yaml
+```
+
+아래와 같이 설치가 진행됩니다.   
+```
+PLAY [Install Nginx on Ubuntu] *******************************************************
+
+TASK [Gathering Facts] ***************************************************************
+ok: [ubuntu1]
+ok: [ubuntu2]
+
+TASK [Install Nginx] *****************************************************************
+changed: [ubuntu1]
+changed: [ubuntu2]
+
+TASK [Ensure nginx service started] **************************************************
+ok: [ubuntu2]
+ok: [ubuntu1]
+
+PLAY [Install Nginx on Amazon Linux] *************************************************
+
+TASK [Gathering Facts] ***************************************************************
+[WARNING]: Platform linux on host amazon2 is using the discovered Python interpreter
+at /usr/bin/python3.7, but future installation of another Python interpreter could
+change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.12/reference_appendices/interpreter_discovery.html for more information.
+ok: [amazon2]
+[WARNING]: Platform linux on host amazon1 is using the discovered Python interpreter
+at /usr/bin/python3.7, but future installation of another Python interpreter could
+change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.12/reference_appendices/interpreter_discovery.html for more information.
+ok: [amazon1]
+
+TASK [Enable Nginx repository provided by Amazon] ************************************
+changed: [amazon2]
+changed: [amazon1]
+
+TASK [Install Nginx] *****************************************************************
+changed: [amazon2]
+changed: [amazon1]
+
+TASK [Ensure nginx service started] **************************************************
+changed: [amazon2]
+changed: [amazon1]
+
+PLAY RECAP ***************************************************************************
+amazon1                    : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+amazon2                    : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu1                    : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu2                    : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
