@@ -7,7 +7,7 @@
   - command, script, apt, service
 - `콜렉션` (Collection): 모듈의 집합.
 
-``` 
+``` yaml
 # Playbook
 - name: Play 1
   hosts: ubuntu
@@ -102,7 +102,7 @@ ansible-playbook -i inventory install-nginx.yaml
 ```
 
 아래와 같이 설치가 진행됩니다.   
-```
+``` cli
 PLAY [Install Nginx on Ubuntu] *******************************************************
 
 TASK [Gathering Facts] ***************************************************************
