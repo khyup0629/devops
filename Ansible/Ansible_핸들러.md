@@ -4,7 +4,7 @@
 - Task끼리 의존성을 가지도록 설정할 수 있습니다.
 - 예를 들어, 특정 Task 안에 `notify`라는 파라미터를 통해 `handlers` 이름을 명시하면, 특정 Task가 실행됐을 때 변경사항이 존재하면, `notify` 안의 핸들러에 정의된 Task가 실행됩니다.
 
-```
+``` yaml
 notify:
 - Restart Nginx
 
@@ -21,7 +21,7 @@ config 파일과 관련한 `copy` 모듈을 실행할 때 변경사항이 존재
 그리고 `Restart Nginx`라는 이름의 핸들러를 정의합니다.   
 
 
-```
+``` yaml
 # example.yaml
 ---
 
