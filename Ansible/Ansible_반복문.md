@@ -8,7 +8,7 @@
 
 `with` 문법의 사용법부터 살펴보겠습니다.
 
-```
+``` yaml
 # playbook.yaml
 ---
 
@@ -43,7 +43,7 @@ cat /etc/group
 
 ## loop 
 
-```
+``` yaml
 # playbook.yaml
 ---
 
