@@ -1,6 +1,6 @@
 [ubuntu]
-ubuntu1 ansible_host=3.35.54.37 ansible_user=ubuntu
-ubuntu2 ansible_host=3.36.76.69 ansible_user=ubuntu
+ubuntu1 ansible_host=13.125.5.182 ansible_user=ubuntu
+ubuntu2 ansible_host=15.165.236.120 ansible_user=ubuntu
 
 [linux:children]
 ubuntu
