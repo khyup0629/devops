@@ -9,4 +9,3 @@ ubuntu2 ansible_host=ec2-54-180-151-150.ap-northeast-2.compute.amazonaws.com ans
 [linux:children]
 amazon
 ubuntu
-
