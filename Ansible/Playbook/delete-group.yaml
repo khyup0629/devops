@@ -1,0 +1,16 @@
+---
+
+- name: Delete group playbook
+  hosts: ubuntu
+  become: true
+  tasks:
+  - name: Delete group
+    group:
+      name: "{{ item }}"
+      state: absent
+    loop:
+    - backend
+    - frontend
+    - devops
+    - cloud
+    - infra
