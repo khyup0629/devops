@@ -1,0 +1,34 @@
+---
+
+# 사용자 생성, 사용자에 대해 /etc/sudoers에 쓰기 작업
+- name: Create user, write sudoers
+  hosts: ubuntu
+  become: true
+  vars:
+    - users:
+      - name: cypress2
+        shell: /bin/bash
+        comment: create cypress1 user
+
+  tasks:
+    - name: Create User
+      user:
+        name: "{{ item.name }}"
+        state: absent
+      loop: "{{ users }}"
+      
+    - name: Write permission
+      command: chmod u+w /etc/sudoers
+
+    - name: delete line
+      lineinfile:
+        path: /etc/sudoers
+        state: absent
+        line: "{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+      loop: "{{ users }}"
+      
+    - name: Write permission disable
+      command: chmod u-w /etc/sudoers
+    
+      
+
