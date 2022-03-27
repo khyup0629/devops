@@ -344,3 +344,24 @@ ok: [ubuntu2] => {
     "msg": "There is no claud"
 }
 ```
+
+## 코드 해설
+
+```
+- name: "Print users"
+    command: "cut -d: -f1 /etc/passwd"
+    register: users
+
+  - name: "Is there claud"
+    debug:
+      msg: "There is no claud"
+    when: users.stdout.find('claud') == -1
+```
+
+`cut -d: -f1 /etc/passwd`를 명령하면 아래와 같이 사용자명이 출력됩니다.   
+![image](https://user-images.githubusercontent.com/43658658/160265210-e46842a9-6b58-4ac3-b12c-aef6c8b0eac2.png)
+
+이것을 `register` 속성을 통해 `users` 변수에 등록합니다.
+
+그리고 `when: users.stdout.find('claud') == -1`을 통해 `users` 변수의 `stdout(출력)`에서 `claud`라는 유저를 `find(찾아)`했을 때 `-1`로 존재하지 않으면, `There is no claud` 메시지를 출력하라는 의미입니다.
+
