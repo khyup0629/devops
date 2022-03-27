@@ -191,7 +191,11 @@ ubuntu2 | SUCCESS => {
 
 이런 것들은 `set_fact` 모듈을 이용해 `key` 값을 간단하게 변경해 새롭게 상세에 추가해줄 수 있습니다.
 
-아래 플레이북을 실행하기 전에 반드시 `pip install netaddr`을 실행합니다.
+아래 플레이북을 실행하기 전에 반드시 `pip install netaddr`을 실행합니다.   
+(ipaddr 함수를 사용할 수 있게 됩니다)   
+```
+pip install netaddr
+```
 
 ``` yaml
 ---
