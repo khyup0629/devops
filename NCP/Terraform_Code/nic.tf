@@ -7,11 +7,11 @@ locals {
 }
 
 resource "ncloud_network_interface" "nic" {
-  for_each = local.network_interface_private_ip
-  name = each.key
-  description = "terraform test"
-  subnet_no = ncloud_subnet.test.id
-  private_ip = each.value
+  for_each              = local.network_interface_private_ip
+  name                  = each.key
+  description           = "terraform test"
+  subnet_no             = ncloud_subnet.test.id
+  private_ip            = each.value
   access_control_groups = [ncloud_access_control_group.acg.id]
 }
 

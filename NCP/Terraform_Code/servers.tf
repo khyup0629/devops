@@ -13,9 +13,19 @@ resource "ncloud_server" "server" {
   subnet_no                 = ncloud_subnet.test.id
 
   network_interface {
-    network_interface_no = ncloud_network_interface.nic[format("tf-test-%s", count.index+1)].id
-    order = 0
+    network_interface_no = ncloud_network_interface.nic[format("tf-test-%s", count.index + 1)].id
+    order                = 0
   }
+}
+
+# Public IP 부여
+resource "ncloud_public_ip" "public_ip" {
+  for_each = {
+    for server in ncloud_server.server :
+    server.name => server
+  }
+
+  server_instance_no = each.value.id
 }
 
 # ncloud image & product : https://github.com/NaverCloudPlatform/terraform-ncloud-docs/blob/main/docs/server_image_product.md
@@ -56,4 +66,15 @@ data "ncloud_server_product" "product" {
     name   = "product_type"
     values = ["STAND"]
   }
+}
+
+# root password 가져오기
+data "ncloud_root_password" "password" {
+  for_each = {
+    for server in ncloud_server.server :
+    server.name => server
+  }
+
+  server_instance_no = each.value.id
+  private_key        = ncloud_login_key.loginkey.private_key
 }

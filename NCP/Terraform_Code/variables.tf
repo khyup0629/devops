@@ -10,3 +10,11 @@ variable "region" {
   default = "KR"
 }
 
+variable "lb_info" {
+  default = {
+    target-1 = {
+      protocol = "HTTP"
+      port = 80
+    }
+  }
+}

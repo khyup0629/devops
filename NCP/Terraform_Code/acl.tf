@@ -23,7 +23,7 @@ resource "ncloud_access_control_group_rule" "acg-rule" {
 
   outbound {
     protocol    = "TCP"
-    ip_block    = "0.0.0.0/0" 
+    ip_block    = "0.0.0.0/0"
     port_range  = "1-65535"
     description = "accept 1-65535 port"
   }
