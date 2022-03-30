@@ -3,17 +3,17 @@ resource "ncloud_login_key" "loginkey" {
   key_name = "tf-test"
 }
 
-# 서버2개 생성
+# 서브넷 각각 1개씩 서버 생성
 resource "ncloud_server" "server" {
   count                     = 2
   name                      = format("tf-vm-%s", count.index + 1)
   server_image_product_code = data.ncloud_server_image.image.id
   server_product_code       = data.ncloud_server_product.product.id
   login_key_name            = ncloud_login_key.loginkey.key_name
-  subnet_no                 = ncloud_subnet.test.id
+  subnet_no                 = ncloud_subnet.test[count.index].id
 
   network_interface {
-    network_interface_no = ncloud_network_interface.nic[format("tf-test-%s", count.index + 1)].id
+    network_interface_no = ncloud_network_interface.nic[format("tf-vm-%s", count.index + 1)].id
     order                = 0
   }
 }

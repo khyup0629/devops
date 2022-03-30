@@ -9,7 +9,7 @@ output "server_product_code" {
 output "server_ip" {
   value = [
     for server in ncloud_server.server : {
-      public_ip = server.public_ip
+      public_ip  = server.public_ip
       private_ip = server.private_ip
     }
   ]
