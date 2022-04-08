@@ -225,4 +225,7 @@ stress --cpu 1 --timeout 300
 CloudWatch에 경보가 울리고, Slack에 알림이 오는 것을 확인합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162394424-e9dd2793-960e-4479-934f-028dbb066084.png)
 
-
+---
+참고 페이지   
+- https://longtermsad.tistory.com/49
+- https://blog.cowkite.com/blog/2001151846/
