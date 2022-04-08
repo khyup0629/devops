@@ -127,21 +127,7 @@ def lambda_handler(event, context):
         logger.error("Server connection failed: %s", e.reason)
 ```
 
-## 4. CloudWatch 경보 설정
-
-1. 원하는 지표로 CloudWatch의 경보를 생성합니다.   
-![image](https://user-images.githubusercontent.com/43658658/162355427-e88cd1bb-2676-4486-a4fc-a51dbf006464.png)
-
-**CPU 지표**를 생성합니다.   
-![image](https://user-images.githubusercontent.com/43658658/162375561-74d3e992-f169-4e0c-83eb-56215d7d68c8.png)
-
-생성 과정에서 **SNS 주제를 선택**합니다.      
-![image](https://user-images.githubusercontent.com/43658658/162355764-a475d662-c03e-41ec-8e49-19ef9017af91.png)
-
-2. 경보가 생성되었습니다.   
-![image](https://user-images.githubusercontent.com/43658658/162375676-99902be7-173e-41d8-8f7b-2854d743535c.png)
-
-## 5. 알람 테스트
+## 4. 알람 테스트
 
 1. AWS Lambda에서 생성한 함수의 세부 정보로 접근해 `테스트` 탭으로 접근합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162367555-dcb5b787-15c2-43e4-98e9-dff941451843.png)
@@ -201,3 +187,19 @@ Request ID
 
 이럴 땐 해당 함수의 세부 정보에서 `구성 > 일반 구성`으로 접근해 `편집` 버튼을 눌러 **제한 시간**을 늘려주면 됩니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162370302-3fc2020e-0d2f-48c8-b771-c56e5d62c1bc.png)
+
+## 5. CloudWatch 경보 설정
+
+1. 원하는 지표로 CloudWatch의 경보를 생성합니다.   
+![image](https://user-images.githubusercontent.com/43658658/162355427-e88cd1bb-2676-4486-a4fc-a51dbf006464.png)
+
+**CPU 지표**를 생성합니다.   
+![image](https://user-images.githubusercontent.com/43658658/162375561-74d3e992-f169-4e0c-83eb-56215d7d68c8.png)
+
+생성 과정에서 **SNS 주제를 선택**합니다.      
+![image](https://user-images.githubusercontent.com/43658658/162355764-a475d662-c03e-41ec-8e49-19ef9017af91.png)
+
+2. 경보가 생성되었습니다.   
+![image](https://user-images.githubusercontent.com/43658658/162375676-99902be7-173e-41d8-8f7b-2854d743535c.png)
+
+
