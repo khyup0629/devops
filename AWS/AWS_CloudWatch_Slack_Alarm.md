@@ -202,4 +202,25 @@ Request ID
 2. 경보가 생성되었습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162375676-99902be7-173e-41d8-8f7b-2854d743535c.png)
 
+## 6. 경보 테스트
+
+1. 테스트를 위한 인스턴스를 하나 생성합니다.   
+![image](https://user-images.githubusercontent.com/43658658/162379186-9db3dc45-5513-4e80-8ea5-9f27d3b772bd.png)
+
+2. 해당 인스턴스에 접근해 `stress` 패키지를 설치합니다.   
+(유저 이름은 `ec2-user`입니다)   
+```
+sudo amazon-linux-extras install epel -y
+sudo yum install -y stress
+```
+
+3. 서버에 부하를 발생시켜서 경보를 울리게 만듭니다.   
+(5분 동안 CPU 100% 사용)   
+```
+stress --cpu 1 --timeout 300
+```
+
+4. 알림 확인   
+CloudWatch에 경보가 울리고, Slack에 알림이 오는 것을 확인합니다.   
+
 
