@@ -70,7 +70,7 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"
 ![image](https://user-images.githubusercontent.com/43658658/162352609-d3b290a5-e507-4843-bf05-725ef7166060.png)
 
 6. 생성된 함수의 상제 정보에서 `구성 > 환경 변수`로 접근해 환경 변수를 아래와 같이 수정합니다.   
-![image](https://user-images.githubusercontent.com/43658658/162367058-c395c800-435b-422d-a290-60299977a265.png)
+![image](https://user-images.githubusercontent.com/43658658/162378011-cc71c21f-189f-41b2-909c-36d9743785e4.png)
 
 7. **코드를 수정**합니다.   
 **암호화를 사용하지 않을 것이기 때문에** 암호화와 관련된 변수들(`ENCRYPTED_HOOK_URL`, `HOOK_URL`)을 수정합니다.   
