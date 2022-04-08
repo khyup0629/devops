@@ -190,7 +190,11 @@ Request ID
 
 ## 5. CloudWatch 경보 설정
 
+0. 테스트를 위한 인스턴스를 하나 생성합니다.   
+![image](https://user-images.githubusercontent.com/43658658/162379186-9db3dc45-5513-4e80-8ea5-9f27d3b772bd.png)
+
 1. 원하는 지표로 CloudWatch의 경보를 생성합니다.   
+`instanceid`에 위에서 생성한 **인스턴스 id**를 입력합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162355427-e88cd1bb-2676-4486-a4fc-a51dbf006464.png)
 
 **CPU 지표**를 생성합니다.   
@@ -204,23 +208,21 @@ Request ID
 
 ## 6. 경보 테스트
 
-1. 테스트를 위한 인스턴스를 하나 생성합니다.   
-![image](https://user-images.githubusercontent.com/43658658/162379186-9db3dc45-5513-4e80-8ea5-9f27d3b772bd.png)
-
-2. 해당 인스턴스에 접근해 `stress` 패키지를 설치합니다.   
+1. 위에 생성한 인스턴스에 접근해 `stress` 패키지를 설치합니다.   
 (유저 이름은 `ec2-user`입니다)   
 ```
 sudo amazon-linux-extras install epel -y
 sudo yum install -y stress
 ```
 
-3. 서버에 부하를 발생시켜서 경보를 울리게 만듭니다.   
+2. 서버에 부하를 발생시켜서 경보를 울리게 만듭니다.   
 (5분 동안 CPU 100% 사용)   
 ```
 stress --cpu 1 --timeout 300
 ```
 
-4. 알림 확인   
+3. 알림 확인   
 CloudWatch에 경보가 울리고, Slack에 알림이 오는 것을 확인합니다.   
+![image](https://user-images.githubusercontent.com/43658658/162394424-e9dd2793-960e-4479-934f-028dbb066084.png)
 
 
