@@ -24,11 +24,9 @@
 ![image](https://user-images.githubusercontent.com/43658658/162349052-9410000f-f9c3-4f44-8004-29f8de3b03f7.png)
 
 7. 생성한 채널에도 메시지가 와있는 것을 확인할 수 있습니다.   
-![image](https://user-images.githubusercontent.com/43658658/162349280-a872fcc4-cb49-4f22-9802-8803d097fded.png)
-
+![image](https://user-images.githubusercontent.com/43658658/162349280-a872fcc4-cb49-4f22-9802-8803d097fded.png)   
 `incoming-webhook`을 눌러 `구성`으로 접속하면 `수신 웹후크` 앱이 나타납니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162351512-ded84c24-b22f-459f-abce-a1f4e6ad75b5.png)   
-
 `구성`탭으로 접속하면 자신이 생성한 웹훅 구성이 있음을 확인할 수 있습니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162349517-f1ca7aef-3fe8-4e50-99c2-5fc728c47d1d.png)
 
@@ -72,8 +70,8 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"
 6. 생성된 함수의 상제 정보에서 `구성 > 환경 변수`로 접근해 환경 변수를 아래와 같이 수정합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162367058-c395c800-435b-422d-a290-60299977a265.png)
 
-7. 코드를 수정합니다.   
-암호화를 사용하지 않을 것이기 때문에 암호화와 관련된 변수들(`ENCRYPTED_HOOK_URL`, `HOOK_URL`)을 수정합니다.   
+7. **코드를 수정**합니다.   
+**암호화를 사용하지 않을 것이기 때문에** 암호화와 관련된 변수들(`ENCRYPTED_HOOK_URL`, `HOOK_URL`)을 수정합니다.   
 ``` python
 import boto3
 import json
@@ -132,11 +130,71 @@ def lambda_handler(event, context):
 1. 원하는 지표로 CloudWatch의 경보를 생성합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162355427-e88cd1bb-2676-4486-a4fc-a51dbf006464.png)
 
-생성 과정에서 SNS 주제를 선택합니다.      
+**CPU 지표**를 생성합니다.   
+![image](https://user-images.githubusercontent.com/43658658/162375561-74d3e992-f169-4e0c-83eb-56215d7d68c8.png)
+
+생성 과정에서 **SNS 주제를 선택**합니다.      
 ![image](https://user-images.githubusercontent.com/43658658/162355764-a475d662-c03e-41ec-8e49-19ef9017af91.png)
 
 2. 경보가 생성되었습니다.   
-![image](https://user-images.githubusercontent.com/43658658/162356657-7259a06f-adb7-4abc-a173-abb43d0ba7b1.png)
+![image](https://user-images.githubusercontent.com/43658658/162375676-99902be7-173e-41d8-8f7b-2854d743535c.png)
+
+## 5. 알람 테스트
+
+1. AWS Lambda에서 생성한 함수의 세부 정보로 접근해 `테스트` 탭으로 접근합니다.   
+![image](https://user-images.githubusercontent.com/43658658/162367555-dcb5b787-15c2-43e4-98e9-dff941451843.png)
+
+2. 새 이벤트를 생성합니다. 
+![image](https://user-images.githubusercontent.com/43658658/162372445-8d7a9c07-5fb5-42eb-857a-2ce8b9476393.png)   
+이벤트 JSON은 아래와 같이 작성합니다.   
+``` json
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:eu-west-1:000000000000:cloudwatch-alarms:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "TopicArn": "arn:aws:sns:eu-west-1:000000000000:cloudwatch-alarms",
+        "Subject": "ALARM: \"Example alarm name\" in EU - Ireland",
+        "Message": "{\"AlarmName\":\"Example alarm name\",\"AlarmDescription\":\"Example alarm description.\",\"AWSAccountId\":\"000000000000\",\"NewStateValue\":\"ALARM\",\"NewStateReason\":\"Threshold Crossed: 1 datapoint (10.0) was greater than or equal to the threshold (1.0).\",\"StateChangeTime\":\"2017-01-12T16:30:42.236+0000\",\"Region\":\"EU - Ireland\",\"OldStateValue\":\"OK\",\"Trigger\":{\"MetricName\":\"DeliveryErrors\",\"Namespace\":\"ExampleNamespace\",\"Statistic\":\"SUM\",\"Unit\":null,\"Dimensions\":[],\"Period\":300,\"EvaluationPeriods\":1,\"ComparisonOperator\":\"GreaterThanOrEqualToThreshold\",\"Threshold\":1.0}}",
+        "Timestamp": "2017-01-12T16:30:42.318Z",
+        "SignatureVersion": "1",
+        "Signature": "Cg==",
+        "SigningCertUrl": "https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.pem",
+        "UnsubscribeUrl": "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:000000000000:cloudwatch-alarms:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}
+```   
++) 위 코드의 원문은 [AWS Docs](https://aws.amazon.com/ko/blogs/mobile/invoking-aws-lambda-functions-via-amazon-sns/)에 있습니다.
+
+3. 저장 버튼을 누르고, 테스트 버튼을 눌러 이벤트를 수행해볼 수 있습니다.   
 
 
+(참고)간혹 아래와 같이 `Timeout` 에러가 뜰 수 있습니다.   
+```
+Test Event Name
+test
 
+Response
+{
+  "errorMessage": "2022-04-08T05:20:27.294Z 99a755e7-91a5-4e20-a512-85c0eee91187 Task timed out after 3.04 seconds"
+}
+
+Function Logs
+START RequestId: 99a755e7-91a5-4e20-a512-85c0eee91187 Version: $LATEST
+END RequestId: 99a755e7-91a5-4e20-a512-85c0eee91187
+REPORT RequestId: 99a755e7-91a5-4e20-a512-85c0eee91187	Duration: 3040.69 ms	Billed Duration: 3000 ms	Memory Size: 128 MB	Max Memory Used: 21 MB	
+2022-04-08T05:20:27.294Z 99a755e7-91a5-4e20-a512-85c0eee91187 Task timed out after 3.04 seconds
+
+Request ID
+99a755e7-91a5-4e20-a512-85c0eee91187
+```
+
+이럴 땐 해당 함수의 세부 정보에서 `구성 > 일반 구성`으로 접근해 `편집` 버튼을 눌러 **제한 시간**을 늘려주면 됩니다.   
+![image](https://user-images.githubusercontent.com/43658658/162370302-3fc2020e-0d2f-48c8-b771-c56e5d62c1bc.png)
