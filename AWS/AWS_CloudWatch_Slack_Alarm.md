@@ -6,7 +6,9 @@
 => [Slack 앱 생성 후 Webhook URL 받기](https://blog.cowkite.com/blog/2001151846/)
 
 1. 슬랙 앱에서 알람을 받기를 원하는 **채널을 추가**합니다.   
-![image](https://user-images.githubusercontent.com/43658658/162347872-91846ec2-09a9-45da-b623-81148b085db7.png)
+채널을 추가할 땐 반드시 **공개 방식으로 추가**해야합니다.   
+(비공개 방식으로 추가하면 알림이 오지 않습니다)   
+![image](https://user-images.githubusercontent.com/43658658/162377315-c55a3ed7-ff8c-490a-bb26-7bbc74cbb379.png)
 
 2. `워크스페이스 이름 > 관리 > 앱 관리`를 클릭합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162351462-c9fd3a2c-8a61-4635-9a75-9b00052dd9b2.png)
@@ -171,10 +173,11 @@ def lambda_handler(event, context):
   ]
 }
 ```   
-+) 위 코드의 원문은 [AWS Docs](https://aws.amazon.com/ko/blogs/mobile/invoking-aws-lambda-functions-via-amazon-sns/)에 있습니다.
++) 람다의 파이썬 코드는 위 JSON 형식에 맞춰서 작성되어 있기 때문에, 위의 JSON 형식을 벗어나면 `JSONDecodeError` 에러가 발생합니다.
 
 3. 저장 버튼을 누르고, 테스트 버튼을 눌러 이벤트를 수행해볼 수 있습니다.   
-
+슬랙에 정상적으로 알림이 오는 것을 확인할 수 있습니다.   
+![image](https://user-images.githubusercontent.com/43658658/162377605-0efcdede-7a34-4d99-97a0-7383010eddcc.png)
 
 (참고)간혹 아래와 같이 `Timeout` 에러가 뜰 수 있습니다.   
 ```
