@@ -226,6 +226,11 @@ stress --cpu 1 --timeout 300
 CloudWatch에 경보가 울리고, Slack에 알림이 오는 것을 확인합니다.   
 ![image](https://user-images.githubusercontent.com/43658658/162394424-e9dd2793-960e-4479-934f-028dbb066084.png)
 
+## 7. 알림 메시지 꾸미기
+
+아래 링크에 Slack 알림 메시지를 예쁘게 꾸미는 방법이 있습니다.   
+=> https://github.com/khyup0629/devops/blob/main/etc/slack%20%EB%A9%94%EC%8B%9C%EC%A7%80%20%EA%BE%B8%EB%AF%B8%EA%B8%B0.md#slack-%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%BE%B8%EB%AF%B8%EA%B8%B0
+
 ---
 참고 페이지   
 - https://longtermsad.tistory.com/49
