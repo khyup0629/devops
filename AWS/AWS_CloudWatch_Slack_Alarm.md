@@ -74,6 +74,7 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"
 
 7. **코드를 수정**합니다.   
 **암호화를 사용하지 않을 것이기 때문에** 암호화와 관련된 변수들(`ENCRYPTED_HOOK_URL`, `HOOK_URL`)을 수정합니다.   
+코드를 수정한 이후에는 `Deploy` 버튼을 눌러 꼭 배포합니다.   
 ``` python
 import boto3
 import json
