@@ -8,6 +8,8 @@
 핵심은 `slack_message` 부분입니다.   
 **slack_message** 부분에서 메시지의 **UI**를 만들 수 있습니다.
 
+### <코드>
+
 ``` python
 import boto3
 import json
@@ -122,7 +124,7 @@ def lambda_handler(event, context):
         logger.error("Server connection failed: %s", e.reason)
 ```
 
-<코드 세부 설명>
+### <코드 세부 설명>
 
 - `attachments` : 결과화면에서 빨간 선 세로 줄로 들여쓰기 된 부분을 나타냅니다.
 - 이벤트가 발생하면, message 내용 부분까지 파싱한 후, 아래의 해당 항목들을 변수로 뽑아냅니다.
@@ -136,7 +138,7 @@ def lambda_handler(event, context):
 - `:이모티콘이름:`의 형식으로 문자열 내부에 이모티콘을 쓸 수 있습니다.
  
 
-<결과 화면>   
+### <결과 화면>   
 ![image](https://user-images.githubusercontent.com/43658658/162715681-58a9d0de-1333-4070-a389-e6c8a248ecf1.png)
 
 그냥 무지성으로 `Slack Block Kit Builder`로 만든 템플릿을 쓰면 안돼서 트러블 슈팅 과정이 조금 필요했습니다.   
