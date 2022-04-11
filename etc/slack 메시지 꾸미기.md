@@ -51,68 +51,72 @@ def lambda_handler(event, context):
     color = "#30db3f" if alarm_name.find("off") >= 0 else "#eb4034"
 
     slack_message = {
-    	"blocks": [
-        	{
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": ":star:*알림 발생!*\n 아래 내용을 확인해주세요"
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": ":star:*알림 발생!*\n\n *<" + alarm_name + ">* 내용의 경보가 발생했습니다.\n\n 아래 내용을 확인해주세요"
+                },
+                "accessory": {
+                    "type": "image",
+                    "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/korel-1YjNtFtJlMTaC26A/o.jpg",
+                    "alt_text": "alt text for image"
+                }
+            },
+            {
+                "type": "divider"
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*경보 내용:*\n" + alarm_description
+                }
+            },
+            {
+                "type": "divider"
             }
-          },
-          {
-            "type": "divider"
-          },
-          {
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": "*경보 내용:*\n" + alarm_description
-            }
-          },
-          {
-            "type": "divider"
-          }
         ],
-		"attachments": [{
+        "attachments": [{
             "color": color,
             "blocks": [
-	            {
-	                "type": "section",
-	                "fields": [
-	                    {
-	                        "type": "mrkdwn",
-	                        "text": '*경보 이름:*\n' + alarm_name
-	                    },
-	                    {
-	                        "type": "mrkdwn",
-	                        "text": '*경보 시간:*\n' + change_time
-	                    }
-	                ]
-	            },
-	            {
-	                "type": "section",
-	                "fields": [
-	                    {
-	                        "type": "mrkdwn",
-	                        "text": '*상태 변경 전:*\n' + old_state
-	                    },
-	                    {
-	                        "type": "mrkdwn",
-	                        "text": '*상태 변경 후:*\n' + new_state
-	                    }
-	                ]
-	            },
-	            {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*바로가기 :*\n https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#home:"
-                  }
-              }
+                {
+                    "type": "section",
+                    "fields": [
+                        {
+                            "type": "mrkdwn",
+                            "text": '*경보 이름:*\n' + alarm_name
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": '*경보 시간:*\n' + change_time
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "fields": [
+                        {
+                            "type": "mrkdwn",
+                            "text": '*상태 변경 전:*\n' + old_state
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": '*상태 변경 후:*\n' + new_state
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "*바로가기 :*\n https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#home:"
+                    }
+                }
             ]
-      }]
-	  }
-
+        }]
+    }
 
     req = Request(HOOK_URL, json.dumps(slack_message).encode('utf-8'))
     try:
@@ -122,6 +126,7 @@ def lambda_handler(event, context):
         logger.error("Request failed: %d %s", e.code, e.reason)
     except URLError as e:
         logger.error("Server connection failed: %s", e.reason)
+
 ```
 
 ### <코드 세부 설명>
@@ -139,7 +144,7 @@ def lambda_handler(event, context):
  
 
 ### <결과 화면>   
-![image](https://user-images.githubusercontent.com/43658658/162715681-58a9d0de-1333-4070-a389-e6c8a248ecf1.png)
+![image](https://user-images.githubusercontent.com/43658658/162716787-1fcdd7b9-617b-439a-94a6-416d71ae9214.png)
 
 그냥 무지성으로 `Slack Block Kit Builder`로 만든 템플릿을 쓰면 안돼서 트러블 슈팅 과정이 조금 필요했습니다.   
 - 버튼을 만드는 기능이 먹히지 않았습니다.
