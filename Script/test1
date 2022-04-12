@@ -1,5 +1,2 @@
-#!/bin/bash
-echo -n The time and date are:
-date
-echo -n "Let's see who's logged into the system:"
-who
+hyeob    pts/0        2022-04-12 01:04 (172.16.0.85)
+Tue 12 Apr 2022 06:10:44 AM UTC
