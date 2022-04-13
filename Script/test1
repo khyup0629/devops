@@ -1,2 +1,17 @@
-hyeob    pts/0        2022-04-12 01:04 (172.16.0.85)
-Tue 12 Apr 2022 06:10:44 AM UTC
+#!/bin/bash
+file_name=$HOME/devops/Script/test
+if [ -f $file_name ]
+then
+	echo "There is a $file_name"
+	echo "Checking on the file, $file_name"
+	if [ -s $file_name ]
+	then
+		echo "$file_name is not empty"
+	else
+		echo "$file_name is empty"
+		echo "Deleting empty file..."
+		rm $file_name
+	fi
+else
+	echo "$file_name doesn't exist"
+fi
