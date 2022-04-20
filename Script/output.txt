@@ -1,0 +1,7 @@
+/home/hyeob/devops/Script/= is directory
+/home/hyeob/devops/Script/~ is directory
+/home/hyeob/devops/Script/환경_변수.md is directory
+/home/hyeob/devops/Script/output.txt is directory
+/home/hyeob/devops/Script/states is directory
+/home/hyeob/devops/Script/test1 is directory
+/home/hyeob/devops/Script/test2 is directory
