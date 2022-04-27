@@ -1,0 +1,16 @@
+#!/bin/bash
+
+outfile="users.sql"
+IFS=','
+
+if [ -n "$1" ]
+then
+	while read cname name address city zip
+	do
+		cat >> $outfile << EOF
+INSERT INTO users (cname,name,address,city,zip) VALUES ('$cname','$name','$address','$city','$zip');
+EOF
+	done < $1
+else
+	echo "Needed .csv file..."
+fi
